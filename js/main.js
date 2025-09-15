@@ -67,7 +67,7 @@ class App {
         if (module.obj && typeof module.obj.init === "function") {
           try {
             module.obj.init();
-            console.log(`✅ ${module.name} inicializado com sucesso!`);
+            // console.log(`✅ ${module.name} inicializado com sucesso!`);
           } catch (error) {
             console.error(`❌ Erro ao inicializar ${module.name}:`, error);
           }
@@ -78,7 +78,7 @@ class App {
         }
       });
 
-      console.log("✅ Educa+ Minas Landing Page inicializada com sucesso!");
+      // console.log("✅ Educa+ Minas Landing Page inicializada com sucesso!");
     } catch (error) {
       console.error("❌ Erro ao inicializar aplicação:", error);
     }
