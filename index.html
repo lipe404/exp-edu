@@ -852,7 +852,8 @@
                                     <label
                                         class="block text-sm font-semibold text-educa-blue mb-2">Tipo
                                         de Parceria</label>
-                                    <select id="partnership-type" title="Selecione o tipo de parceria"
+                                    <select id="partnership-type"
+                                        title="Selecione o tipo de parceria"
                                         class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent">
                                         <option value="small">Pequeno
                                             Polo/Vendedor (20-50
@@ -868,7 +869,8 @@
                                     <label
                                         class="block text-sm font-semibold text-educa-blue mb-2">Número
                                         de Alunos Estimado</label>
-                                    <input type="range" id="student-count" title="Número de alunos estimado"
+                                    <input type="range" id="student-count"
+                                        title="Número de alunos estimado"
                                         min="20" max="300" value="50"
                                         class="w-full accent-educa-pink">
                                     <div
@@ -883,7 +885,8 @@
                                     <label
                                         class="block text-sm font-semibold text-educa-blue mb-2">Ticket
                                         Médio por Aluno</label>
-                                    <select id="ticket-price" title="Selecione o ticket médio por aluno"
+                                    <select id="ticket-price"
+                                        title="Selecione o ticket médio por aluno"
                                         class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent">
                                         <option value="200">R$ 200 - Cursos
                                             Básicos</option>
@@ -1253,7 +1256,8 @@
                         </div>
 
                         <!-- Controles do Carrossel -->
-                        <button id="prev-testimonial" title="Depoimento Anterior"
+                        <button id="prev-testimonial"
+                            title="Depoimento Anterior"
                             class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-educa-pink text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-colors">
                             <i class="fas fa-chevron-left"></i>
                         </button>
@@ -1770,35 +1774,47 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-educa-blue text-educa-white py-12">
+        <footer class="bg-educa-blue text-white py-12">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Logo e Descrição -->
                     <div class="md:col-span-2">
-                        <img src="./assets/educa-minas-logo.png"
-                            alt="Logo Educa+ Minas" class="h-16 mb-4">
-                        <p class="text-gray-300 leading-relaxed mb-4">
-                            A Educa+ Minas é líder em educação a distância,
-                            transformando vidas através do conhecimento e
-                            criando oportunidades de negócio para nossos
-                            parceiros em todo o Brasil.
+                        <img src="./assets/educa-mais-logo.webp"
+                            alt="Logo Educa+ Minas - Em Parceria com o Futuro"
+                            class="h-16 mb-2">
+                        <p class="text-educa-pink font-medium mb-4">Em Parceria
+                            com o Futuro</p>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            A Educa+ Minas é o braço educacional do Grupo RJ,
+                            líder em educação a distância, transformando vidas
+                            através do conhecimento e criando oportunidades de
+                            negócio para nossos parceiros em todo o Brasil.
                         </p>
                         <div class="flex space-x-4">
-                            <a href="#"
-                                class="text-gray-300 hover:text-educa-pink transition-colors">
+                            <a href="#" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-educa-pink transition-colors transform hover:scale-110 duration-300"
+                                title="Facebook Educa+ Minas">
                                 <i class="fab fa-facebook-f text-xl"></i>
                             </a>
-                            <a href="#"
-                                class="text-gray-300 hover:text-educa-pink transition-colors">
+                            <a href="#" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-educa-pink transition-colors transform hover:scale-110 duration-300"
+                                title="Instagram Educa+ Minas">
                                 <i class="fab fa-instagram text-xl"></i>
                             </a>
-                            <a href="#"
-                                class="text-gray-300 hover:text-educa-pink transition-colors">
+                            <a href="#" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-educa-pink transition-colors transform hover:scale-110 duration-300"
+                                title="LinkedIn Educa+ Minas">
                                 <i class="fab fa-linkedin-in text-xl"></i>
                             </a>
-                            <a href="#"
-                                class="text-gray-300 hover:text-educa-pink transition-colors">
+                            <a href="#" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-educa-pink transition-colors transform hover:scale-110 duration-300"
+                                title="YouTube Educa+ Minas">
                                 <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                            <a href="#" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-educa-pink transition-colors transform hover:scale-110 duration-300"
+                                title="TikTok Educa+ Minas">
+                                <i class="fab fa-tiktok text-xl"></i>
                             </a>
                         </div>
                     </div>
@@ -1806,51 +1822,117 @@
                     <!-- Links Úteis -->
                     <div>
                         <h4
-                            class="font-heading text-lg font-semibold mb-4">Links
-                            Úteis</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#sobre-educa-minas"
-                                    class="text-gray-300 hover:text-educa-pink transition-colors">Sobre
-                                    Nós</a></li>
-                            <li><a href="#beneficios"
-                                    class="text-gray-300 hover:text-educa-pink transition-colors">Benefícios</a></li>
-                            <li><a href="#como-funciona"
-                                    class="text-gray-300 hover:text-educa-pink transition-colors">Como
-                                    Funciona</a></li>
-                            <li><a href="#depoimentos"
-                                    class="text-gray-300 hover:text-educa-pink transition-colors">Depoimentos</a></li>
-                            <li><a href="#faq"
-                                    class="text-gray-300 hover:text-educa-pink transition-colors">FAQ</a></li>
+                            class="font-heading text-lg font-semibold mb-4 text-educa-pink border-b border-educa-pink/30 pb-2">
+                            Links Úteis
+                        </h4>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#sobre-educa-minas"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    Sobre Nós
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#beneficios"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    Benefícios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#como-funciona"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    Como Funciona
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#depoimentos"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    Depoimentos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#faq"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#simulacao-ganhos"
+                                    class="text-gray-300 hover:text-educa-pink transition-colors flex items-center group">
+                                    <i
+                                        class="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                                    Simulador de Ganhos
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
                     <!-- Contato -->
                     <div>
                         <h4
-                            class="font-heading text-lg font-semibold mb-4">Contato</h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li class="flex items-center">
+                            class="font-heading text-lg font-semibold mb-4 text-educa-pink border-b border-educa-pink/30 pb-2">
+                            Contato
+                        </h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li
+                                class="flex items-center hover:text-white transition-colors">
                                 <i
                                     class="fas fa-phone mr-3 text-educa-pink"></i>
-                                <span>(31) 3333-4444</span>
+                                <a href="tel:+553133334444"
+                                    class="hover:text-educa-pink transition-colors">
+                                    (31) 3333-4444
+                                </a>
                             </li>
-                            <li class="flex items-center">
+                            <li
+                                class="flex items-center hover:text-white transition-colors">
                                 <i
                                     class="fab fa-whatsapp mr-3 text-educa-pink"></i>
-                                <span>(31) 99999-8888</span>
+                                <a href="https://wa.me/5531999998888"
+                                    class="hover:text-educa-pink transition-colors">
+                                    (31) 99999-8888
+                                </a>
                             </li>
-                            <li class="flex items-center">
+                            <li
+                                class="flex items-center hover:text-white transition-colors">
                                 <i
                                     class="fas fa-envelope mr-3 text-educa-pink"></i>
-                                <span>parceria@educaminas.com.br</span>
+                                <a href="mailto:parceria@educamais.com.br"
+                                    class="hover:text-educa-pink transition-colors">
+                                    parceria@educamais.com.br
+                                </a>
                             </li>
-                            <li class="flex items-start">
+                            <li
+                                class="flex items-start hover:text-white transition-colors">
                                 <i
                                     class="fas fa-map-marker-alt mr-3 text-educa-pink mt-1"></i>
                                 <span>Av. Afonso Pena, 1000<br>Centro - Belo
-                                    Horizonte/MG</span>
+                                    Horizonte/MG<br>CEP: 30130-002</span>
                             </li>
                         </ul>
+
+                        <!-- Horário de Funcionamento -->
+                        <div
+                            class="mt-6 p-3 bg-blue-900/50 rounded-lg border border-educa-pink/20">
+                            <h5
+                                class="font-semibold text-educa-pink mb-2 text-sm">
+                                <i class="fas fa-clock mr-2"></i>
+                                Horário de Atendimento
+                            </h5>
+                            <p class="text-xs text-gray-300">
+                                Segunda a Sexta: 8h às 18h<br>
+                                Sábado: 8h às 12h
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -1858,20 +1940,63 @@
                 <div class="border-t border-gray-600 mt-8 pt-8">
                     <div class="text-center">
                         <h4
-                            class="font-heading text-lg font-semibold mb-4">Materiais
-                            Gratuitos</h4>
+                            class="font-heading text-lg font-semibold mb-6 text-educa-pink">
+                            <i class="fas fa-download mr-2"></i>
+                            Materiais Gratuitos
+                        </h4>
                         <div
                             class="flex flex-col sm:flex-row justify-center gap-4">
                             <a href="#"
-                                class="inline-block bg-educa-pink text-educa-white px-6 py-3 rounded-lg hover:bg-pink-600 transition-colors">
-                                <i class="fas fa-download mr-2"></i>
+                                class="inline-block bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg cta-glow">
+                                <i class="fas fa-file-pdf mr-2"></i>
                                 Guia Completo de Parceria (PDF)
                             </a>
                             <a href="#"
-                                class="inline-block bg-transparent border border-educa-pink text-educa-pink px-6 py-3 rounded-lg hover:bg-educa-pink hover:text-white transition-colors">
+                                class="inline-block bg-transparent border-2 border-educa-pink text-educa-pink px-6 py-3 rounded-lg hover:bg-educa-pink hover:text-white transition-all duration-300 transform hover:scale-105">
                                 <i class="fas fa-play mr-2"></i>
                                 Vídeo Explicativo
                             </a>
+                            <a href="#"
+                                class="inline-block bg-transparent border-2 border-gray-500 text-gray-300 px-6 py-3 rounded-lg hover:bg-gray-500 hover:text-white transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i>
+                                Planilha de Investimento
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificações e Selos -->
+                <div class="border-t border-gray-600 mt-8 pt-8">
+                    <div class="text-center">
+                        <h4
+                            class="font-heading text-lg font-semibold mb-6 text-educa-pink">
+                            Certificações e Reconhecimentos
+                        </h4>
+                        <div
+                            class="flex flex-wrap justify-center items-center gap-6 opacity-70">
+                            <div class="text-center">
+                                <i
+                                    class="fas fa-certificate text-3xl text-yellow-400 mb-2"></i>
+                                <p class="text-xs text-gray-300">Certificado
+                                    MEC</p>
+                            </div>
+                            <div class="text-center">
+                                <i
+                                    class="fas fa-shield-alt text-3xl text-green-400 mb-2"></i>
+                                <p class="text-xs text-gray-300">LGPD
+                                    Compliance</p>
+                            </div>
+                            <div class="text-center">
+                                <i
+                                    class="fas fa-award text-3xl text-educa-pink mb-2"></i>
+                                <p class="text-xs text-gray-300">ISO 9001</p>
+                            </div>
+                            <div class="text-center">
+                                <i
+                                    class="fas fa-star text-3xl text-yellow-400 mb-2"></i>
+                                <p class="text-xs text-gray-300">5 Estrelas
+                                    ReclameAqui</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1879,46 +2004,209 @@
                 <!-- Copyright -->
                 <div
                     class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
-                    <p>&copy; 2024 Educa+ Minas. Todos os direitos
-                        reservados.</p>
-                    <p class="mt-2">
+                    <div class="mb-4">
+                        <p class="text-lg font-semibold text-educa-pink mb-2">
+                            Educa+ Minas | Em Parceria com o Futuro
+                        </p>
+                        <p>&copy; 2024 Educa+ Minas - Grupo RJ Educação e
+                            Tecnologia. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4 text-sm">
                         <a href="#"
                             class="hover:text-educa-pink transition-colors">Política
-                            de Privacidade</a> |
+                            de Privacidade</a>
+                        <span class="text-gray-600">|</span>
                         <a href="#"
                             class="hover:text-educa-pink transition-colors">Termos
-                            de Uso</a> |
+                            de Uso</a>
+                        <span class="text-gray-600">|</span>
                         <a href="#"
                             class="hover:text-educa-pink transition-colors">LGPD</a>
-                    </p>
+                        <span class="text-gray-600">|</span>
+                        <a href="#"
+                            class="hover:text-educa-pink transition-colors">Política
+                            de Cookies</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#"
+                            class="hover:text-educa-pink transition-colors">Ouvidoria</a>
+                    </div>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <p>CNPJ: 00.000.000/0001-00 | Inscrição Estadual:
+                            000.000.000.000</p>
+                        <p>Desenvolvido com ❤️ pela equipe Educa+ Minas</p>
+                    </div>
                 </div>
             </div>
         </footer>
 
-        <!-- Botão WhatsApp Flutuante -->
-        <div class="fixed bottom-6 right-6 z-50">
-            <a title="Fale Conosco pelo WhatsApp"
-                href="https://wa.me/5531999998888?text=Olá! Tenho interesse em conhecer as oportunidades de parceria da Educa+ Minas."
-                class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-pulse">
+        <!-- Botões Flutuantes -->
+        <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+            <!-- WhatsApp -->
+            <a title="Fale Conosco pelo WhatsApp - Educa+ Minas"
+                href="https://wa.me/5531999998888?text=Olá! Tenho interesse em conhecer as oportunidades de parceria da Educa+ Minas. Vim através do site e gostaria de mais informações sobre como me tornar um parceiro."
+                class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-pulse group">
                 <i class="fab fa-whatsapp text-2xl"></i>
+                <span
+                    class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    Fale conosco agora!
+                </span>
+            </a>
+
+            <!-- Telefone -->
+            <a title="Ligue para a Educa+ Minas"
+                href="tel:+553133334444"
+                class="bg-educa-pink text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 hover:scale-110 group">
+                <i class="fas fa-phone text-lg"></i>
+                <span
+                    class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    (31) 3333-4444
+                </span>
             </a>
         </div>
 
         <!-- Botão Voltar ao Topo -->
-        <button id="back-to-top" title="Voltar ao Topo"
-            class="fixed bottom-6 left-6 bg-educa-pink text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-all duration-300 opacity-0 invisible z-50">
+        <button id="back-to-top"
+            title="Voltar ao Topo"
+            class="fixed bottom-6 left-6 bg-educa-pink text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 opacity-0 invisible z-50 hover:scale-110 group">
             <i class="fas fa-chevron-up"></i>
+            <span
+                class="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Voltar ao topo
+            </span>
         </button>
+
+        <!-- Cookie Consent Banner -->
+        <div id="cookie-banner"
+            class="fixed bottom-0 left-0 right-0 bg-educa-blue text-white p-4 shadow-lg z-40 transform translate-y-full transition-transform duration-500">
+            <div
+                class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex-1">
+                    <p class="text-sm">
+                        <i class="fas fa-cookie-bite text-educa-pink mr-2"></i>
+                        Utilizamos cookies para melhorar sua experiência em
+                        nosso site. Ao continuar navegando, você concorda com
+                        nossa
+                        <a href="#"
+                            class="text-educa-pink hover:underline">Política de
+                            Cookies</a>.
+                    </p>
+                </div>
+                <div class="flex gap-2">
+                    <button id="accept-cookies"
+                        class="bg-educa-pink text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm">
+                        Aceitar
+                    </button>
+                    <button id="reject-cookies"
+                        class="bg-transparent border border-gray-400 text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+                        Recusar
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Scripts -->
         <script src="./script.js"></script>
+
+        <!-- Script para Cookie Banner -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cookieBanner = document.getElementById('cookie-banner');
+                const acceptBtn = document.getElementById('accept-cookies');
+                const rejectBtn = document.getElementById('reject-cookies');
+
+                // Mostrar banner se não houver preferência salva
+                if (!localStorage.getItem('cookieConsent')) {
+                    setTimeout(() => {
+                        cookieBanner.classList.remove('translate-y-full');
+                    }, 2000);
+                }
+
+                acceptBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookieConsent', 'accepted');
+                    cookieBanner.classList.add('translate-y-full');
+
+                    // Ativar Google Analytics e outros cookies
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'analytics_storage': 'granted'
+                        });
+                    }
+                });
+
+                rejectBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookieConsent', 'rejected');
+                    cookieBanner.classList.add('translate-y-full');
+
+                    // Desativar cookies não essenciais
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'analytics_storage': 'denied'
+                        });
+                    }
+                });
+            });
+            </script>
+
+        <!-- Structured Data adicional -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "EducationalOrganization",
+                "name": "Educa+ Minas",
+                "alternateName": "Educa Mais Minas",
+                "description": "Transformar vidas e negócios por meio da educação acessível, inovadora e de qualidade, construindo parcerias sólidas que impulsionam oportunidades para alunos e empreendedores educacionais.",
+                "url": "https://educamais.com.br",
+                "logo": "https://educamais.com.br/assets/educa-mais-logo.webp",
+                "slogan": "Em Parceria com o Futuro",
+                "foundingDate": "2009",
+                "parentOrganization": {
+                    "@type": "Organization",
+                    "name": "Grupo RJ - Educação e Tecnologia"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Av. Afonso Pena, 1000",
+                    "addressLocality": "Belo Horizonte",
+                    "addressRegion": "MG",
+                    "postalCode": "30130-002",
+                    "addressCountry": "BR"
+                },
+                "contactPoint": [
+                    {
+                        "@type": "ContactPoint",
+                        "telephone": "+55-31-3333-4444",
+                        "contactType": "customer service",
+                        "availableLanguage": "Portuguese"
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        "telephone": "+55-31-99999-8888",
+                        "contactType": "customer service",
+                        "availableLanguage": "Portuguese",
+                        "contactOption": "WhatsApp"
+                    }
+                ],
+                "sameAs": [
+                    "https://www.facebook.com/educaminas",
+                    "https://www.instagram.com/educaminas",
+                    "https://www.linkedin.com/company/educaminas",
+                    "https://www.youtube.com/educaminas"
+                ],
+                "offers": {
+                    "@type": "Offer",
+                    "name": "Programa de Parceria EAD",
+                    "description": "Oportunidade de se tornar parceiro da Educa+ Minas para venda de cursos EAD ou abertura de polos educacionais"
+                }
+            }
+            </script>
 
         <!-- Google Tag Manager (noscript) -->
         <noscript>
             <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-                height="0" width="0"
-                style="display:none;visibility:hidden"></iframe>
+                height="0" width="0" style="display:none;visibility:hidden">
+            </iframe>
         </noscript>
+
     </body>
 </html>
