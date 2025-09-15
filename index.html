@@ -269,7 +269,8 @@
                         <p
                             class="text-xl text-educa-dark-gray max-w-3xl mx-auto animate-fade-in animation-delay-300">
                             <strong class="text-educa-pink">Em Parceria com o
-                                Futuro</strong>, negócios que transformam realidades
+                                Futuro</strong>, negócios que transformam
+                            realidades
                         </p>
                     </div>
 
@@ -1343,10 +1344,20 @@
                             <div id="faq-1"
                                 class="faq-content hidden px-6 pb-6">
                                 <p class="text-educa-dark-gray leading-relaxed">
-                                    Não há taxa de adesão para se tornar parceiro.<br>
-                                    <strong>Modelo Comercial (sem polo físico):</strong> o único investimento é direcionado para ações de tráfego pago e marketing digital, de acordo com sua estratégia de captação.<br>
-                                    <strong>Modelo Polo Físico:</strong> o investimento inicial está relacionado apenas à estrutura local (espaço físico, equipamentos básicos e capital de giro).
-                                    Em ambos os casos, oferecemos suporte e orientação estratégica para otimizar seus investimentos e acelerar o retorno.
+                                    Não há taxa de adesão para se tornar
+                                    parceiro.<br>
+                                    <strong>Modelo Comercial (sem polo
+                                        físico):</strong> o único investimento é
+                                    direcionado para ações de tráfego pago e
+                                    marketing digital, de acordo com sua
+                                    estratégia de captação.<br>
+                                    <strong>Modelo Polo Físico:</strong> o
+                                    investimento inicial está relacionado apenas
+                                    à estrutura local (espaço físico,
+                                    equipamentos básicos e capital de giro).
+                                    Em ambos os casos, oferecemos suporte e
+                                    orientação estratégica para otimizar seus
+                                    investimentos e acelerar o retorno.
                                 </p>
                             </div>
                         </div>
@@ -1538,15 +1549,40 @@
 
                     <div
                         class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-educa-blue animate-fade-in-up animation-delay-600">
-                        <form id="partnership-form" class="space-y-6">
+                        <!-- FORM CONFIGURADO PARA NETLIFY FORMS -->
+                        <form id="partnership-form"
+                            name="partnership-form"
+                            method="POST"
+                            data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                            action="obrigado.html"
+                            netlify
+                            class="space-y-6">
+
+                            <!-- Campo honeypot para anti-spam (oculto) -->
+                            <div style="display: none;">
+                                <label>Não preencha este campo se você for
+                                    humano:
+                                    <input name="bot-field" />
+                                </label>
+                            </div>
+
+                            <!-- Campos ocultos para dados extras -->
+                            <input type="hidden" name="form-name"
+                                value="partnership-form">
+                            <input type="hidden" name="source"
+                                value="landing-page-parceria">
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Nome Completo -->
                                 <div>
                                     <label for="full-name"
                                         class="block text-sm font-semibold mb-2">Nome
                                         Completo *</label>
-                                    <input type="text" id="full-name"
-                                        name="full-name" required
+                                    <input type="text"
+                                        id="full-name"
+                                        name="nome_completo"
+                                        required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300"
                                         placeholder="Seu nome completo">
                                 </div>
@@ -1556,7 +1592,9 @@
                                     <label for="email"
                                         class="block text-sm font-semibold mb-2">E-mail
                                         *</label>
-                                    <input type="email" id="email" name="email"
+                                    <input type="email"
+                                        id="email"
+                                        name="email"
                                         required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300"
                                         placeholder="seu@email.com">
@@ -1567,7 +1605,9 @@
                                     <label for="phone"
                                         class="block text-sm font-semibold mb-2">Telefone/WhatsApp
                                         *</label>
-                                    <input type="tel" id="phone" name="phone"
+                                    <input type="tel"
+                                        id="phone"
+                                        name="telefone"
                                         required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300"
                                         placeholder="(31) 99999-9999">
@@ -1578,7 +1618,9 @@
                                     <label for="city"
                                         class="block text-sm font-semibold mb-2">Cidade
                                         *</label>
-                                    <input type="text" id="city" name="city"
+                                    <input type="text"
+                                        id="city"
+                                        name="cidade"
                                         required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300"
                                         placeholder="Sua cidade">
@@ -1589,7 +1631,9 @@
                                     <label for="state"
                                         class="block text-sm font-semibold mb-2">Estado
                                         *</label>
-                                    <select id="state" name="state" required
+                                    <select id="state"
+                                        name="estado"
+                                        required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300">
                                         <option value>Selecione seu
                                             estado</option>
@@ -1636,7 +1680,8 @@
                                         class="block text-sm font-semibold mb-2">Interesse
                                         em Parceria *</label>
                                     <select id="partnership-interest"
-                                        name="partnership-interest" required
+                                        name="tipo_parceria"
+                                        required
                                         class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300">
                                         <option value>Selecione uma
                                             opção</option>
@@ -1659,7 +1704,8 @@
                                 <label for="experience"
                                     class="block text-sm font-semibold mb-2">Experiência
                                     Anterior</label>
-                                <select id="experience" name="experience"
+                                <select id="experience"
+                                    name="experiencia"
                                     class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300">
                                     <option value>Selecione sua
                                         experiência</option>
@@ -1681,14 +1727,19 @@
                                 <label for="message"
                                     class="block text-sm font-semibold mb-2">Mensagem
                                     (Opcional)</label>
-                                <textarea id="message" name="message" rows="4"
+                                <textarea id="message"
+                                    name="mensagem"
+                                    rows="4"
                                     class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent transition-all duration-300"
                                     placeholder="Conte-nos mais sobre seus objetivos e expectativas..."></textarea>
                             </div>
 
                             <!-- Termos e Condições -->
                             <div class="flex items-start space-x-3">
-                                <input type="checkbox" id="terms" name="terms"
+                                <input type="checkbox"
+                                    id="terms"
+                                    name="aceita_termos"
+                                    value="sim"
                                     required
                                     class="mt-1 h-5 w-5 text-educa-pink border-gray-300 rounded focus:ring-educa-pink accent-educa-pink">
                                 <label for="terms"
@@ -1707,8 +1758,10 @@
 
                             <!-- Newsletter -->
                             <div class="flex items-start space-x-3">
-                                <input type="checkbox" id="newsletter"
-                                    name="newsletter"
+                                <input type="checkbox"
+                                    id="newsletter"
+                                    name="aceita_newsletter"
+                                    value="sim"
                                     class="mt-1 h-5 w-5 text-educa-pink border-gray-300 rounded focus:ring-educa-pink accent-educa-pink">
                                 <label for="newsletter"
                                     class="text-sm text-educa-dark-gray">
@@ -1908,7 +1961,9 @@
                                 class="flex items-start hover:text-white transition-colors">
                                 <i
                                     class="fas fa-map-marker-alt mr-3 text-educa-pink mt-1"></i>
-                                <span>Rua Felipe Albeny, 16<br>Professores - Coronel Fabriciano/MG<br>CEP: 35170-128</span>
+                                <span>Rua Felipe Albeny, 16<br>Professores -
+                                    Coronel Fabriciano/MG<br>CEP:
+                                    35170-128</span>
                             </li>
                         </ul>
 

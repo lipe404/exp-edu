@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Obrigado! - Educa+ Minas</title>
+        <link rel="icon" href="assets/educa-mais-logo.ico" type="image/x-icon">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'educa-pink': '#e71f5d',
+                        'educa-blue': '#212148',
+                        'educa-light-gray': '#f8f9fa',
+                        'educa-dark-gray': '#6b7280'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+        <style>
+        .hero-gradient { background: linear-gradient(135deg, #e71f5d 0%, #c2185b 50%, #ad1457 100%); }
+        .animate-bounce-slow { animation: bounce 2s infinite; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+    </style>
+    </head>
+    <body class="bg-educa-light-gray font-sans">
+        <!-- Header -->
+        <header class="hero-gradient text-white py-6">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center">
+                    <img src="./assets/educa-mais-logo.webp"
+                        alt="Logo Educa+ Minas" class="h-12 mr-4">
+                    <div class="text-center">
+                        <h1 class="font-heading text-2xl font-bold">Educa+
+                            Minas</h1>
+                        <p class="text-sm opacity-90">Em Parceria com o
+                            Futuro</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-16">
+            <div class="container mx-auto px-4 max-w-2xl">
+                <div
+                    class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center animate-fade-in-up">
+                    <!-- Ícone de Sucesso -->
+                    <div
+                        class="text-8xl text-green-500 mb-6 animate-bounce-slow">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+
+                    <!-- Título -->
+                    <h1
+                        class="font-heading text-3xl md:text-4xl font-bold text-educa-blue mb-4">
+                        Formulário Enviado com Sucesso!
+                    </h1>
+
+                    <!-- Mensagem -->
+                    <p
+                        class="text-lg text-educa-dark-gray mb-8 leading-relaxed">
+                        Obrigado por seu interesse em se tornar um parceiro da
+                        <strong class="text-educa-pink">Educa+ Minas</strong>!
+                        Recebemos suas informações e nossa equipe especializada
+                        entrará em contato em até <strong>24 horas</strong>
+                        para apresentar a melhor oportunidade para seu perfil.
+                    </p>
+
+                    <!-- Próximos Passos -->
+                    <div
+                        class="bg-blue-50 border-l-4 border-educa-pink p-6 rounded-r-lg mb-8 text-left">
+                        <h3 class="font-semibold text-educa-blue mb-3">
+                            <i class="fas fa-list-check mr-2"></i>
+                            Próximos Passos:
+                        </h3>
+                        <ul class="space-y-2 text-educa-dark-gray">
+                            <li class="flex items-start">
+                                <i
+                                    class="fas fa-phone text-educa-pink mr-3 mt-1"></i>
+                                <span>Nossa equipe entrará em contato via
+                                    telefone ou WhatsApp</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i
+                                    class="fas fa-calendar-check text-educa-pink mr-3 mt-1"></i>
+                                <span>Agendaremos uma reunião para conhecer seu
+                                    perfil</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i
+                                    class="fas fa-handshake text-educa-pink mr-3 mt-1"></i>
+                                <span>Apresentaremos a proposta ideal para
+                                    você</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="space-y-4">
+                        <a
+                            href="https://wa.me/5531999998888?text=Olá! Acabei de preencher o formulário de parceria no site. Gostaria de mais informações sobre as oportunidades disponíveis."
+                            class="inline-block bg-green-500 text-white px-8 py-4 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold">
+                            <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                            Falar no WhatsApp Agora
+                        </a>
+
+                        <div
+                            class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="index.html"
+                                class="inline-block bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-home mr-2"></i>
+                                Voltar ao Site
+                            </a>
+
+                            <a
+                                href="./docs/Guia_Completo_de_Parceria_Educa_Minas.pdf"
+                                class="inline-block bg-educa-blue text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-download mr-2"></i>
+                                Baixar Guia de Parceria
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Informações de Contato -->
+                    <div class="mt-12 pt-8 border-t border-gray-200">
+                        <h4 class="font-semibold text-educa-blue mb-4">
+                            <i class="fas fa-phone mr-2"></i>
+                            Ou entre em contato diretamente:
+                        </h4>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-educa-dark-gray">
+                            <div class="flex items-center justify-center">
+                                <i
+                                    class="fas fa-phone text-educa-pink mr-2"></i>
+                                <span>(31) 3333-4444</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <i
+                                    class="fas fa-envelope text-educa-pink mr-2"></i>
+                                <span>parceria@educamais.com.br</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">
+                            Horário de atendimento: Segunda a Quinta, 8h às 18h
+                            | Sexta, 8h às 17h
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-educa-blue text-white py-8 text-center">
+            <div class="container mx-auto px-4">
+                <p>&copy; 2025 Educa+ Minas - Grupo RJ Educação e Tecnologia.
+                    Todos os direitos reservados.</p>
+                <p class="mt-2 text-sm opacity-75">Em Parceria com o Futuro</p>
+            </div>
+        </footer>
+
+        <!-- Analytics para página de agradecimento -->
+        <script>
+        // Google Analytics - Conversão
+        if (typeof gtag !== "undefined") {
+            gtag("event", "conversion", {
+                send_to: "AW-CONVERSION_ID/CONVERSION_LABEL", // Substitua pelos seus IDs
+                value: 1.0,
+                currency: "BRL"
+            });
+
+            gtag("event", "form_completion", {
+                form_name: "partnership_form",
+                page_location: window.location.href
+            });
+        }
+
+        // Redirecionar para WhatsApp após 10 segundos (opcional)
+        setTimeout(() => {
+            const whatsappLink = document.querySelector('a[href*="wa.me"]');
+            if (whatsappLink && !localStorage.getItem('whatsapp_opened')) {
+                localStorage.setItem('whatsapp_opened', 'true');
+                // Descomente a linha abaixo se quiser redirecionamento automático
+                // window.open(whatsappLink.href, '_blank');
+            }
+        }, 10000);
+    </script>
+    </body>
+</html>
