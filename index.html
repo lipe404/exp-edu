@@ -181,38 +181,50 @@
         <header class="relative overflow-hidden">
             <!-- Background Animation - Mantém-se inalterado e relativo à header pai -->
             <div class="absolute inset-0 z-0">
-                <div class="absolute top-0 left-0 w-64 h-64 bg-educa-blue opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-                <div class="absolute bottom-0 right-0 w-72 h-72 bg-white opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-                <div class="absolute top-1/2 left-1/2 w-48 h-48 bg-yellow-300 opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-1000"></div>
+                <div
+                    class="absolute top-0 left-0 w-64 h-64 bg-educa-blue opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                <div
+                    class="absolute bottom-0 right-0 w-72 h-72 bg-white opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+                <div
+                    class="absolute top-1/2 left-1/2 w-48 h-48 bg-yellow-300 opacity-10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-1000"></div>
             </div>
 
             <!-- Container principal para as duas colunas (Logo e Conteúdo) -->
-            <div class="relative z-10 flex flex-col lg:flex-row lg:min-h-screen">
+            <div
+                class="relative z-10 flex flex-col lg:flex-row lg:min-h-screen">
 
                 <!-- Coluna Esquerda: Seção do Logo com Fundo Branco -->
-                <div class="w-full lg:w-1/3 bg-educa-blue-bg text-gray-800 flex items-center justify-center py-16 md:py-24 px-4 animate-fade-in">
+                <div
+                    class="w-full lg:w-1/3 bg-educa-blue-bg text-gray-800 flex items-center justify-center py-16 md:py-24 px-4 animate-fade-in">
                     <img src="./assets/logos/Ativo 10.png"
                         alt="Logo Educa+ Minas - Em Parceria com o Futuro"
                         class="h-16 md:h-28 lg:h-32 mx-auto drop-shadow-md">
                 </div>
 
                 <!-- Coluna Direita: Seção de Conteúdo Hero com Gradiente -->
-                <div class="w-full lg:w-2/3 hero-gradient text-white flex items-center py-16 md:py-24 relative">
+                <div
+                    class="w-full lg:w-2/3 hero-gradient text-white flex items-center py-16 md:py-24 relative">
                     <div class="container mx-auto px-12">
                         <div class="text-center lg:text-left">
-                            <h1 class="font-heading text-2xl md:text-3xl lg:text-4xl leading-tight mb-6 animate-fade-in-up drop-shadow-lg">
+                            <h1
+                                class="font-heading text-2xl md:text-3xl lg:text-4xl leading-tight mb-6 animate-fade-in-up drop-shadow-lg">
                                 Novas oportunidades te esperam:<br>
-                                <span class="text-4xl md:text-5xl lg:text-6xl font-extrabold">Seja
-                                    um parceiro <span class="text-educa-blue-bg">Educa+</span>!</span>
+                                <span
+                                    class="text-4xl md:text-5xl lg:text-6xl font-extrabold">Seja
+                                    um parceiro <span
+                                        class="text-educa-blue-bg">Educa+</span>!</span>
                             </h1>
-                            <p class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-300 leading-relaxed">
-                                Educação que conecta propósito e negócios. Torne-se
+                            <p
+                                class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-300 leading-relaxed">
+                                Educação que conecta propósito e negócios.
+                                Torne-se
                                 um polo Educa+ e expanda seus ganhos.
                             </p>
 
                             <!-- CTA Buttons -->
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-600">
-                                <a href="#formulario-parceria"
+                            <div
+                                class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-600">
+                                <a href="#" data-modal-trigger="partnership-form-modal"
                                     class="inline-block bg-educa-blue text-white font-bold text-lg md:text-xl px-10 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 animate-pulse-slow cta-glow">
                                     <i class="fas fa-handshake mr-2"></i>
                                     Quero Ser Parceiro Agora!
@@ -224,16 +236,19 @@
                                 </a>
                             </div>
 
-                            <p class="mt-6 text-sm opacity-80 animate-fade-in-up animation-delay-1000">
+                            <p
+                                class="mt-6 text-sm opacity-80 animate-fade-in-up animation-delay-1000">
                                 <i class="fas fa-shield-alt mr-2"></i>
-                                Invista no futuro da educação e garanta seu sucesso
+                                Invista no futuro da educação e garanta seu
+                                sucesso
                                 financeiro
                             </p>
                         </div>
                     </div>
 
                     <!-- Scroll Indicator - Mantém-se relativo à coluna direita -->
-                    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <div
+                        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
                         <a href="#sobre-educa-minas"
                             title="Conheça mais sobre a Educa+ Minas"
                             class="text-white opacity-70 hover:opacity-100 transition-opacity">
@@ -371,7 +386,7 @@
 
                             <!-- CTA Button -->
                             <div class="text-center lg:text-left">
-                                <a href="#formulario-parceria"
+                                <a href="#" data-modal-trigger="partnership-form-modal"
                                     class="inline-block bg-gradient-to-r from-educa-pink to-red-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 cta-glow">
                                     <i class="fas fa-handshake mr-2"></i>
                                     Quero Ser Parceiro Agora!
@@ -402,7 +417,7 @@
                                     <!-- Overlay com Play Button (opcional) -->
                                     <div
                                         class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                        <button
+                                        <button title="Reproduzir Vídeo"
                                             class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                                             <i
                                                 class="fas fa-play text-educa-pink text-xl ml-1"></i>
@@ -457,15 +472,6 @@
                         class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 md:p-12">
                         <!-- Header dos Valores -->
                         <div class="text-center mb-12">
-                            <div
-                                class="inline-block bg-white px-6 py-2 rounded-full mb-4 shadow-sm">
-                                <span
-                                    class="text-educa-blue font-semibold text-sm uppercase tracking-wide">
-                                    <i
-                                        class="fas fa-heart mr-2 text-educa-pink"></i>
-                                    Nossos Valores
-                                </span>
-                            </div>
                             <h3
                                 class="font-heading text-2xl md:text-3xl font-bold text-educa-blue mb-4">
                                 Os Pilares que Nos Movem
@@ -619,7 +625,7 @@
                                         <i class="fas fa-star mr-2"></i>
                                         Ver Benefícios
                                     </a>
-                                    <a href="#formulario-parceria"
+                                    <a href="#" data-modal-trigger="partnership-form-modal"
                                         class="inline-block bg-educa-pink text-white font-semibold px-6 py-3 rounded-full hover:bg-red-600 transition-colors">
                                         <i class="fas fa-rocket mr-2"></i>
                                         Começar Agora
@@ -1212,7 +1218,7 @@
                             reais de parceiros ativos e podem variar conforme o
                             desempenho e a região.
                         </p>
-                        <a href="#formulario-parceria"
+                        <a href="#" data-modal-trigger="partnership-form-modal"
                             class="inline-block bg-educa-blue text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 cta-glow">
                             <i class="fas fa-chart-line mr-2"></i>
                             Comece a Construir Seu Sucesso Financeiro!
@@ -1996,6 +2002,138 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Modal de Formulário de Parceria -->
+            <div id="partnership-form-modal"
+                class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999] hidden animate-fade-in-fast"
+                aria-modal="true"
+                aria-hidden="true"
+                role="dialog">
+                <div
+                    class="bg-gray-900 rounded-lg p-8 w-11/12 max-w-md relative text-white shadow-2xl animate-fade-in-up">
+                    <!-- Botão de Fechar -->
+                    <button
+                        class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl transition-colors duration-200 focus:outline-none close-modal-btn"
+                        aria-label="Fechar formulário">
+                        &times;
+                    </button>
+
+                    <h2
+                        class="font-heading text-2xl md:text-3xl font-bold text-center mb-8">
+                        Dê o primeiro passo para o <br>
+                        <span class="text-educa-pink">sucesso
+                            profissional</span>
+                    </h2>
+
+                    <form id="partner-form" class="space-y-4">
+                        <!-- Campo Nome -->
+                        <div>
+                            <label for="name" class="sr-only">Nome</label>
+                            <input type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Digite seu nome*"
+                                required
+                                class="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-educa-pink focus:border-transparent text-lg">
+                            <p id="name-error"
+                                class="text-red-500 text-sm mt-1 hidden">Preencha
+                                esse campo obrigatório.</p>
+                        </div>
+
+                        <!-- Campo E-mail -->
+                        <div>
+                            <label for="email" class="sr-only">E-mail</label>
+                            <input type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Digite seu e-mail*"
+                                required
+                                class="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-educa-pink focus:border-transparent text-lg">
+                            <p id="email-error"
+                                class="text-red-500 text-sm mt-1 hidden">Preencha
+                                esse campo obrigatório.</p>
+                        </div>
+
+                        <!-- Campo Telefone (WhatsApp) -->
+                        <div>
+                            <label for="phone" class="sr-only">Telefone</label>
+                            <input type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Digite seu WhatsApp*"
+                                required
+                                class="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-educa-pink focus:border-transparent text-lg">
+                            <p id="phone-error"
+                                class="text-red-500 text-sm mt-1 hidden">Preencha
+                                esse campo obrigatório.</p>
+                        </div>
+
+                        <!-- Campo Select de Experiência -->
+                        <div>
+                            <label for="experience" class="sr-only">Sua
+                                Experiência</label>
+                            <div class="relative">
+                                <select id="experience"
+                                    name="experience"
+                                    required
+                                    class="block appearance-none w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-educa-pink focus:border-transparent text-lg pr-10">
+                                    <option value disabled selected>Selecione
+                                        sua área de interesse*</option>
+                                    <option value="educacao">Já trabalho com
+                                        Educação</option>
+                                    <option value="vendas">Tenho Experiência em
+                                        Vendas</option>
+                                    <option value="empreendedor">Sou
+                                        empreendedor</option>
+                                    <option value="sem_experiencia">Não tenho
+                                        experiência na área</option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                    <svg class="fill-current h-4 w-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p id="experience-error"
+                                class="text-red-500 text-sm mt-1 hidden">Preencha
+                                esse campo obrigatório.</p>
+                        </div>
+
+                        <!-- Checkbox de Consentimento -->
+                        <div class="flex items-start">
+                            <input type="checkbox"
+                                id="privacyConsent"
+                                name="privacyConsent"
+                                required
+                                class="h-5 w-5 text-educa-pink rounded focus:ring-educa-pink border-gray-700 bg-gray-800">
+                            <label for="privacyConsent"
+                                class="ml-3 text-sm text-gray-300">
+                                Eu concordo em receber contato da Educa+ Minas
+                                sobre oportunidades de parceria e aceito os
+                                <a href="#"
+                                    class="text-educa-pink hover:underline">termos
+                                    de uso</a> e
+                                <a href="#"
+                                    class="text-educa-pink hover:underline">política
+                                    de privacidade</a>.*
+                            </label>
+                        </div>
+                        <p id="privacyConsent-error"
+                            class="text-red-500 text-sm mt-1 hidden -mt-2">Você
+                            deve concordar para continuar.</p>
+
+                        <!-- Botão de Enviar -->
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-gray-900 font-bold py-4 rounded-lg hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 text-xl shadow-lg">
+                            QUERO SABER MAIS
+                        </button>
+                    </form>
+                </div>
+            </div>
         </main>
 
         <!-- Footer -->
@@ -2340,6 +2478,7 @@
         <script src="./js/sections/form.js"></script>
         <script src="./js/sections/analytics.js"></script>
         <script src="./js/sections/performance.js"></script>
+        <script src="./js/sections/forms_janela.js"></script>
         <script src="./js/main.js"></script>
 
         <!-- Script para Cookie Banner -->
