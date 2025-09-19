@@ -1,0 +1,221 @@
+ <!-- Simulação de Ganhos Section -->
+<section id="simulacao-ganhos" class="py-16 md:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-16">
+            <h2
+                class="font-heading text-3xl md:text-4xl font-bold mb-6 text-educa-blue animate-fade-in">
+                Potencialize Seus Ganhos: Simule Sua Lucratividade!
+            </h2>
+            <p
+                class="text-lg text-educa-dark-gray max-w-2xl mx-auto animate-fade-in animation-delay-300">
+                Descubra o potencial de lucro da sua parceria.
+                Nossos modelos foram pensados para garantir a sua
+                rentabilidade desde o primeiro mês.
+            </p>
+            <div class="w-24 h-1 bg-educa-pink mx-auto mt-6"></div>
+        </div>
+
+        <!-- Simulação Interativa -->
+        <div
+            class="bg-white rounded-2xl shadow-xl p-8 mb-12 animate-fade-in-up animation-delay-600">
+            <h3
+                class="font-heading text-2xl font-bold text-center mb-8 text-educa-blue">
+                Calculadora de Rentabilidade
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Inputs -->
+                <div class="space-y-6">
+                    <div>
+                        <label
+                            class="block text-sm font-semibold text-educa-blue mb-2">Tipo
+                            de Parceria</label>
+                        <select id="partnership-type"
+                            title="Selecione o tipo de parceria"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent">
+                            <option value="small">Pequeno
+                                Polo/Vendedor (20-50
+                                alunos)</option>
+                            <option value="medium">Médio
+                                Polo/Vendedor (50-150
+                                alunos)</option>
+                            <option value="large">Grande
+                                Polo/Vendedor (150+ alunos)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-semibold text-educa-blue mb-2">Número
+                            de Alunos Estimado</label>
+                        <input type="range" id="student-count"
+                            title="Número de alunos estimado"
+                            min="20" max="300" value="50"
+                            class="w-full accent-educa-pink">
+                        <div
+                            class="flex justify-between text-sm text-educa-dark-gray mt-1">
+                            <span>20</span>
+                            <span id="student-display"
+                                class="font-semibold text-educa-pink">50</span>
+                            <span>300+</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-semibold text-educa-blue mb-2">Ticket
+                            Médio por Aluno</label>
+                        <select id="ticket-price"
+                            title="Selecione o ticket médio por aluno"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-educa-pink focus:border-transparent">
+                            <option value="200">R$ 200 - Cursos
+                                Básicos</option>
+                            <option value="350">R$ 350 - Cursos
+                                Técnicos</option>
+                            <option value="500">R$ 500 -
+                                Graduação</option>
+                            <option value="800">R$ 800 -
+                                Pós-graduação</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div
+                    class="bg-gradient-to-br from-educa-pink to-red-600 text-white p-6 rounded-xl">
+                    <h4
+                        class="font-heading text-xl font-bold mb-6 text-center">Sua
+                        Projeção Mensal</h4>
+                    <div class="space-y-4">
+                        <div
+                            class="flex justify-between items-center">
+                            <span>Faturamento Bruto:</span>
+                            <span id="gross-revenue"
+                                class="font-bold text-xl">R$
+                                17.500</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center">
+                            <span>Sua Comissão (40%):</span>
+                            <span id="commission"
+                                class="font-bold text-xl">R$
+                                7.000</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center">
+                            <span>Custos Operacionais:</span>
+                            <span id="operational-costs"
+                                class="font-bold text-xl">R$
+                                1.500</span>
+                        </div>
+                        <hr class="border-white/30">
+                        <div
+                            class="flex justify-between items-center">
+                            <span class="font-bold">Lucro
+                                Líquido:</span>
+                            <span id="net-profit"
+                                class="font-bold text-2xl text-yellow-300">R$
+                                5.500</span>
+                        </div>
+                        <div class="text-center mt-4">
+                            <span class="text-sm opacity-90">Lucro
+                                Anual Estimado:</span>
+                            <div id="annual-profit"
+                                class="font-bold text-xl text-yellow-300">R$
+                                66.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela Comparativa -->
+        <div
+            class="overflow-x-auto bg-white rounded-xl shadow-lg animate-fade-in-up animation-delay-900">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-educa-blue text-white">
+                        <th
+                            class="px-6 py-4 text-left font-semibold">Cenário</th>
+                        <th
+                            class="px-6 py-4 text-left font-semibold">Alunos
+                            Ativos</th>
+                        <th
+                            class="px-6 py-4 text-left font-semibold">Faturamento
+                            Mensal</th>
+                        <th
+                            class="px-6 py-4 text-left font-semibold">Lucro
+                            Líquido (Parceiro)</th>
+                        <th
+                            class="px-6 py-4 text-left font-semibold">ROI
+                            Mensal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td
+                            class="px-6 py-4 font-medium text-educa-blue">Pequeno
+                            Polo/Vendedor</td>
+                        <td
+                            class="px-6 py-4 text-educa-dark-gray">20-50
+                            alunos</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-blue">R$
+                            5.000 - R$ 12.000</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-pink">R$
+                            2.000 - R$ 6.000</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-green-600">15%
+                            - 25%</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 bg-red-50">
+                        <td
+                            class="px-6 py-4 font-medium text-educa-blue">Médio
+                            Polo/Vendedor</td>
+                        <td
+                            class="px-6 py-4 text-educa-dark-gray">50-150
+                            alunos</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-blue">R$
+                            12.000 - R$ 35.000</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-pink">R$
+                            6.000 - R$ 18.000</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-green-600">25%
+                            - 35%</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td
+                            class="px-6 py-4 font-medium text-educa-blue">Grande
+                            Polo/Vendedor</td>
+                        <td
+                            class="px-6 py-4 text-educa-dark-gray">150+
+                            alunos</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-blue">R$
+                            35.000+</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-educa-pink">R$
+                            18.000+</td>
+                        <td
+                            class="px-6 py-4 font-semibold text-green-600">35%+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-8">
+            <p class="text-sm text-educa-dark-gray mb-6">
+                <i class="fas fa-info-circle mr-2"></i>
+                *Estes valores são estimativas baseadas em dados
+                reais de parceiros ativos e podem variar conforme o
+                desempenho e a região.
+            </p>
+            <a href="#" data-modal-trigger="partnership-form-modal"
+                class="inline-block bg-educa-blue text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 cta-glow">
+                <i class="fas fa-chart-line mr-2"></i>
+                Comece a Construir Seu Sucesso Financeiro!
+            </a>
+        </div>
+    </div>
+</section>
