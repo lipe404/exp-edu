@@ -96,6 +96,17 @@
             .animation-delay-1000 { animation-delay: 1s; }
             .animation-delay-2000 { animation-delay: 2s; }
 
+            /* Animação fade-in e slide-up */
+            .animate-fade-slide-up {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+            .animate-fade-slide-up.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
             /* Smooth scroll */
             html {
                 scroll-behavior: smooth;
@@ -132,6 +143,17 @@
             /* Efeito de brilho nos CTAs */
             .cta-glow:hover {
                 box-shadow: 0 0 20px rgba(231, 31, 93, 0.4);
+            }
+
+            /* Header fade out */
+            .header-fade-out {
+                opacity: 1;
+                transition: opacity 1.8s ease-out;
+            }
+
+            .header-fade-out.hide {
+                opacity: 0;
+                pointer-events: none;
             }
         </style>
 
@@ -178,7 +200,7 @@
         </div>
 
         <!-- Header/Hero Section -->
-        <header class="relative overflow-hidden">
+        <header class="relative overflow-hidden header-fade-out">
             <!-- Background Animation - Mantém-se inalterado e relativo à header pai -->
             <div class="absolute inset-0 z-0">
                 <div
@@ -263,7 +285,7 @@
         <main>
             <!-- Sobre a Educa+ Minas Section -->
             <section id="sobre-educa-minas"
-                class="py-16 md:py-20 bg-white relative overflow-hidden">
+                class="py-16 md:py-20 bg-white relative overflow-hidden animate-fade-slide-up">
                 <!-- Background Decorativo -->
                 <div class="absolute inset-0 z-0">
                     <div
@@ -426,7 +448,7 @@
             </section>
 
             <!-- Benefícios Section -->
-            <section id="beneficios" class="py-16 md:py-20 bg-gray-50">
+            <section id="beneficios" class="py-16 md:py-20 bg-gray-50 animate-fade-slide-up">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-16">
                         <h2
@@ -605,7 +627,7 @@
             </section>
 
             <!-- Como Funciona Section -->
-            <section id="como-funciona" class="py-16 md:py-20 bg-white">
+            <section id="como-funciona" class="py-16 md:py-20 bg-white animate-fade-slide-up">
                 <div class="container mx-auto px-4 max-w-6xl">
                     <div class="text-center mb-16">
                         <h2
@@ -795,7 +817,7 @@
             </section>
 
             <!-- FAQ Section -->
-            <section id="faq" class="py-16 md:py-20 bg-gray-50">
+            <section id="faq" class="py-16 md:py-20 bg-gray-50 animate-fade-slide-up">
                 <div class="container mx-auto px-4 max-w-4xl">
                     <div class="text-center mb-16">
                         <h2
@@ -1015,7 +1037,7 @@
 
             <!-- Formulário de Parceria Section -->
             <section id="formulario-parceria"
-                class="py-16 md:py-20 bg-gradient-to-br from-educa-blue to-blue-900 text-white">
+                class="py-16 md:py-20 bg-gradient-to-br from-educa-blue to-blue-900 text-white animate-fade-slide-up">
                 <div class="container mx-auto px-4 max-w-4xl">
                     <div class="text-center mb-12">
                         <h2
@@ -1823,6 +1845,45 @@
                         });
                     }
                 });
+            });
+        </script>
+
+        <!-- Script para listernet scroll no header para classe hide-->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const header = document.querySelector('header');
+                const main = document.querySelector('main');
+                window.addEventListener('scroll', () => {
+                if (window.scrollY > header.offsetHeight / 2) {
+                    header.classList.add('hide');
+                } else {
+                    header.classList.remove('hide');
+                }
+                });
+            });
+        </script>
+
+        <!-- Script para Intersection Observer em viewport -->
+         <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const animatedElements = document.querySelectorAll('.animate-fade-slide-up');
+
+                const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // 15% do elemento visível para ativar
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // anima uma vez só para performance
+                    }
+                });
+                }, observerOptions);
+
+                animatedElements.forEach(el => observer.observe(el));
             });
         </script>
 
