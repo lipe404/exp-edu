@@ -12,19 +12,23 @@ const ScrollManager = {
       anchor.addEventListener("click", (e) => {
         e.preventDefault();
         const targetId = anchor.getAttribute("href");
-        const targetElement = document.querySelector(targetId);
 
-        if (targetElement) {
-          Utils.smoothScrollTo(targetElement);
+        // CORREÇÃO: Verificar se targetId não é apenas "#"
+        if (targetId && targetId !== "#") {
+          const targetElement = document.querySelector(targetId);
 
-          // Atualizar URL sem recarregar página
-          history.pushState(null, null, targetId);
+          if (targetElement) {
+            Utils.smoothScrollTo(targetElement);
 
-          // Google Analytics tracking
-          if (typeof gtag !== "undefined") {
-            gtag("event", "scroll_to_section", {
-              section_name: targetId.replace("#", ""),
-            });
+            // Atualizar URL sem recarregar página
+            history.pushState(null, null, targetId);
+
+            // Google Analytics tracking
+            if (typeof gtag !== "undefined") {
+              gtag("event", "scroll_to_section", {
+                section_name: targetId.replace("#", ""),
+              });
+            }
           }
         }
       });
@@ -39,16 +43,22 @@ const ScrollManager = {
         window.pageYOffset || document.documentElement.scrollTop;
 
       // Back to top button
-      if (scrollTop > 300) {
-        backToTopBtn.classList.remove("opacity-0", "invisible");
-        backToTopBtn.classList.add("opacity-100", "visible");
-      } else {
-        backToTopBtn.classList.add("opacity-0", "invisible");
-        backToTopBtn.classList.remove("opacity-100", "visible");
+      if (backToTopBtn) {
+        if (scrollTop > 300) {
+          backToTopBtn.classList.remove("opacity-0", "invisible");
+          backToTopBtn.classList.add("opacity-100", "visible");
+        } else {
+          backToTopBtn.classList.add("opacity-0", "invisible");
+          backToTopBtn.classList.remove("opacity-100", "visible");
+        }
       }
 
       // Marcar que o usuário fez scroll
-      if (scrollTop > 100 && !AppState.hasScrolled) {
+      if (
+        scrollTop > 100 &&
+        typeof AppState !== "undefined" &&
+        !AppState.hasScrolled
+      ) {
         AppState.hasScrolled = true;
         if (typeof gtag !== "undefined") {
           gtag("event", "page_scroll", {
@@ -93,7 +103,9 @@ const ScrollManager = {
             const finalValue = parseInt(
               entry.target.getAttribute("data-counter")
             );
-            Utils.animateCounter(entry.target, 0, finalValue, 2000);
+            if (typeof Utils !== "undefined" && Utils.animateCounter) {
+              Utils.animateCounter(entry.target, 0, finalValue, 2000);
+            }
           }
         }
       });
