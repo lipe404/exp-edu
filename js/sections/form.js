@@ -38,10 +38,11 @@ class FormsManagerClass {
 
     // Desabilitar API por enquanto
     this.apiConfig = {
-      endpoint: null, // Desabilitado
-      timeout: 10000,
+      endpoint:
+        "https://script.google.com/macros/s/AKfycbzcGKtBU_Du409OAuoNbl7n6wK7_jCwVdBz788Pa-M-81B0N7wWS3PO9rHly1RJe-gVtg/exec",
+      timeout: 15000,
       retries: 3,
-      enabled: false, // Flag para controlar API
+      enabled: true, // Flag para controlar API
     };
   }
 
@@ -388,19 +389,60 @@ class FormsManagerClass {
       // Coletar dados do formulário
       const formData = this.collectFormData(formKey);
 
-      // Salvar localmente sempre
+      // Salvar localmente sempre (backup)
       this.saveLeadLocally(formData);
 
+      // Enviar para Google Sheets
+      if (this.apiConfig.enabled && this.apiConfig.endpoint) {
+        try {
+          const response = await this.submitToGoogleSheets(formData);
+          console.log("Enviado para Google Sheets:", response);
+        } catch (apiError) {
+          console.warn("Erro ao enviar para Google Sheets:", apiError);
+          // Continua mesmo se der erro na API
+        }
+      }
+
       // Simular delay de processamento
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Processar resposta de sucesso
       await this.handleSubmissionSuccess(formKey, { success: true });
     } catch (error) {
-      // console.error("Erro no envio:", error);
+      console.error("Erro no envio:", error);
       this.handleSubmissionError(formKey, error);
     } finally {
       this.setLoadingState(submitButton, false);
+    }
+  }
+
+  /**
+   * Enviar dados para Google Sheets - Versão GET (sem CORS)
+   */
+  async submitToGoogleSheets(data) {
+    try {
+      console.log("Enviando para Google Sheets:", data);
+
+      // Usar GET para evitar CORS
+      const params = new URLSearchParams({
+        data: JSON.stringify(data),
+      });
+
+      const url = `${this.apiConfig.endpoint}?${params.toString()}`;
+
+      // Usar fetch com GET
+      const response = await fetch(url, {
+        method: "GET",
+        mode: "no-cors", // Evita problemas de CORS
+      });
+
+      // Com no-cors, não conseguimos ler a resposta, mas funciona
+      console.log("Enviado para Google Sheets (no-cors)");
+
+      return { success: true, message: "Enviado com sucesso" };
+    } catch (error) {
+      console.error("Google Sheets - Erro:", error);
+      throw error;
     }
   }
 
