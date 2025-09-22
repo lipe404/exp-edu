@@ -1,4 +1,4 @@
-// forms_janela.js
+// Gerenciamento do Formulário - Janelas Modais
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("partnership-form-modal");

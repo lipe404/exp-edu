@@ -54,7 +54,6 @@ const FormManager = {
       this.showSubmittingFeedback();
 
       // O Netlify Forms vai processar o envio automaticamente
-      // Não precisamos prevenir o comportamento padrão se tudo estiver válido
     });
   },
 

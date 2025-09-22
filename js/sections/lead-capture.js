@@ -1,4 +1,4 @@
-// lead-capture.js - Sistema de Captura de Leads Educa+
+// Gerenciamento do Formulário - Leads de Captura via Botões Flutuantes
 
 class LeadCapture {
   constructor() {
@@ -159,7 +159,6 @@ class LeadCapture {
 
   async submitLead(leadData) {
     // Implementar integração com sua API/CRM aqui
-    // Exemplo com diferentes opções:
 
     // Opção 1: Netlify Forms
     if (window.netlify) {
