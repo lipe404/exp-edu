@@ -5,7 +5,6 @@ class App {
   }
 
   init() {
-    // Aguardar DOM estar pronto
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () =>
         this.initializeModules()
@@ -17,7 +16,6 @@ class App {
 
   initializeModules() {
     try {
-      // Verificar se todos os módulos estão carregados
       const modules = [
         {
           name: "LoadingManager",
@@ -67,9 +65,7 @@ class App {
         if (module.obj && typeof module.obj.init === "function") {
           try {
             module.obj.init();
-            // console.log(`✅ ${module.name} inicializado com sucesso!`);
           } catch (error) {
-            // console.error(`❌ Erro ao inicializar ${module.name}:`, error);
           }
         } else {
           console.warn(
@@ -79,7 +75,6 @@ class App {
       });
 
     } catch (error) {
-      // console.error("❌ Erro ao inicializar aplicação:", error);
     }
   }
 }
