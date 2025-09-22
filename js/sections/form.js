@@ -1,6 +1,6 @@
 /**
  * Forms Manager - Gerenciamento Unificado de Formulários
- * Gerencia 3 tipos de formulários:
+ * Gerencia 3 formulários:
  * 1. Formulário Principal (Seção LP) - #partnership-form
  * 2. Formulário Modal Resumido - #partner-form
  * 3. Formulário Lead Capture - #leadForm
@@ -36,13 +36,12 @@ class FormsManagerClass {
       contentType: "",
     };
 
-    // Desabilitar API por enquanto
     this.apiConfig = {
       endpoint:
         "https://script.google.com/macros/s/AKfycbzcGKtBU_Du409OAuoNbl7n6wK7_jCwVdBz788Pa-M-81B0N7wWS3PO9rHly1RJe-gVtg/exec",
       timeout: 15000,
       retries: 3,
-      enabled: true, // Flag para controlar API
+      enabled: true,
     };
   }
 
@@ -54,7 +53,6 @@ class FormsManagerClass {
     this.setupModals();
     this.setupFloatingButtons();
     this.setupValidationListeners();
-    // console.log("Forms Manager inicializado");
   }
 
   /**
@@ -67,7 +65,6 @@ class FormsManagerClass {
 
       if (form.element) {
         this.setupFormSubmission(key);
-        // console.log(`Formulário ${key} configurado`);
       }
     });
   }
@@ -213,10 +210,7 @@ class FormsManagerClass {
       e.preventDefault();
       e.stopPropagation();
 
-      // console.log(`Enviando formulário: ${formKey}`);
-
       if (!this.validateForm(formKey)) {
-        // console.log("Validação falhou");
         return;
       }
 
@@ -371,7 +365,6 @@ class FormsManagerClass {
       }
     });
 
-    // console.log(`Validação do formulário ${formKey}:`, isValid);
     return isValid;
   }
 
@@ -396,10 +389,8 @@ class FormsManagerClass {
       if (this.apiConfig.enabled && this.apiConfig.endpoint) {
         try {
           const response = await this.submitToGoogleSheets(formData);
-          console.log("Enviado para Google Sheets:", response);
         } catch (apiError) {
           console.warn("Erro ao enviar para Google Sheets:", apiError);
-          // Continua mesmo se der erro na API
         }
       }
 
@@ -421,8 +412,6 @@ class FormsManagerClass {
    */
   async submitToGoogleSheets(data) {
     try {
-      console.log("Enviando para Google Sheets:", data);
-
       // Usar GET para evitar CORS
       const params = new URLSearchParams({
         data: JSON.stringify(data),
@@ -433,11 +422,8 @@ class FormsManagerClass {
       // Usar fetch com GET
       const response = await fetch(url, {
         method: "GET",
-        mode: "no-cors", // Evita problemas de CORS
+        mode: "no-cors",
       });
-
-      // Com no-cors, não conseguimos ler a resposta, mas funciona
-      console.log("Enviado para Google Sheets (no-cors)");
 
       return { success: true, message: "Enviado com sucesso" };
     } catch (error) {
@@ -715,9 +701,7 @@ class FormsManagerClass {
         local_timestamp: new Date().toISOString(),
       });
       localStorage.setItem("educa_leads", JSON.stringify(leads));
-      // console.log("Lead salvo localmente:", data);
     } catch (error) {
-      // console.warn("Erro ao salvar lead localmente:", error);
     }
   }
 
@@ -748,7 +732,6 @@ const FormsManager = {
   // Método init() que o main.js espera
   init() {
     if (this.isInitialized) {
-      // console.log("FormsManager já foi inicializado");
       return this.instance;
     }
 
@@ -758,7 +741,6 @@ const FormsManager = {
       this.isInitialized = true;
       return this.instance;
     } catch (error) {
-      // console.error("❌ Erro ao inicializar FormsManager:", error);
       return null;
     }
   },
