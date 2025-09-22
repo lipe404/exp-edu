@@ -25,24 +25,24 @@ class App {
           name: "ScrollManager",
           obj: typeof ScrollManager !== "undefined" ? ScrollManager : null,
         },
-        {
+        /*{
           name: "TestimonialCarousel",
           obj:
             typeof TestimonialCarousel !== "undefined"
               ? TestimonialCarousel
               : null,
-        },
+        },*/
         {
           name: "FAQManager",
           obj: typeof FAQManager !== "undefined" ? FAQManager : null,
         },
-        {
+        /*{
           name: "ProfitabilityCalculator",
           obj:
             typeof ProfitabilityCalculator !== "undefined"
               ? ProfitabilityCalculator
               : null,
-        },
+        },*/
         {
           name: "FormsManager",
           obj: typeof FormsManager !== "undefined" ? FormsManager : null,
@@ -52,13 +52,13 @@ class App {
           obj:
             typeof AnalyticsManager !== "undefined" ? AnalyticsManager : null,
         },
-        {
+        /*{
           name: "PerformanceMonitor",
           obj:
             typeof PerformanceMonitor !== "undefined"
               ? PerformanceMonitor
               : null,
-        },
+        },*/
       ];
 
       modules.forEach((module) => {
