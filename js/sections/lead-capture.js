@@ -15,12 +15,14 @@ class LeadCapture {
     document
       .getElementById("openGuideModal")
       ?.addEventListener("click", (e) => {
+        e.preventDefault();
         this.openModal(e.target.closest("button"));
       });
 
     document
       .getElementById("openPodcastModal")
       ?.addEventListener("click", (e) => {
+        e.preventDefault();
         this.openModal(e.target.closest("button"));
       });
 
@@ -36,14 +38,18 @@ class LeadCapture {
       }
     });
 
-    // Event listener do formulário
+    // Event listener do formulário - CORRIGIDO
     this.form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       this.handleSubmit(e);
     });
 
     // Formatação automática do WhatsApp
     const whatsappInput = document.getElementById("whatsapp");
-    whatsappInput?.addEventListener("input", this.formatWhatsApp);
+    whatsappInput?.addEventListener("input", (e) => {
+      this.formatWhatsApp(e);
+    });
 
     // Fechar modal com ESC
     document.addEventListener("keydown", (e) => {
@@ -67,9 +73,16 @@ class LeadCapture {
     this.modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
 
+    // Limpar formulário antes de abrir
+    this.resetForm();
+
     // Foco no primeiro campo
     setTimeout(() => {
-      document.getElementById("email")?.focus();
+      const emailInput = document.getElementById("email");
+      if (emailInput) {
+        emailInput.focus();
+        emailInput.value = ""; // Garantir que está limpo
+      }
     }, 300);
 
     // Analytics
@@ -86,7 +99,7 @@ class LeadCapture {
       modalIcon.className =
         "w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center text-2xl bg-gradient-to-br from-blue-500 to-blue-600";
       modalIcon.innerHTML = '<i class="fas fa-file-pdf text-white"></i>';
-      modalTitle.textContent = "📋 Baixar Guia Completo";
+      modalTitle.textContent = "Baixar Guia Completo";
       modalSubtitle.textContent =
         "Descubra tudo sobre nossa parceria em um material exclusivo";
       submitText.textContent = "BAIXAR GUIA GRÁTIS";
@@ -94,7 +107,7 @@ class LeadCapture {
       modalIcon.className =
         "w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center text-2xl bg-gradient-to-br from-purple-500 to-purple-600";
       modalIcon.innerHTML = '<i class="fas fa-podcast text-white"></i>';
-      modalTitle.textContent = "🎧 Ouvir Podcast";
+      modalTitle.textContent = "Ouvir Podcast";
       modalSubtitle.textContent = "Conheça nossa proposta de parceria em áudio";
       submitText.textContent = "OUVIR PODCAST";
     }
@@ -108,11 +121,33 @@ class LeadCapture {
 
   async handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
 
-    // Validar formulário
-    if (!this.validateForm()) {
+    console.log("=== INÍCIO DA VALIDAÇÃO ===");
+
+    // CAPTURAR VALORES DIRETAMENTE DOS INPUTS
+    const emailInput = document.getElementById("email");
+    const whatsappInput = document.getElementById("whatsapp");
+    const consentInput = document.getElementById("consent");
+
+    if (!emailInput || !whatsappInput || !consentInput) {
+      console.error("Inputs não encontrados!");
       return;
     }
+
+    const email = emailInput.value.trim();
+    const whatsapp = whatsappInput.value.trim();
+    const consent = consentInput.checked;
+
+    console.log("Valores capturados:", { email, whatsapp, consent });
+
+    // Validar formulário
+    if (!this.validateFormData(email, whatsapp, consent)) {
+      console.log("Validação falhou!");
+      return;
+    }
+
+    console.log("Validação passou! Processando...");
 
     const submitBtn = document.getElementById("submitBtn");
     const submitText = document.getElementById("submitText");
@@ -124,16 +159,17 @@ class LeadCapture {
     submitLoader.classList.remove("hidden");
 
     try {
-      // Coletar dados
-      const formData = new FormData(this.form);
+      // Dados do lead
       const leadData = {
-        email: formData.get("email"),
-        whatsapp: formData.get("whatsapp"),
+        email: email,
+        whatsapp: whatsapp,
         content_type: this.currentType,
         file_url: this.currentFileUrl,
         timestamp: new Date().toISOString(),
         source: "floating_buttons",
       };
+
+      console.log("Enviando lead:", leadData);
 
       // Simular envio (substituir por sua API)
       await this.submitLead(leadData);
@@ -157,36 +193,60 @@ class LeadCapture {
     }
   }
 
-  async submitLead(leadData) {
-    // Implementar integração com sua API/CRM aqui
+  // NOVA FUNÇÃO DE VALIDAÇÃO
+  validateFormData(email, whatsapp, consent) {
+    let isValid = true;
 
-    // Opção 1: Netlify Forms
-    if (window.netlify) {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "lead-capture",
-          ...leadData,
-        }).toString(),
-      });
+    console.log("Validando dados:", { email, whatsapp, consent });
 
-      if (!response.ok) throw new Error("Erro no envio");
+    // Validar e-mail
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!email) {
+      this.showFieldError("email", "E-mail é obrigatório");
+      isValid = false;
+      console.log("Email vazio");
+    } else if (!emailRegex.test(email)) {
+      this.showFieldError("email", "Formato de e-mail inválido");
+      isValid = false;
+      console.log("Email inválido:", email);
+    } else {
+      this.hideFieldError("email");
+      console.log("Email válido:", email);
     }
 
-    // Opção 2: Google Sheets via Apps Script
-    // const response = await fetch('SUA_URL_GOOGLE_APPS_SCRIPT', {
-    //     method: 'POST',
-    //     body: JSON.stringify(leadData)
-    // });
+    // Validar WhatsApp
+    const cleanWhatsapp = whatsapp.replace(/\D/g, "");
+    if (!whatsapp) {
+      this.showFieldError("whatsapp", "WhatsApp é obrigatório");
+      isValid = false;
+      console.log("WhatsApp vazio");
+    } else if (cleanWhatsapp.length < 10 || cleanWhatsapp.length > 11) {
+      this.showFieldError("whatsapp", "WhatsApp deve ter 10 ou 11 dígitos");
+      isValid = false;
+      console.log(
+        "WhatsApp inválido:",
+        whatsapp,
+        "Dígitos:",
+        cleanWhatsapp.length
+      );
+    } else {
+      this.hideFieldError("whatsapp");
+      console.log("WhatsApp válido:", whatsapp);
+    }
 
-    // Opção 3: RD Station, HubSpot, etc.
-    // const response = await fetch('SUA_WEBHOOK_URL', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(leadData)
-    // });
+    // Validar consentimento
+    if (!consent) {
+      this.showError("Você deve concordar com nossa política de privacidade");
+      isValid = false;
+      console.log("Consentimento não marcado");
+    }
 
+    console.log("Resultado da validação:", isValid);
+    return isValid;
+  }
+
+  async submitLead(leadData) {
     // Salvar no localStorage para backup
     this.saveLeadLocally(leadData);
 
@@ -200,45 +260,17 @@ class LeadCapture {
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
-  validateForm() {
-    const email = document.getElementById("email").value.trim();
-    const whatsapp = document.getElementById("whatsapp").value.trim();
-    const consent = document.getElementById("consent").checked;
-
-    let isValid = true;
-
-    // Validar e-mail
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
-      this.showFieldError("email", "Por favor, insira um e-mail válido");
-      isValid = false;
-    } else {
-      this.hideFieldError("email");
-    }
-
-    // Validar WhatsApp
-    const cleanWhatsapp = whatsapp.replace(/\D/g, "");
-    if (!whatsapp || cleanWhatsapp.length < 10) {
-      this.showFieldError("whatsapp", "Por favor, insira um WhatsApp válido");
-      isValid = false;
-    } else {
-      this.hideFieldError("whatsapp");
-    }
-
-    // Validar consentimento
-    if (!consent) {
-      this.showError("Você deve concordar com nossa política de privacidade");
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
   showFieldError(fieldName, message) {
     const field = document.getElementById(fieldName);
     const error = document.getElementById(fieldName + "Error");
 
-    field?.classList.add("border-red-500", "focus:ring-red-500");
+    console.log("Mostrando erro para:", fieldName, message);
+
+    if (field) {
+      field.classList.add("border-red-500", "focus:ring-red-500");
+      field.classList.remove("border-gray-600");
+    }
+
     if (error) {
       error.textContent = message;
       error.classList.remove("hidden");
@@ -249,8 +281,14 @@ class LeadCapture {
     const field = document.getElementById(fieldName);
     const error = document.getElementById(fieldName + "Error");
 
-    field?.classList.remove("border-red-500", "focus:ring-red-500");
-    error?.classList.add("hidden");
+    if (field) {
+      field.classList.remove("border-red-500", "focus:ring-red-500");
+      field.classList.add("border-gray-600");
+    }
+
+    if (error) {
+      error.classList.add("hidden");
+    }
   }
 
   showSuccessState() {
@@ -290,20 +328,44 @@ class LeadCapture {
     let value = e.target.value.replace(/\D/g, "");
 
     if (value.length <= 11) {
-      value = value.replace(/(\d{2})(\d)/, "($1) $2");
-      value = value.replace(/(\d{4,5})(\d{4})$/, "$1-$2");
+      if (value.length <= 2) {
+        value = value.replace(/(\d{0,2})/, "($1");
+      } else if (value.length <= 6) {
+        value = value.replace(/(\d{2})(\d{0,4})/, "($1) $2");
+      } else if (value.length <= 10) {
+        value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+      } else {
+        value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+      }
     }
 
     e.target.value = value;
   }
 
   showError(message) {
-    // Implementar sistema de toast/notificação
-    alert(message); // Substituir por toast mais elegante
+    // Toast simples
+    const toast = document.createElement("div");
+    toast.className =
+      "fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg z-[10000]";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
   }
 
   resetForm() {
-    this.form?.reset();
+    // Limpar formulário manualmente
+    const emailInput = document.getElementById("email");
+    const whatsappInput = document.getElementById("whatsapp");
+    const consentInput = document.getElementById("consent");
+
+    if (emailInput) emailInput.value = "";
+    if (whatsappInput) whatsappInput.value = "";
+    if (consentInput) consentInput.checked = false;
+
+    // Mostrar formulário e esconder sucesso
     const formSection = document.getElementById("leadForm");
     const successState = document.getElementById("successState");
 
@@ -319,6 +381,7 @@ class LeadCapture {
       const leads = JSON.parse(localStorage.getItem("educa_leads") || "[]");
       leads.push(leadData);
       localStorage.setItem("educa_leads", JSON.stringify(leads));
+      console.log("Lead salvo localmente:", leadData);
     } catch (error) {
       console.warn("Erro ao salvar lead localmente:", error);
     }
