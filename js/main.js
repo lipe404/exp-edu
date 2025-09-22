@@ -45,7 +45,6 @@ class App {
               ? ProfitabilityCalculator
               : null,
         },
-        // CORRIGIDO: FormsManager em vez de FormManager
         {
           name: "FormsManager",
           obj: typeof FormsManager !== "undefined" ? FormsManager : null,
@@ -68,9 +67,9 @@ class App {
         if (module.obj && typeof module.obj.init === "function") {
           try {
             module.obj.init();
-            console.log(`✅ ${module.name} inicializado com sucesso!`);
+            // console.log(`✅ ${module.name} inicializado com sucesso!`);
           } catch (error) {
-            console.error(`❌ Erro ao inicializar ${module.name}:`, error);
+            // console.error(`❌ Erro ao inicializar ${module.name}:`, error);
           }
         } else {
           console.warn(
@@ -79,9 +78,8 @@ class App {
         }
       });
 
-      console.log("✅ Educa+ Landing Page inicializada com sucesso!");
     } catch (error) {
-      console.error("❌ Erro ao inicializar aplicação:", error);
+      // console.error("❌ Erro ao inicializar aplicação:", error);
     }
   }
 }

@@ -36,7 +36,7 @@ class FormsManagerClass {
       contentType: "",
     };
 
-    // CORREÇÃO: Desabilitar API por enquanto
+    // Desabilitar API por enquanto
     this.apiConfig = {
       endpoint: null, // Desabilitado
       timeout: 10000,
@@ -53,7 +53,7 @@ class FormsManagerClass {
     this.setupModals();
     this.setupFloatingButtons();
     this.setupValidationListeners();
-    console.log("✅ Forms Manager inicializado");
+    // console.log("Forms Manager inicializado");
   }
 
   /**
@@ -66,7 +66,7 @@ class FormsManagerClass {
 
       if (form.element) {
         this.setupFormSubmission(key);
-        console.log(`📋 Formulário ${key} configurado`);
+        // console.log(`Formulário ${key} configurado`);
       }
     });
   }
@@ -212,10 +212,10 @@ class FormsManagerClass {
       e.preventDefault();
       e.stopPropagation();
 
-      console.log(`📤 Enviando formulário: ${formKey}`);
+      // console.log(`Enviando formulário: ${formKey}`);
 
       if (!this.validateForm(formKey)) {
-        console.log("❌ Validação falhou");
+        // console.log("Validação falhou");
         return;
       }
 
@@ -370,7 +370,7 @@ class FormsManagerClass {
       }
     });
 
-    console.log(`Validação do formulário ${formKey}:`, isValid);
+    // console.log(`Validação do formulário ${formKey}:`, isValid);
     return isValid;
   }
 
@@ -388,9 +388,6 @@ class FormsManagerClass {
       // Coletar dados do formulário
       const formData = this.collectFormData(formKey);
 
-      // CORREÇÃO: Pular API e ir direto para sucesso
-      console.log("📊 Dados coletados:", formData);
-
       // Salvar localmente sempre
       this.saveLeadLocally(formData);
 
@@ -400,7 +397,7 @@ class FormsManagerClass {
       // Processar resposta de sucesso
       await this.handleSubmissionSuccess(formKey, { success: true });
     } catch (error) {
-      console.error("Erro no envio:", error);
+      // console.error("Erro no envio:", error);
       this.handleSubmissionError(formKey, error);
     } finally {
       this.setLoadingState(submitButton, false);
@@ -471,7 +468,7 @@ class FormsManagerClass {
         break;
 
       case "leadCapture":
-        // CORREÇÃO: Ir direto para download sem mostrar tela de sucesso
+        // Ir direto para download sem mostrar tela de sucesso
         this.processLeadCaptureDownload();
         this.closeModal("leadCaptureModal");
         this.showSuccessMessage("Download iniciado! Verifique seus arquivos.");
@@ -676,9 +673,9 @@ class FormsManagerClass {
         local_timestamp: new Date().toISOString(),
       });
       localStorage.setItem("educa_leads", JSON.stringify(leads));
-      console.log("💾 Lead salvo localmente:", data);
+      // console.log("Lead salvo localmente:", data);
     } catch (error) {
-      console.warn("Erro ao salvar lead localmente:", error);
+      // console.warn("Erro ao salvar lead localmente:", error);
     }
   }
 
@@ -698,13 +695,10 @@ class FormsManagerClass {
     if (typeof fbq !== "undefined") {
       fbq("track", eventName, parameters);
     }
-
-    // Console para debug
-    console.log("📊 Event tracked:", eventName, parameters);
   }
 }
 
-// ===== CORREÇÃO: Criar objeto estático compatível com main.js =====
+// Criar objeto estático compatível com main.js
 const FormsManager = {
   instance: null,
   isInitialized: false,
@@ -712,7 +706,7 @@ const FormsManager = {
   // Método init() que o main.js espera
   init() {
     if (this.isInitialized) {
-      console.log("✅ FormsManager já foi inicializado");
+      // console.log("FormsManager já foi inicializado");
       return this.instance;
     }
 
@@ -722,7 +716,7 @@ const FormsManager = {
       this.isInitialized = true;
       return this.instance;
     } catch (error) {
-      console.error("❌ Erro ao inicializar FormsManager:", error);
+      // console.error("❌ Erro ao inicializar FormsManager:", error);
       return null;
     }
   },
