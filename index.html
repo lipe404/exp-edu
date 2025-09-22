@@ -1996,86 +1996,87 @@
         <script src="./js/sections/performance.js"></script>
         <script src="./js/sections/forms_janela.js"></script>
         <script src="./js/sections/lead-capture.js"></script>
+        <script src="./js/sections/video.js"></script>
         <script src="./js/main.js"></script>
 
         <!-- Script para Cookie Banner -->
         <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const cookieBanner = document.getElementById('cookie-banner');
-                    const acceptBtn = document.getElementById('accept-cookies');
-                    const rejectBtn = document.getElementById('reject-cookies');
+            document.addEventListener('DOMContentLoaded', function() {
+                const cookieBanner = document.getElementById('cookie-banner');
+                const acceptBtn = document.getElementById('accept-cookies');
+                const rejectBtn = document.getElementById('reject-cookies');
 
-                    // Mostrar banner se não houver preferência salva
-                    if (!localStorage.getItem('cookieConsent')) {
-                        setTimeout(() => {
-                            cookieBanner.classList.remove('translate-y-full');
-                        }, 2000);
+                // Mostrar banner se não houver preferência salva
+                if (!localStorage.getItem('cookieConsent')) {
+                    setTimeout(() => {
+                        cookieBanner.classList.remove('translate-y-full');
+                    }, 2000);
+                }
+
+                acceptBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookieConsent', 'accepted');
+                    cookieBanner.classList.add('translate-y-full');
+
+                    // Ativar Google Analytics e outros cookies
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'analytics_storage': 'granted'
+                        });
                     }
-
-                    acceptBtn.addEventListener('click', function() {
-                        localStorage.setItem('cookieConsent', 'accepted');
-                        cookieBanner.classList.add('translate-y-full');
-
-                        // Ativar Google Analytics e outros cookies
-                        if (typeof gtag !== 'undefined') {
-                            gtag('consent', 'update', {
-                                'analytics_storage': 'granted'
-                            });
-                        }
-                    });
-
-                    rejectBtn.addEventListener('click', function() {
-                        localStorage.setItem('cookieConsent', 'rejected');
-                        cookieBanner.classList.add('translate-y-full');
-
-                        // Desativar cookies não essenciais
-                        if (typeof gtag !== 'undefined') {
-                            gtag('consent', 'update', {
-                                'analytics_storage': 'denied'
-                            });
-                        }
-                    });
                 });
-            </script>
+
+                rejectBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookieConsent', 'rejected');
+                    cookieBanner.classList.add('translate-y-full');
+
+                    // Desativar cookies não essenciais
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'analytics_storage': 'denied'
+                        });
+                    }
+                });
+            });
+        </script>
 
         <!-- Script para listernet scroll no header para classe hide-->
         <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const header = document.querySelector('header');
-                    const main = document.querySelector('main');
-                    window.addEventListener('scroll', () => {
-                    if (window.scrollY > header.offsetHeight / 2) {
-                        header.classList.add('hide');
-                    } else {
-                        header.classList.remove('hide');
-                    }
-                    });
+            document.addEventListener('DOMContentLoaded', () => {
+                const header = document.querySelector('header');
+                const main = document.querySelector('main');
+                window.addEventListener('scroll', () => {
+                if (window.scrollY > header.offsetHeight / 2) {
+                    header.classList.add('hide');
+                } else {
+                    header.classList.remove('hide');
+                }
                 });
-            </script>
+            });
+        </script>
 
         <!-- Script para Intersection Observer em viewport -->
         <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const animatedElements = document.querySelectorAll('.animate-fade-slide-up');
+            document.addEventListener('DOMContentLoaded', () => {
+                const animatedElements = document.querySelectorAll('.animate-fade-slide-up');
 
-                    const observerOptions = {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.15 // 15% do elemento visível para ativar
-                    };
+                const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // 15% do elemento visível para ativar
+                };
 
-                    const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // anima uma vez só para performance
-                        }
-                    });
-                    }, observerOptions);
-
-                    animatedElements.forEach(el => observer.observe(el));
+                const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // anima uma vez só para performance
+                    }
                 });
-            </script>
+                }, observerOptions);
+
+                animatedElements.forEach(el => observer.observe(el));
+            });
+        </script>
 
         <!-- Google Tag Manager (noscript) -->
         <noscript>
