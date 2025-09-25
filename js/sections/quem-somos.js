@@ -21,10 +21,10 @@ class TeamManager {
         id: 1,
         name: "Felipe Toledo Lopes da Silva",
         role: "Consultor de Expansão",
-        // department: "Expansão", // Removido
         photo: "assets/quem-somos/felipe.png",
         skills: [
           "Gestor de tráfego",
+          "Automação de Processos",
           "Desenvolvimento Web",
           "Análise de Dados",
         ],
@@ -34,15 +34,14 @@ class TeamManager {
         quote:
           "Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda. - PAulo Freire",
         email: "felipe@educamais.com.br",
-        experience: "10+ anos",
+        experience: "5+ anos",
       },
       {
         id: 2,
         name: "Mateus Santos Coelho",
         role: "Coordenador de Marketing",
-        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Mateus se possível
+          "assets/quem-somos/mateus.png",
         skills: ["Design", "Editor", "Foto e Vídeo"],
         hobbies: "Assistir filme/série, cozinhar e jogar",
         favoriteMusic: "Não tem",
@@ -56,9 +55,8 @@ class TeamManager {
         id: 3,
         name: "Igor Alecsander Moreira Cassimiro",
         role: "Consultor de Expansão",
-        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Igor se possível
+          "assets/quem-somos/igor.png",
         skills: ["Designer Gráfico", "Gestor de Tráfego", "Copywriter"],
         hobbies: "Jogar e cozinhar",
         favoriteMusic: "Hungria -  Um Pedido",
@@ -71,9 +69,8 @@ class TeamManager {
         id: 4,
         name: "Leila Reis Pessoa",
         role: "Consultora de Expansão",
-        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real da Leila se possível
+          "assets/quem-somos/leila.png",
         skills: [
           "Organização e Gerenciamento de Tempo",
           "Gerenciamento de Pessoas",
@@ -83,16 +80,15 @@ class TeamManager {
         favoriteMusic: "Andanças - Beth Carvalho",
         favoriteMovie: "Comer, Rezar e Amar",
         quote: "Nós somos nossas escolhas. - Jean-Paul Sartre",
-        email: "reis.leila@hotmail.com",
+        email: "leita@sejaeducamais.com.br",
         experience: "10+ anos",
       },
       {
         id: 5,
         name: "Rafael Pessoa",
-        role: "Consultor de Vendas Sênior",
-        // department: "vendas", // Removido
+        role: "Gestor de Expansão",
         photo:
-          "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Rafael se possível
+          "assets/quem-somos/rafael.png",
         skills: [
           "Vendas Consultivas",
           "CRM",
@@ -104,10 +100,9 @@ class TeamManager {
         favoriteMusic: "Pop Internacional - Adele",
         favoriteMovie: "O Diabo Veste Prada",
         quote: "Vender é resolver problemas, não empurrar produtos.",
-        email: "rafael.pessoa@educamais.com.br", // Ajustado para corresponder ao nome
+        email: "rafael@sejaeducamais.com.br",
         experience: "7+ anos",
       },
-      // Adicione mais membros aqui
     ];
 
     this.filteredMembers = [...this.teamMembers];
@@ -117,7 +112,6 @@ class TeamManager {
 
   // Setup de event listeners
   setupEventListeners() {
-    // Search input
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", (e) => {
       this.searchTerm = e.target.value.toLowerCase();
