@@ -13,7 +13,7 @@ const ScrollManager = {
         e.preventDefault();
         const targetId = anchor.getAttribute("href");
 
-        // CORREÇÃO: Verificar se targetId não é apenas "#"
+        // Verificar se targetId não é apenas "#"
         if (targetId && targetId !== "#") {
           const targetElement = document.querySelector(targetId);
 

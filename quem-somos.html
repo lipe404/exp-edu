@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quem Somos - Nossa Equipe | Educa+ Minas</title>
+        <meta name="description"
+            content="Conheça a equipe da Educa+ Minas. Profissionais dedicados e especializados que fazem a diferença na educação brasileira.">
+
+        <!-- Favicon -->
+        <link rel="icon" href="assets/icons/icon-pink-to-blue.ico"
+            type="image/x-icon">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800;900&display=swap"
+            rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Configuração Personalizada do Tailwind -->
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'educa-pink': '#e71f5d',
+                        'educa-blue': '#212148',
+                        'educa-white': '#ffffff',
+                        'educa-light-gray': '#f8f9fa',
+                        'educa-dark-gray': '#6b7280',
+                        'educa-pink-light': '#f8d7da',
+                        'educa-blue-light': '#e3f2fd',
+                        'educa-blue-bg': '#212148'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(231, 31, 93, 0.3)' },
+                            '50%': { boxShadow: '0 0 40px rgba(231, 31, 93, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+        <!-- CSS Personalizado -->
+        <style>
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e71f5d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c2185b;
+        }
+
+        /* Gradiente personalizado para header */
+        .hero-gradient {
+            background: linear-gradient(135deg, #e71f5d 0%, #c2185b 50%, #ad1457 100%);
+        }
+
+        /* Efeitos hover */
+        .team-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        /* Animações de delay */
+        .animation-delay-100 { animation-delay: 0.1s; }
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-300 { animation-delay: 0.3s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-500 { animation-delay: 0.5s; }
+
+        /* Loading states */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Modal styles */
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+        }
+
+        /* Skills tags */
+        .skill-tag {
+            background: linear-gradient(135deg, #e71f5d, #c2185b);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
+        }
+
+        /* Search input focus */
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(231, 31, 93, 0.1);
+        }
+
+        /* No results animation */
+        .no-results {
+            animation: fadeInUp 0.5s ease-out;
+        }
+    </style>
+    </head>
+
+    <body class="font-sans text-educa-blue antialiased bg-educa-light-gray">
+        <!-- Loading Spinner -->
+        <div id="loading-spinner"
+            class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+            <div
+                class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-educa-pink"></div>
+        </div>
+
+        <!-- Header -->
+        <header
+            class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
+            <!-- Background decorativo -->
+            <div class="absolute inset-0 opacity-10">
+                <div
+                    class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full"></div>
+                <div
+                    class="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full"></div>
+                <div
+                    class="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full"></div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <!-- Navegação -->
+                <nav class="flex items-center justify-between mb-12">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                        <img src="./assets/logos/Ativo 10.png"
+                            alt="Logo Educa+ Minas" class="h-12 md:h-16">
+                    </a>
+                    <a href="index.html"
+                        class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Voltar ao Site
+                    </a>
+                </nav>
+
+                <!-- Hero Content -->
+                <div class="text-center max-w-4xl mx-auto">
+                    <h1
+                        class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
+                        Conheça Nossa <span
+                            class="text-yellow-300">Equipe</span>
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-200 leading-relaxed">
+                        Os talentos que fazem a diferença.
+                    </p>
+
+                    <!-- Search Section -->
+                    <div
+                        class="max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i
+                                    class="fas fa-search text-gray-400 text-lg"></i>
+                            </div>
+                            <input type="text"
+                                id="searchInput"
+                                placeholder="Pesquisar por nome, cargo, skill, hobby..."
+                                class="search-input w-full pl-12 pr-4 py-4 text-lg rounded-2xl border-0 focus:ring-2 focus:ring-white/50 text-gray-800 placeholder-gray-500 shadow-lg">
+                        </div>
+                        <p class="text-sm opacity-80 mt-3">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            Dica: Tente pesquisar por "JavaScript", "Marketing"
+                            ou "Violão"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-16 md:py-20">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <!-- Stats Section -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                    <div
+                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in">
+                        <div
+                            class="text-3xl md:text-4xl font-bold text-educa-pink mb-2"
+                            id="totalMembers">0</div>
+                        <div
+                            class="text-sm text-educa-dark-gray font-medium">Colaboradores</div>
+                    </div>
+                    <div
+                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-100">
+                        <div
+                            class="text-3xl md:text-4xl font-bold text-educa-blue mb-2"
+                            id="totalDepartments">0</div>
+                        <div
+                            class="text-sm text-educa-dark-gray font-medium">Departamentos</div>
+                    </div>
+                    <div
+                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-200">
+                        <div
+                            class="text-3xl md:text-4xl font-bold text-green-600 mb-2"
+                            id="totalSkills">0</div>
+                        <div
+                            class="text-sm text-educa-dark-gray font-medium">Skills
+                            Únicas</div>
+                    </div>
+                    <div
+                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-300">
+                        <div
+                            class="text-3xl md:text-4xl font-bold text-purple-600 mb-2">15+</div>
+                        <div
+                            class="text-sm text-educa-dark-gray font-medium">Anos
+                            Experiência</div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="mb-12 animate-fade-in-up animation-delay-500">
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-users mr-2"></i>Todos
+                        </button>
+                        <button class="filter-btn" data-filter="gestao">
+                            <i class="fas fa-crown mr-2"></i>Gestão
+                        </button>
+                        <button class="filter-btn" data-filter="educacional">
+                            <i
+                                class="fas fa-graduation-cap mr-2"></i>Educacional
+                        </button>
+                        <button class="filter-btn" data-filter="tecnologia">
+                            <i class="fas fa-code mr-2"></i>Tecnologia
+                        </button>
+                        <button class="filter-btn" data-filter="marketing">
+                            <i class="fas fa-bullhorn mr-2"></i>Marketing
+                        </button>
+                        <button class="filter-btn" data-filter="vendas">
+                            <i class="fas fa-handshake mr-2"></i>Vendas
+                        </button>
+                        <button class="filter-btn" data-filter="suporte">
+                            <i class="fas fa-headset mr-2"></i>Suporte
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Team Grid -->
+                <div id="teamGrid"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Cards serão inseridos aqui pelo JavaScript -->
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResultsMessage"
+                    class="no-results text-center py-16 hidden">
+                    <div class="max-w-md mx-auto">
+                        <i
+                            class="fas fa-search text-6xl text-gray-300 mb-6"></i>
+                        <h3
+                            class="text-2xl font-bold text-educa-dark-gray mb-4">Nenhum
+                            resultado encontrado</h3>
+                        <p class="text-educa-dark-gray mb-6">Tente pesquisar por
+                            outro termo ou limpe os filtros.</p>
+                        <button onclick="clearSearch()"
+                            class="bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors">
+                            <i class="fas fa-times mr-2"></i>Limpar Pesquisa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Skeleton -->
+                <div id="loadingSkeleton"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
+                    <!-- Skeleton cards -->
+                    <div class="loading-skeleton rounded-2xl h-96"></div>
+                    <div class="loading-skeleton rounded-2xl h-96"></div>
+                    <div class="loading-skeleton rounded-2xl h-96"></div>
+                    <div class="loading-skeleton rounded-2xl h-96"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal de Detalhes -->
+        <div id="memberModal"
+            class="fixed inset-0 bg-black/80 modal-backdrop flex items-center justify-center z-50 hidden p-4">
+            <div
+                class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-scale-in">
+                <!-- Close Button -->
+                <button id="closeModal"
+                    class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors z-10">
+                    <i class="fas fa-times text-gray-600"></i>
+                </button>
+
+                <!-- Modal Content -->
+                <div id="modalContent">
+                    <!-- Conteúdo será inserido pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-educa-blue text-white py-12">
+            <div class="container mx-auto px-4 text-center">
+                <img src="./assets/logos/Ativo 10.png" alt="Logo Educa+ Minas"
+                    class="h-16 mx-auto mb-6">
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.facebook.com/sejaeducamais"
+                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/sejaeducamais/"
+                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/educa-mais-minas/"
+                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@educamaisminas.oficial"
+                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-gray-600 mt-8 pt-8">
+                    <p class="text-gray-400 text-sm">&copy; 2025 Educa+ Minas.
+                        Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JavaScript -->
+        <script src="./js/sections/quem-somos.js"></script>
+    </body>
+</html>

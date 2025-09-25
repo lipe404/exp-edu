@@ -19,7 +19,6 @@ const PerformanceMonitor = {
   },
 
   monitorCoreWebVitals() {
-    // Implementar Web Vitals se necessário
-    // Requer biblioteca web-vitals
+    // Implementar Web Vitals futuramente
   },
 };
