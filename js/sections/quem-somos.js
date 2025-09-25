@@ -380,7 +380,6 @@ class TeamManager {
 
   createModalContent(member) {
     return `
-      <!-- Header com imagem corrigida -->
       <div class="relative">
         <img src="${member.photo}"
              alt="${member.name}"
@@ -398,9 +397,7 @@ class TeamManager {
         </div>
       </div>
 
-      <!-- Content -->
       <div class="p-8">
-        <!-- Quote -->
         <div class="bg-educa-pink/10 rounded-2xl p-6 mb-8 text-center">
           <i class="fas fa-quote-left text-educa-pink text-2xl mb-4"></i>
           <p class="text-lg italic text-educa-blue font-medium">"${
@@ -408,7 +405,6 @@ class TeamManager {
           }"</p>
         </div>
 
-        <!-- Skills -->
         <div class="mb-8">
           <h3 class="text-xl font-bold text-educa-blue mb-4 flex items-center">
             <i class="fas fa-cogs text-educa-pink mr-3"></i>
@@ -424,7 +420,6 @@ class TeamManager {
           </div>
         </div>
 
-        <!-- Personal Info Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Hobbies -->
           <div class="bg-gray-50 rounded-2xl p-6">
@@ -435,7 +430,6 @@ class TeamManager {
             <p class="text-educa-dark-gray">${member.hobbies}</p>
           </div>
 
-          <!-- Favorite Music -->
           <div class="bg-gray-50 rounded-2xl p-6">
             <h4 class="font-bold text-educa-blue mb-3 flex items-center">
               <i class="fas fa-music text-purple-500 mr-2"></i>
@@ -444,7 +438,6 @@ class TeamManager {
             <p class="text-educa-dark-gray">${member.favoriteMusic}</p>
           </div>
 
-          <!-- Favorite Movie -->
           <div class="bg-gray-50 rounded-2xl p-6">
             <h4 class="font-bold text-educa-blue mb-3 flex items-center">
               <i class="fas fa-film text-yellow-500 mr-2"></i>
@@ -453,7 +446,6 @@ class TeamManager {
             <p class="text-educa-dark-gray">${member.favoriteMovie}</p>
           </div>
 
-          <!-- Contact -->
           <div class="bg-gray-50 rounded-2xl p-6">
             <h4 class="font-bold text-educa-blue mb-3 flex items-center">
               <i class="fas fa-envelope text-blue-500 mr-2"></i>
