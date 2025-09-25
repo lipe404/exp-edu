@@ -11,9 +11,7 @@ class TeamManager {
   }
 
   init() {
-    // Primeiro configuramos o IntersectionObserver
     this.setupIntersectionObserver();
-    // Depois carregamos os dados
     this.loadTeamData();
     this.setupEventListeners();
     this.setupModal();
@@ -111,17 +109,14 @@ class TeamManager {
     this.renderTeam();
   }
 
-  // Setup de event listeners otimizado
   setupEventListeners() {
     const searchInput = document.getElementById("searchInput");
 
-    // Verifica se o elemento existe
     if (!searchInput) {
       console.warn("Search input not found");
       return;
     }
 
-    // Debounce para otimizar a busca
     searchInput.addEventListener("input", (e) => {
       clearTimeout(this.searchTimeout);
       this.searchTimeout = setTimeout(() => {
@@ -130,12 +125,10 @@ class TeamManager {
       }, 300);
     });
 
-    // Adiciona efeito visual imediato
     searchInput.addEventListener("input", (e) => {
       this.addSearchFeedback(e.target.value);
     });
 
-    // Limpa busca com ESC
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         this.clearSearch();
@@ -143,7 +136,6 @@ class TeamManager {
     });
   }
 
-  // Feedback visual para busca
   addSearchFeedback(value) {
     const searchInput = document.getElementById("searchInput");
     if (!searchInput) return;
@@ -155,7 +147,6 @@ class TeamManager {
     }
   }
 
-  // Setup do modal otimizado
   setupModal() {
     const modal = document.getElementById("memberModal");
     const closeBtn = document.getElementById("closeModal");
@@ -180,12 +171,9 @@ class TeamManager {
     });
   }
 
-  // Intersection Observer para animações lazy
   setupIntersectionObserver() {
-    // Verifica se o navegador suporta IntersectionObserver
     if (!("IntersectionObserver" in window)) {
       console.warn("IntersectionObserver not supported");
-      // Fallback: usar animações CSS simples
       this.intersectionObserver = null;
       return;
     }
@@ -210,13 +198,11 @@ class TeamManager {
     }
   }
 
-  // Filtrar equipe otimizado
   filterTeam() {
     if (this.isLoading) return;
 
     this.isLoading = true;
 
-    // Usa requestAnimationFrame para não bloquear a UI
     requestAnimationFrame(() => {
       this.filteredMembers = this.teamMembers.filter((member) => {
         const matchesSearch =
@@ -229,7 +215,6 @@ class TeamManager {
     });
   }
 
-  // Verificar se membro corresponde ao termo de busca otimizado
   matchesSearchTerm(member) {
     const searchFields = [
       member.name,
@@ -246,7 +231,6 @@ class TeamManager {
     return searchFields.includes(this.searchTerm);
   }
 
-  // Renderizar equipe otimizado
   renderTeam() {
     const grid = document.getElementById("teamGrid");
     const noResults = document.getElementById("noResultsMessage");
@@ -265,7 +249,6 @@ class TeamManager {
     grid.classList.remove("hidden");
     noResults.classList.add("hidden");
 
-    // Usa DocumentFragment para melhor performance
     const fragment = document.createDocumentFragment();
 
     this.filteredMembers.forEach((member, index) => {
@@ -280,7 +263,6 @@ class TeamManager {
     this.animateCards();
   }
 
-  // Criar elemento do card (ao invés de string HTML)
   createMemberCardElement(member, index) {
     const delay = Math.min(index * 100, 500);
 
@@ -292,17 +274,17 @@ class TeamManager {
 
     cardDiv.innerHTML = `
       <div class="team-card-inner">
-        <img src="${member.photo}" 
-             alt="${member.name}" 
+        <img src="${member.photo}"
+             alt="${member.name}"
              class="team-card-image"
              loading="lazy"
              onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNTAgMTAwQzEyNy45IDEwMCAxMTAgMTE3LjkgMTEwIDE0MFMxMjcuOSAxODAgMTUwIDE4MFMxOTAgMTYyLjEgMTkwIDE0MFMxNzIuMSAxMDAgMTUwIDEwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPHBhdGggZD0iTTIxMCAyMDBDMjEwIDE3Mi4zOSAxODcuNjEgMTUwIDE2MCAxNTBIMTQwQzExMi4zOSAxNTAgOTAgMTcyLjM5IDkwIDIwMFYyMTBIMjEwVjIwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPC9zdmc+'">
-        
+
         <div class="team-card-overlay">
           <h3 class="text-xl font-bold mb-1">${member.name}</h3>
           <p class="text-sm">${member.role}</p>
           <span class="email text-xs opacity-80 mb-4">${member.email}</span>
-          
+
           <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors micro-bounce">
             <i class="fas fa-eye mr-2"></i>Ver Detalhes
           </button>
@@ -313,17 +295,14 @@ class TeamManager {
     return cardDiv;
   }
 
-  // Animar cards com Intersection Observer ou fallback
   animateCards() {
     const cards = document.querySelectorAll(".team-card.card-enter");
 
     if (this.intersectionObserver) {
-      // Usa IntersectionObserver se disponível
       cards.forEach((card) => {
         this.intersectionObserver.observe(card);
       });
     } else {
-      // Fallback: anima todos os cards imediatamente
       cards.forEach((card, index) => {
         setTimeout(() => {
           card.classList.add("card-enter-active");
@@ -332,27 +311,22 @@ class TeamManager {
     }
   }
 
-  // Setup de listeners otimizado
   setupCardListeners() {
     const cards = document.querySelectorAll(".team-card");
     cards.forEach((card) => {
-      // Remove listeners anteriores para evitar memory leaks
       const newCard = card.cloneNode(true);
       card.parentNode.replaceChild(newCard, card);
 
-      // Adiciona novo listener
       newCard.addEventListener("click", this.handleCardClick.bind(this));
     });
   }
 
-  // Handler de clique do card
   handleCardClick(event) {
     const card = event.currentTarget;
     const memberId = parseInt(card.dataset.memberId);
     this.openModal(memberId);
   }
 
-  // Abrir modal otimizado
   openModal(memberId) {
     const member = this.teamMembers.find((m) => m.id === memberId);
     if (!member) return;
@@ -368,7 +342,6 @@ class TeamManager {
     content.innerHTML = this.createModalContent(member);
     modal.classList.remove("hidden");
 
-    // Animação de entrada
     const modalContentDiv = modal.querySelector(".modal-content");
     if (modalContentDiv) {
       requestAnimationFrame(() => {
@@ -378,11 +351,9 @@ class TeamManager {
 
     document.body.style.overflow = "hidden";
 
-    // Preload da imagem se necessário
     this.preloadModalImage(member.photo);
   }
 
-  // Preload da imagem do modal
   preloadModalImage(imageSrc) {
     const img = new Image();
     img.src = imageSrc;
@@ -391,7 +362,6 @@ class TeamManager {
     };
   }
 
-  // Fechar modal otimizado
   closeModal() {
     const modal = document.getElementById("memberModal");
     if (!modal) return;
@@ -408,13 +378,12 @@ class TeamManager {
     }, 300);
   }
 
-  // Criar conteúdo do modal com correção da imagem
   createModalContent(member) {
     return `
       <!-- Header com imagem corrigida -->
       <div class="relative">
-        <img src="${member.photo}" 
-             alt="${member.name}" 
+        <img src="${member.photo}"
+             alt="${member.name}"
              class="modal-image rounded-t-3xl"
              onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjI4MCIgdmlld0JveD0iMCAwIDYwMCAyODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0zMDAgMTAwQzI2Ny45IDEwMCAyNDIgMTI1LjkgMjQyIDE1OFMyNjcuOSAyMTYgMzAwIDIxNlMzNTggMTkwLjEgMzU4IDE1OFMzMzIuMSAxMDAgMzAwIDEwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPHBhdGggZD0iTTM3MCAyNDBDMzcwIDIwMi4zOSAzMzcuNjEgMTcwIDMwMCAxNzBIMzAwQzI2Mi4zOSAxNzAgMjMwIDIwMi4zOSAyMzAgMjQwVjI2MEgzNzBWMjQwWiIgZmlsbD0iIzlDQTRBRiIvPgo8L3N2Zz4='">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -501,7 +470,6 @@ class TeamManager {
     `;
   }
 
-  // Limpar busca otimizado
   clearSearch() {
     const searchInput = document.getElementById("searchInput");
     if (!searchInput) return;
@@ -513,7 +481,6 @@ class TeamManager {
     searchInput.focus();
   }
 
-  // Esconder loading otimizado
   hideLoading() {
     setTimeout(() => {
       const spinner = document.getElementById("loading-spinner");
@@ -527,7 +494,6 @@ class TeamManager {
     }, 1000);
   }
 
-  // Cleanup para evitar memory leaks
   destroy() {
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
@@ -538,19 +504,16 @@ class TeamManager {
   }
 }
 
-// Função global para limpar pesquisa
 function clearSearch() {
   if (window.teamManager) {
     window.teamManager.clearSearch();
   }
 }
 
-// Inicializar quando o DOM estiver pronto
 document.addEventListener("DOMContentLoaded", () => {
   window.teamManager = new TeamManager();
 });
 
-// Cleanup ao sair da página
 window.addEventListener("beforeunload", () => {
   if (window.teamManager) {
     window.teamManager.destroy();
