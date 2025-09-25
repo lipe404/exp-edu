@@ -23,7 +23,7 @@ class TeamManager {
     this.teamMembers = [
       {
         id: 1,
-        name: "Felipe Toledo Lopes da Silva",
+        name: "Felipe Toledo",
         role: "Consultor de Expansão",
         photo: "assets/quem-somos/felipe.png",
         skills: [
@@ -42,7 +42,7 @@ class TeamManager {
       },
       {
         id: 2,
-        name: "Mateus Santos Coelho",
+        name: "Mateus Coelho",
         role: "Coordenador de Marketing",
         photo: "assets/quem-somos/mateus.png",
         skills: ["Design", "Editor", "Foto e Vídeo"],
@@ -56,7 +56,7 @@ class TeamManager {
       },
       {
         id: 3,
-        name: "Igor Alecsander Moreira Cassimiro",
+        name: "Igor Alecsander",
         role: "Consultor de Expansão",
         photo: "assets/quem-somos/igor.png",
         skills: ["Designer Gráfico", "Gestor de Tráfego", "Copywriter"],
@@ -69,7 +69,7 @@ class TeamManager {
       },
       {
         id: 4,
-        name: "Leila Reis Pessoa",
+        name: "Leila Reis",
         role: "Consultora de Expansão",
         photo: "assets/quem-somos/leila.png",
         skills: [
@@ -87,21 +87,19 @@ class TeamManager {
       {
         id: 5,
         name: "Rafael Pessoa",
-        role: "Gestor de Expansão",
+        role: "Diretor de Expansão",
         photo: "assets/quem-somos/rafael.png",
         skills: [
-          "Vendas Consultivas",
-          "CRM",
-          "Negociação",
-          "Relacionamento",
-          "Apresentações",
+          "Gestão Estratégica de Alta Performance",
+          "Liderança e Desenvolvimento de Pessoas",
+          "Integração de Processos & Parcerias",
         ],
-        hobbies: "Dança, teatro e gastronomia",
-        favoriteMusic: "Pop Internacional - Adele",
-        favoriteMovie: "O Diabo Veste Prada",
-        quote: "Vender é resolver problemas, não empurrar produtos.",
+        hobbies: "Exercícios Físicos, jogos e cozinhar",
+        favoriteMusic: "Jota Quest -  Dias Melhores",
+        favoriteMovie: "O Lobo de Wall Street",
+        quote: "A melhor maneira de prever o futuro é criá-lo. – Peter Drucker",
         email: "rafael@sejaeducamais.com.br",
-        experience: "7+ anos",
+        experience: "15+ anos",
       },
     ];
 
