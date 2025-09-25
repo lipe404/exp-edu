@@ -4,7 +4,7 @@ class TeamManager {
   constructor() {
     this.teamMembers = [];
     this.filteredMembers = [];
-    this.currentFilter = "all";
+    // this.currentFilter = "all"; // Removido: Filtros de departamento
     this.searchTerm = "";
 
     this.init();
@@ -24,9 +24,8 @@ class TeamManager {
         id: 1,
         name: "Felipe Toledo Lopes da Silva",
         role: "Consultor de Expansão",
-        department: "Expansão",
-        photo:
-          "assets/quem-somos/felipe.png",
+        // department: "Expansão", // Removido
+        photo: "assets/quem-somos/felipe.png",
         skills: [
           "Gestor de tráfego",
           "Desenvolvimento Web",
@@ -35,26 +34,24 @@ class TeamManager {
         hobbies: "Leitura, jogos e viagens",
         favoriteMusic: "Construção - Chico Buarque",
         favoriteMovie: "Na Natureza Selvagem",
-        quote: "Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda. - PAulo Freire",
+        quote:
+          "Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda. - PAulo Freire",
         email: "felipe@educamais.com.br",
         experience: "10+ anos",
       },
       {
         id: 2,
         name: "Mateus Santos Coelho",
-        role: "- Coordenador de Marketing",
-        department: "Expansão",
+        role: "Coordenador de Marketing",
+        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-        skills: [
-          "Design",
-          "Editor",
-          "Foto e Vídeo",
-        ],
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Mateus se possível
+        skills: ["Design", "Editor", "Foto e Vídeo"],
         hobbies: "Assistir filme/série, cozinhar e jogar",
         favoriteMusic: "Não tem",
         favoriteMovie: "Filme de ação e aventura",
-        quote: "- Transformando ideias em estratégias e estratégias em resultados.",
+        quote:
+          "Transformando ideias em estratégias e estratégias em resultados.",
         email: "mateus@sejaeducamais.com",
         experience: "7+ anos",
       },
@@ -62,9 +59,9 @@ class TeamManager {
         id: 3,
         name: "Igor Alecsander Moreira Cassimiro",
         role: "Consultor de Expansão",
-        department: "Expansão",
+        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Igor se possível
         skills: ["Designer Gráfico", "Gestor de Tráfego", "Copywriter"],
         hobbies: "Jogar e cozinhar",
         favoriteMusic: "Hungria -  Um Pedido",
@@ -77,9 +74,9 @@ class TeamManager {
         id: 4,
         name: "Leila Reis Pessoa",
         role: "Consultora de Expansão",
-        department: "Expansão",
+        // department: "Expansão", // Removido
         photo:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real da Leila se possível
         skills: [
           "Organização e Gerenciamento de Tempo",
           "Gerenciamento de Pessoas",
@@ -95,10 +92,10 @@ class TeamManager {
       {
         id: 5,
         name: "Rafael Pessoa",
-        role: "Consultora de Vendas Sênior",
-        department: "vendas",
+        role: "Consultor de Vendas Sênior",
+        // department: "vendas", // Removido
         photo:
-          "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face",
+          "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face", // Altere para uma foto real do Rafael se possível
         skills: [
           "Vendas Consultivas",
           "CRM",
@@ -110,9 +107,10 @@ class TeamManager {
         favoriteMusic: "Pop Internacional - Adele",
         favoriteMovie: "O Diabo Veste Prada",
         quote: "Vender é resolver problemas, não empurrar produtos.",
-        email: "juliana.ferreira@educamais.com.br",
+        email: "rafael.pessoa@educamais.com.br", // Ajustado para corresponder ao nome
         experience: "7+ anos",
       },
+      // Adicione mais membros aqui
     ];
 
     this.filteredMembers = [...this.teamMembers];
@@ -129,19 +127,16 @@ class TeamManager {
       this.filterTeam();
     });
 
-    // Filter buttons
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        // Remove active class from all buttons
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        // Add active class to clicked button
-        e.target.classList.add("active");
-
-        this.currentFilter = e.target.dataset.filter;
-        this.filterTeam();
-      });
-    });
+    // Removido: Filtro por botões de departamento
+    // const filterButtons = document.querySelectorAll(".filter-btn");
+    // filterButtons.forEach((btn) => {
+    //   btn.addEventListener("click", (e) => {
+    //     filterButtons.forEach((b) => b.classList.remove("active"));
+    //     e.target.classList.add("active");
+    //     this.currentFilter = e.target.dataset.filter;
+    //     this.filterTeam();
+    //   });
+    // });
   }
 
   // Setup do modal
@@ -167,13 +162,12 @@ class TeamManager {
   // Filtrar equipe
   filterTeam() {
     this.filteredMembers = this.teamMembers.filter((member) => {
-      const matchesFilter =
-        this.currentFilter === "all" ||
-        member.department === this.currentFilter;
+      // Simplificado: Agora só filtra pelo termo de busca
+      // const matchesFilter = this.currentFilter === "all" || member.department === this.currentFilter;
       const matchesSearch =
         this.searchTerm === "" || this.matchesSearchTerm(member);
 
-      return matchesFilter && matchesSearch;
+      return matchesSearch;
     });
 
     this.renderTeam();
@@ -184,11 +178,12 @@ class TeamManager {
     const searchFields = [
       member.name,
       member.role,
-      member.department,
+      // member.department, // Removido
       ...member.skills,
       member.hobbies,
       member.favoriteMusic,
       member.favoriteMovie,
+      member.email, // Adicionado email para busca
     ]
       .join(" ")
       .toLowerCase();
@@ -223,72 +218,24 @@ class TeamManager {
     const delay = Math.min(index * 100, 500);
 
     return `
-            <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer animate-scale-in" 
+            <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer animate-scale-in h-[400px]" 
                  style="animation-delay: ${delay}ms"
                  data-member-id="${member.id}">
-                <!-- Photo Section -->
-                <div class="relative">
+                <div class="team-card-inner">
                     <img src="${member.photo}" 
                          alt="${member.name}" 
-                         class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 text-white">
-                        <div class="text-sm opacity-90">${this.getDepartmentName(
-                          member.department
-                        )}</div>
-                    </div>
-                    <div class="absolute top-4 right-4">
-                        <div class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-xs">
-                            ${member.experience}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Content Section -->
-                <div class="p-6">
-                    <h3 class="font-heading text-xl font-bold text-educa-blue mb-2">${
-                      member.name
-                    }</h3>
-                    <p class="text-educa-dark-gray mb-4">${member.role}</p>
+                         class="team-card-image">
                     
-                    <!-- Skills Preview -->
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        ${member.skills
-                          .slice(0, 3)
-                          .map(
-                            (skill) =>
-                              `<span class="skill-tag text-white text-xs px-2 py-1 rounded-full">${skill}</span>`
-                          )
-                          .join("")}
-                        ${
-                          member.skills.length > 3
-                            ? `<span class="text-xs text-educa-dark-gray">+${
-                                member.skills.length - 3
-                              } mais</span>`
-                            : ""
-                        }
+                    <div class="team-card-overlay">
+                        <h3 class="text-2xl font-bold mb-1">${member.name}</h3>
+                        <p class="text-base">${member.role}</p>
+                        <span class="email text-sm opacity-80 mb-4">${member.email}</span>
+                        
+                        <!-- View Details Button -->
+                        <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                            <i class="fas fa-eye mr-2"></i>Ver Detalhes
+                        </button>
                     </div>
-
-                    <!-- Quick Info -->
-                    <div class="space-y-2 text-sm text-educa-dark-gray">
-                        <div class="flex items-center">
-                            <i class="fas fa-music w-4 text-educa-pink mr-2"></i>
-                            <span class="truncate">${
-                              member.favoriteMusic
-                            }</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-heart w-4 text-red-500 mr-2"></i>
-                            <span class="truncate">${
-                              member.hobbies.split(",")[0]
-                            }</span>
-                        </div>
-                    </div>
-
-                    <!-- View Details Button -->
-                    <button class="mt-4 w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
-                        <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                    </button>
                 </div>
             </div>
         `;
@@ -332,15 +279,12 @@ class TeamManager {
             <div class="relative">
                 <img src="${member.photo}" alt="${
       member.name
-    }" class="w-full h-64 object-cover">
+    }" class="w-full h-64 object-cover rounded-t-3xl">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 text-white">
                     <h2 class="text-3xl font-bold mb-2">${member.name}</h2>
                     <p class="text-xl opacity-90">${member.role}</p>
                     <div class="flex items-center mt-2">
-                        <span class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm">
-                            ${this.getDepartmentName(member.department)}
-                        </span>
                         <span class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm ml-2">
                             ${member.experience}
                         </span>
@@ -424,35 +368,35 @@ class TeamManager {
         `;
   }
 
-  // Obter nome do departamento
-  getDepartmentName(dept) {
-    const departments = {
-      gestao: "Gestão",
-      educacional: "Educacional",
-      tecnologia: "Tecnologia",
-      marketing: "Marketing",
-      vendas: "Vendas",
-      suporte: "Suporte",
-    };
-    return departments[dept] || dept;
-  }
+  // Removido: Obter nome do departamento
+  // getDepartmentName(dept) {
+  //   const departments = {
+  //     gestao: "Gestão",
+  //     educacional: "Educacional",
+  //     tecnologia: "Tecnologia",
+  //     marketing: "Marketing",
+  //     vendas: "Vendas",
+  //     suporte: "Suporte",
+  //   };
+  //   return departments[dept] || dept;
+  // }
 
   // Atualizar estatísticas
   updateStats() {
     const totalMembers = this.teamMembers.length;
-    const departments = [...new Set(this.teamMembers.map((m) => m.department))]
-      .length;
+    // const departments = [...new Set(this.teamMembers.map((m) => m.department))].length; // Removido
     const skills = [...new Set(this.teamMembers.flatMap((m) => m.skills))]
       .length;
 
     this.animateCounter("totalMembers", totalMembers);
-    this.animateCounter("totalDepartments", departments);
+    // this.animateCounter("totalDepartments", departments); // Removido
     this.animateCounter("totalSkills", skills);
   }
 
   // Animar contador
   animateCounter(elementId, target) {
     const element = document.getElementById(elementId);
+    if (!element) return; // Adicionado check para evitar erro se elemento não existir
     const duration = 2000;
     const step = target / (duration / 16);
     let current = 0;
@@ -484,51 +428,52 @@ class TeamManager {
 // Função global para limpar pesquisa
 function clearSearch() {
   document.getElementById("searchInput").value = "";
-  document.querySelectorAll(".filter-btn").forEach((btn) => {
-    btn.classList.remove("active");
-  });
-  document
-    .querySelector('.filter-btn[data-filter="all"]')
-    .classList.add("active");
+  // Removido: Limpeza de botões de filtro
+  // document.querySelectorAll(".filter-btn").forEach((btn) => {
+  //   btn.classList.remove("active");
+  // });
+  // document
+  //   .querySelector('.filter-btn[data-filter="all"]')
+  //   .classList.add("active");
 
   if (window.teamManager) {
     window.teamManager.searchTerm = "";
-    window.teamManager.currentFilter = "all";
+    // window.teamManager.currentFilter = "all"; // Removido
     window.teamManager.filterTeam();
   }
 }
 
-// CSS adicional para os botões de filtro
-const additionalStyles = `
-    .filter-btn {
-        background: white;
-        color: #6b7280;
-        border: 2px solid #e5e7eb;
-        padding: 0.75rem 1.5rem;
-        border-radius: 9999px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
+// Removido: CSS adicional para os botões de filtro, pois os botões foram removidos
+// const additionalStyles = `
+//     .filter-btn {
+//         background: white;
+//         color: #6b7280;
+//         border: 2px solid #e5e7eb;
+//         padding: 0.75rem 1.5rem;
+//         border-radius: 9999px;
+//         font-weight: 600;
+//         transition: all 0.3s ease;
+//         cursor: pointer;
+//     }
 
-    .filter-btn:hover {
-        border-color: #e71f5d;
-        color: #e71f5d;
-        transform: translateY(-2px);
-    }
+//     .filter-btn:hover {
+//         border-color: #e71f5d;
+//         color: #e71f5d;
+//         transform: translateY(-2px);
+//     }
 
-    .filter-btn.active {
-        background: #e71f5d;
-        color: white;
-        border-color: #e71f5d;
-        box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
-    }
-`;
+//     .filter-btn.active {
+//         background: #e71f5d;
+//         color: white;
+//         border-color: #e71f5d;
+//         box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
+//     }
+// `;
 
-// Injetar estilos adicionais
-const styleSheet = document.createElement("style");
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
+// Removido: Injeção de estilos adicionais
+// const styleSheet = document.createElement("style");
+// styleSheet.textContent = additionalStyles;
+// document.head.appendChild(styleSheet);
 
 // Inicializar quando o DOM estiver pronto
 document.addEventListener("DOMContentLoaded", () => {

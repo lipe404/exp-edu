@@ -156,6 +156,60 @@
         .no-results {
             animation: fadeInUp 0.5s ease-out;
         }
+
+        /* New card styles for overlay effect */
+        .team-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: inherit; /* Inherit from parent card */
+        }
+
+        .team-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures photo covers the area */
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover .team-card-image {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        .team-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-card-overlay h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem; /* text-2xl */
+            margin-bottom: 0.25rem; /* mb-1 */
+            line-height: 1.2;
+        }
+
+        .team-card-overlay p {
+            font-size: 1rem; /* text-base */
+            line-height: 1.5;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        .team-card-overlay .email {
+            font-size: 0.875rem; /* text-sm */
+            opacity: 0.8;
+            margin-bottom: 1rem; /* mb-4 */
+            word-break: break-all; /* Ensures long emails don't overflow */
+        }
     </style>
     </head>
 
@@ -185,7 +239,7 @@
                 <nav class="flex items-center justify-between mb-12">
                     <a href="index.html"
                         class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                        <img src="./assets/logos/Ativo 10.png"
+                        <img src="./assets/logos/Ativo 13.png"
                             alt="Logo Educa+ Minas" class="h-12 md:h-16">
                     </a>
                     <a href="index.html"
@@ -200,7 +254,7 @@
                     <h1
                         class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
                         Conheça Nossa <span
-                            class="text-yellow-300">Equipe</span>
+                            class="text-educa-blue">Equipe</span>
                     </h1>
                     <p
                         class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-200 leading-relaxed">
@@ -221,11 +275,6 @@
                                 placeholder="Pesquisar por nome, cargo, skill, hobby..."
                                 class="search-input w-full pl-12 pr-4 py-4 text-lg rounded-2xl border-0 focus:ring-2 focus:ring-white/50 text-gray-800 placeholder-gray-500 shadow-lg">
                         </div>
-                        <p class="text-sm opacity-80 mt-3">
-                            <i class="fas fa-lightbulb mr-2"></i>
-                            Dica: Tente pesquisar por "JavaScript", "Marketing"
-                            ou "Violão"
-                        </p>
                     </div>
                 </div>
             </div>
@@ -234,70 +283,6 @@
         <!-- Main Content -->
         <main class="py-16 md:py-20">
             <div class="container mx-auto px-4 max-w-7xl">
-                <!-- Stats Section -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                    <div
-                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in">
-                        <div
-                            class="text-3xl md:text-4xl font-bold text-educa-pink mb-2"
-                            id="totalMembers">0</div>
-                        <div
-                            class="text-sm text-educa-dark-gray font-medium">Colaboradores</div>
-                    </div>
-                    <div
-                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-100">
-                        <div
-                            class="text-3xl md:text-4xl font-bold text-educa-blue mb-2"
-                            id="totalDepartments">0</div>
-                        <div
-                            class="text-sm text-educa-dark-gray font-medium">Departamentos</div>
-                    </div>
-                    <div
-                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-200">
-                        <div
-                            class="text-3xl md:text-4xl font-bold text-green-600 mb-2"
-                            id="totalSkills">0</div>
-                        <div
-                            class="text-sm text-educa-dark-gray font-medium">Skills
-                            Únicas</div>
-                    </div>
-                    <div
-                        class="text-center p-6 bg-white rounded-2xl shadow-lg animate-scale-in animation-delay-300">
-                        <div
-                            class="text-3xl md:text-4xl font-bold text-purple-600 mb-2">15+</div>
-                        <div
-                            class="text-sm text-educa-dark-gray font-medium">Anos
-                            Experiência</div>
-                    </div>
-                </div>
-
-                <!-- Filters -->
-                <div class="mb-12 animate-fade-in-up animation-delay-500">
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <button class="filter-btn active" data-filter="all">
-                            <i class="fas fa-users mr-2"></i>Todos
-                        </button>
-                        <button class="filter-btn" data-filter="gestao">
-                            <i class="fas fa-crown mr-2"></i>Gestão
-                        </button>
-                        <button class="filter-btn" data-filter="educacional">
-                            <i
-                                class="fas fa-graduation-cap mr-2"></i>Educacional
-                        </button>
-                        <button class="filter-btn" data-filter="tecnologia">
-                            <i class="fas fa-code mr-2"></i>Tecnologia
-                        </button>
-                        <button class="filter-btn" data-filter="marketing">
-                            <i class="fas fa-bullhorn mr-2"></i>Marketing
-                        </button>
-                        <button class="filter-btn" data-filter="vendas">
-                            <i class="fas fa-handshake mr-2"></i>Vendas
-                        </button>
-                        <button class="filter-btn" data-filter="suporte">
-                            <i class="fas fa-headset mr-2"></i>Suporte
-                        </button>
-                    </div>
-                </div>
 
                 <!-- Team Grid -->
                 <div id="teamGrid"
@@ -315,7 +300,7 @@
                             class="text-2xl font-bold text-educa-dark-gray mb-4">Nenhum
                             resultado encontrado</h3>
                         <p class="text-educa-dark-gray mb-6">Tente pesquisar por
-                            outro termo ou limpe os filtros.</p>
+                            outro termo ou limpe a pesquisa.</p>
                         <button onclick="clearSearch()"
                             class="bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors">
                             <i class="fas fa-times mr-2"></i>Limpar Pesquisa
@@ -341,7 +326,7 @@
             <div
                 class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-scale-in">
                 <!-- Close Button -->
-                <button id="closeModal"
+                <button id="closeModal" title="Fechar"
                     class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors z-10">
                     <i class="fas fa-times text-gray-600"></i>
                 </button>
@@ -359,19 +344,19 @@
                 <img src="./assets/logos/Ativo 10.png" alt="Logo Educa+ Minas"
                     class="h-16 mx-auto mb-6">
                 <div class="flex justify-center space-x-6">
-                    <a href="https://www.facebook.com/sejaeducamais"
+                    <a href="https://www.facebook.com/sejaeducamais" title="Facebook"
                         class="text-gray-300 hover:text-educa-pink transition-colors">
                         <i class="fab fa-facebook-f text-xl"></i>
                     </a>
-                    <a href="https://www.instagram.com/sejaeducamais/"
+                    <a href="https://www.instagram.com/sejaeducamais/" title="Instagram"
                         class="text-gray-300 hover:text-educa-pink transition-colors">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="https://www.linkedin.com/company/educa-mais-minas/"
+                    <a href="https://www.linkedin.com/company/educa-mais-minas/" title="LinkedIn"
                         class="text-gray-300 hover:text-educa-pink transition-colors">
                         <i class="fab fa-linkedin-in text-xl"></i>
                     </a>
-                    <a href="https://www.youtube.com/@educamaisminas.oficial"
+                    <a href="https://www.youtube.com/@educamaisminas.oficial" title="YouTube"
                         class="text-gray-300 hover:text-educa-pink transition-colors">
                         <i class="fab fa-youtube text-xl"></i>
                     </a>
