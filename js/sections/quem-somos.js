@@ -55,7 +55,7 @@ class TeamManager {
         favoriteMusic: "Não tem",
         favoriteMovie: "Filme de ação e aventura",
         quote: "- Transformando ideias em estratégias e estratégias em resultados.",
-        email: "mcoelho2710@gmail.com",
+        email: "mateus@sejaeducamais.com",
         experience: "7+ anos",
       },
       {
@@ -85,7 +85,7 @@ class TeamManager {
           "Gerenciamento de Pessoas",
           "Gerenciamento de Projetos",
         ],
-        hobbies: "Treinos, jogos e cozinhar",
+        hobbies: "Exercícios físicos, jogar e cozinhar",
         favoriteMusic: "Andanças - Beth Carvalho",
         favoriteMovie: "Comer, Rezar e Amar",
         quote: "Nós somos nossas escolhas. - Jean-Paul Sartre",
