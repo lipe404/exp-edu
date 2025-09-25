@@ -3,17 +3,24 @@ class TeamManager {
     this.teamMembers = [];
     this.filteredMembers = [];
     this.searchTerm = "";
+    this.searchTimeout = null;
+    this.intersectionObserver = null;
+    this.isLoading = false;
 
     this.init();
   }
 
   init() {
+    // Primeiro configuramos o IntersectionObserver
+    this.setupIntersectionObserver();
+    // Depois carregamos os dados
     this.loadTeamData();
     this.setupEventListeners();
     this.setupModal();
     this.hideLoading();
   }
 
+  // Dados da equipe
   loadTeamData() {
     this.teamMembers = [
       {
@@ -39,8 +46,7 @@ class TeamManager {
         id: 2,
         name: "Mateus Santos Coelho",
         role: "Coordenador de Marketing",
-        photo:
-          "assets/quem-somos/mateus.png",
+        photo: "assets/quem-somos/mateus.png",
         skills: ["Design", "Editor", "Foto e Vídeo"],
         hobbies: "Assistir filme/série, cozinhar e jogar",
         favoriteMusic: "Não tem",
@@ -54,11 +60,10 @@ class TeamManager {
         id: 3,
         name: "Igor Alecsander Moreira Cassimiro",
         role: "Consultor de Expansão",
-        photo:
-          "assets/quem-somos/igor.png",
+        photo: "assets/quem-somos/igor.png",
         skills: ["Designer Gráfico", "Gestor de Tráfego", "Copywriter"],
         hobbies: "Jogar e cozinhar",
-        favoriteMusic: "Hungria -  Um Pedido",
+        favoriteMusic: "Hungria - Um Pedido",
         favoriteMovie: "A Forja: O Poder da Transformação",
         quote: "A persistência realiza o impossível.",
         email: "igor@sejaeducamais.com.br",
@@ -68,8 +73,7 @@ class TeamManager {
         id: 4,
         name: "Leila Reis Pessoa",
         role: "Consultora de Expansão",
-        photo:
-          "assets/quem-somos/leila.png",
+        photo: "assets/quem-somos/leila.png",
         skills: [
           "Organização e Gerenciamento de Tempo",
           "Gerenciamento de Pessoas",
@@ -79,15 +83,14 @@ class TeamManager {
         favoriteMusic: "Andanças - Beth Carvalho",
         favoriteMovie: "Comer, Rezar e Amar",
         quote: "Nós somos nossas escolhas. - Jean-Paul Sartre",
-        email: "leita@sejaeducamais.com.br",
+        email: "leila@sejaeducamais.com.br",
         experience: "10+ anos",
       },
       {
         id: 5,
         name: "Rafael Pessoa",
         role: "Gestor de Expansão",
-        photo:
-          "assets/quem-somos/rafael.png",
+        photo: "assets/quem-somos/rafael.png",
         skills: [
           "Vendas Consultivas",
           "CRM",
@@ -105,21 +108,62 @@ class TeamManager {
     ];
 
     this.filteredMembers = [...this.teamMembers];
-    this.updateStats();
     this.renderTeam();
   }
 
+  // Setup de event listeners otimizado
   setupEventListeners() {
     const searchInput = document.getElementById("searchInput");
+
+    // Verifica se o elemento existe
+    if (!searchInput) {
+      console.warn("Search input not found");
+      return;
+    }
+
+    // Debounce para otimizar a busca
     searchInput.addEventListener("input", (e) => {
-      this.searchTerm = e.target.value.toLowerCase();
-      this.filterTeam();
+      clearTimeout(this.searchTimeout);
+      this.searchTimeout = setTimeout(() => {
+        this.searchTerm = e.target.value.toLowerCase();
+        this.filterTeam();
+      }, 300);
+    });
+
+    // Adiciona efeito visual imediato
+    searchInput.addEventListener("input", (e) => {
+      this.addSearchFeedback(e.target.value);
+    });
+
+    // Limpa busca com ESC
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this.clearSearch();
+      }
     });
   }
 
+  // Feedback visual para busca
+  addSearchFeedback(value) {
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) return;
+
+    if (value.length > 0) {
+      searchInput.classList.add("animate-glow-pulse");
+    } else {
+      searchInput.classList.remove("animate-glow-pulse");
+    }
+  }
+
+  // Setup do modal otimizado
   setupModal() {
     const modal = document.getElementById("memberModal");
     const closeBtn = document.getElementById("closeModal");
+
+    if (!modal || !closeBtn) {
+      console.warn("Modal elements not found");
+      return;
+    }
 
     closeBtn.addEventListener("click", () => this.closeModal());
 
@@ -130,24 +174,62 @@ class TeamManager {
     });
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
         this.closeModal();
       }
     });
   }
 
-  filterTeam() {
-    this.filteredMembers = this.teamMembers.filter((member) => {
-      const matchesSearch =
-        this.searchTerm === "" || this.matchesSearchTerm(member);
+  // Intersection Observer para animações lazy
+  setupIntersectionObserver() {
+    // Verifica se o navegador suporta IntersectionObserver
+    if (!("IntersectionObserver" in window)) {
+      console.warn("IntersectionObserver not supported");
+      // Fallback: usar animações CSS simples
+      this.intersectionObserver = null;
+      return;
+    }
 
-      return matchesSearch;
-    });
+    const options = {
+      threshold: 0.1,
+      rootMargin: "50px",
+    };
 
-    this.renderTeam();
+    try {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("card-enter-active");
+            this.intersectionObserver.unobserve(entry.target);
+          }
+        });
+      }, options);
+    } catch (error) {
+      console.warn("Error creating IntersectionObserver:", error);
+      this.intersectionObserver = null;
+    }
   }
 
-  // Verificar se membro corresponde ao termo de busca
+  // Filtrar equipe otimizado
+  filterTeam() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+
+    // Usa requestAnimationFrame para não bloquear a UI
+    requestAnimationFrame(() => {
+      this.filteredMembers = this.teamMembers.filter((member) => {
+        const matchesSearch =
+          this.searchTerm === "" || this.matchesSearchTerm(member);
+        return matchesSearch;
+      });
+
+      this.renderTeam();
+      this.isLoading = false;
+    });
+  }
+
+  // Verificar se membro corresponde ao termo de busca otimizado
   matchesSearchTerm(member) {
     const searchFields = [
       member.name,
@@ -164,9 +246,15 @@ class TeamManager {
     return searchFields.includes(this.searchTerm);
   }
 
+  // Renderizar equipe otimizado
   renderTeam() {
     const grid = document.getElementById("teamGrid");
     const noResults = document.getElementById("noResultsMessage");
+
+    if (!grid || !noResults) {
+      console.warn("Grid or noResults elements not found");
+      return;
+    }
 
     if (this.filteredMembers.length === 0) {
       grid.classList.add("hidden");
@@ -177,49 +265,94 @@ class TeamManager {
     grid.classList.remove("hidden");
     noResults.classList.add("hidden");
 
-    grid.innerHTML = this.filteredMembers
-      .map((member, index) => this.createMemberCard(member, index))
-      .join("");
+    // Usa DocumentFragment para melhor performance
+    const fragment = document.createDocumentFragment();
+
+    this.filteredMembers.forEach((member, index) => {
+      const cardElement = this.createMemberCardElement(member, index);
+      fragment.appendChild(cardElement);
+    });
+
+    grid.innerHTML = "";
+    grid.appendChild(fragment);
 
     this.setupCardListeners();
+    this.animateCards();
   }
 
-  createMemberCard(member, index) {
+  // Criar elemento do card (ao invés de string HTML)
+  createMemberCardElement(member, index) {
     const delay = Math.min(index * 100, 500);
 
-    return `
-            <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer animate-scale-in h-[400px]"
-                 style="animation-delay: ${delay}ms"
-                 data-member-id="${member.id}">
-                <div class="team-card-inner">
-                    <img src="${member.photo}"
-                         alt="${member.name}"
-                         class="team-card-image">
+    const cardDiv = document.createElement("div");
+    cardDiv.className =
+      "team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer card-enter h-[400px]";
+    cardDiv.style.animationDelay = `${delay}ms`;
+    cardDiv.dataset.memberId = member.id;
 
-                    <div class="team-card-overlay">
-                        <h3 class="text-2xl font-bold mb-1">${member.name}</h3>
-                        <p class="text-base">${member.role}</p>
-                        <span class="email text-sm opacity-80 mb-4">${member.email}</span>
+    cardDiv.innerHTML = `
+      <div class="team-card-inner">
+        <img src="${member.photo}" 
+             alt="${member.name}" 
+             class="team-card-image"
+             loading="lazy"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNTAgMTAwQzEyNy45IDEwMCAxMTAgMTE3LjkgMTEwIDE0MFMxMjcuOSAxODAgMTUwIDE4MFMxOTAgMTYyLjEgMTkwIDE0MFMxNzIuMSAxMDAgMTUwIDEwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPHBhdGggZD0iTTIxMCAyMDBDMjEwIDE3Mi4zOSAxODcuNjEgMTUwIDE2MCAxNTBIMTQwQzExMi4zOSAxNTAgOTAgMTcyLjM5IDkwIDIwMFYyMTBIMjEwVjIwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPC9zdmc+'">
+        
+        <div class="team-card-overlay">
+          <h3 class="text-xl font-bold mb-1">${member.name}</h3>
+          <p class="text-sm">${member.role}</p>
+          <span class="email text-xs opacity-80 mb-4">${member.email}</span>
+          
+          <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors micro-bounce">
+            <i class="fas fa-eye mr-2"></i>Ver Detalhes
+          </button>
+        </div>
+      </div>
+    `;
 
-                        <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
-                            <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+    return cardDiv;
   }
 
+  // Animar cards com Intersection Observer ou fallback
+  animateCards() {
+    const cards = document.querySelectorAll(".team-card.card-enter");
+
+    if (this.intersectionObserver) {
+      // Usa IntersectionObserver se disponível
+      cards.forEach((card) => {
+        this.intersectionObserver.observe(card);
+      });
+    } else {
+      // Fallback: anima todos os cards imediatamente
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("card-enter-active");
+        }, index * 100);
+      });
+    }
+  }
+
+  // Setup de listeners otimizado
   setupCardListeners() {
     const cards = document.querySelectorAll(".team-card");
     cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const memberId = parseInt(card.dataset.memberId);
-        this.openModal(memberId);
-      });
+      // Remove listeners anteriores para evitar memory leaks
+      const newCard = card.cloneNode(true);
+      card.parentNode.replaceChild(newCard, card);
+
+      // Adiciona novo listener
+      newCard.addEventListener("click", this.handleCardClick.bind(this));
     });
   }
 
+  // Handler de clique do card
+  handleCardClick(event) {
+    const card = event.currentTarget;
+    const memberId = parseInt(card.dataset.memberId);
+    this.openModal(memberId);
+  }
+
+  // Abrir modal otimizado
   openModal(memberId) {
     const member = this.teamMembers.find((m) => m.id === memberId);
     if (!member) return;
@@ -227,163 +360,199 @@ class TeamManager {
     const modal = document.getElementById("memberModal");
     const content = document.getElementById("modalContent");
 
+    if (!modal || !content) {
+      console.warn("Modal elements not found");
+      return;
+    }
+
     content.innerHTML = this.createModalContent(member);
     modal.classList.remove("hidden");
+
+    // Animação de entrada
+    const modalContentDiv = modal.querySelector(".modal-content");
+    if (modalContentDiv) {
+      requestAnimationFrame(() => {
+        modalContentDiv.classList.add("show");
+      });
+    }
+
     document.body.style.overflow = "hidden";
+
+    // Preload da imagem se necessário
+    this.preloadModalImage(member.photo);
   }
 
+  // Preload da imagem do modal
+  preloadModalImage(imageSrc) {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onerror = () => {
+      console.warn("Failed to preload image:", imageSrc);
+    };
+  }
+
+  // Fechar modal otimizado
   closeModal() {
     const modal = document.getElementById("memberModal");
-    modal.classList.add("hidden");
-    document.body.style.overflow = "";
+    if (!modal) return;
+
+    const modalContentDiv = modal.querySelector(".modal-content");
+
+    if (modalContentDiv) {
+      modalContentDiv.classList.remove("show");
+    }
+
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }, 300);
   }
 
-  // Criar conteúdo do modal
+  // Criar conteúdo do modal com correção da imagem
   createModalContent(member) {
     return `
-            <!-- Header -->
-            <div class="relative">
-                <img src="${member.photo}" alt="${
-      member.name
-    }" class="w-full h-64 object-cover rounded-t-3xl">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                    <h2 class="text-3xl font-bold mb-2">${member.name}</h2>
-                    <p class="text-xl opacity-90">${member.role}</p>
-                    <div class="flex items-center mt-2">
-                        <span class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm ml-2">
-                            ${member.experience}
-                        </span>
-                    </div>
-                </div>
-            </div>
+      <!-- Header com imagem corrigida -->
+      <div class="relative">
+        <img src="${member.photo}" 
+             alt="${member.name}" 
+             class="modal-image rounded-t-3xl"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjI4MCIgdmlld0JveD0iMCAwIDYwMCAyODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0zMDAgMTAwQzI2Ny45IDEwMCAyNDIgMTI1LjkgMjQyIDE1OFMyNjcuOSAyMTYgMzAwIDIxNlMzNTggMTkwLjEgMzU4IDE1OFMzMzIuMSAxMDAgMzAwIDEwMFoiIGZpbGw9IiM5Q0E0QUYiLz4KPHBhdGggZD0iTTM3MCAyNDBDMzcwIDIwMi4zOSAzMzcuNjEgMTcwIDMwMCAxNzBIMzAwQzI2Mi4zOSAxNzAgMjMwIDIwMi4zOSAyMzAgMjQwVjI2MEgzNzBWMjQwWiIgZmlsbD0iIzlDQTRBRiIvPgo8L3N2Zz4='">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-white">
+          <h2 class="text-3xl font-bold mb-2">${member.name}</h2>
+          <p class="text-xl opacity-90">${member.role}</p>
+          <div class="flex items-center mt-2">
+            <span class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm">
+              ${member.experience}
+            </span>
+          </div>
+        </div>
+      </div>
 
-            <!-- Content -->
-            <div class="p-8">
-                <!-- Quote -->
-                <div class="bg-educa-pink/10 rounded-2xl p-6 mb-8 text-center">
-                    <i class="fas fa-quote-left text-educa-pink text-2xl mb-4"></i>
-                    <p class="text-lg italic text-educa-blue font-medium">"${
-                      member.quote
-                    }"</p>
-                </div>
+      <!-- Content -->
+      <div class="p-8">
+        <!-- Quote -->
+        <div class="bg-educa-pink/10 rounded-2xl p-6 mb-8 text-center">
+          <i class="fas fa-quote-left text-educa-pink text-2xl mb-4"></i>
+          <p class="text-lg italic text-educa-blue font-medium">"${
+            member.quote
+          }"</p>
+        </div>
 
-                <!-- Skills -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-educa-blue mb-4 flex items-center">
-                        <i class="fas fa-cogs text-educa-pink mr-3"></i>
-                        Habilidades Técnicas
-                    </h3>
-                    <div class="flex flex-wrap gap-3">
-                        ${member.skills
-                          .map(
-                            (skill) =>
-                              `<span class="skill-tag text-white px-4 py-2 rounded-full font-medium">${skill}</span>`
-                          )
-                          .join("")}
-                    </div>
-                </div>
+        <!-- Skills -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold text-educa-blue mb-4 flex items-center">
+            <i class="fas fa-cogs text-educa-pink mr-3"></i>
+            Habilidades Técnicas
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            ${member.skills
+              .map(
+                (skill) =>
+                  `<span class="skill-tag text-white px-4 py-2 rounded-full font-medium">${skill}</span>`
+              )
+              .join("")}
+          </div>
+        </div>
 
-                <!-- Personal Info Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Hobbies -->
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h4 class="font-bold text-educa-blue mb-3 flex items-center">
-                            <i class="fas fa-heart text-red-500 mr-2"></i>
-                            Hobbies
-                        </h4>
-                        <p class="text-educa-dark-gray">${member.hobbies}</p>
-                    </div>
+        <!-- Personal Info Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Hobbies -->
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h4 class="font-bold text-educa-blue mb-3 flex items-center">
+              <i class="fas fa-heart text-red-500 mr-2"></i>
+              Hobbies
+            </h4>
+            <p class="text-educa-dark-gray">${member.hobbies}</p>
+          </div>
 
-                    <!-- Favorite Music -->
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h4 class="font-bold text-educa-blue mb-3 flex items-center">
-                            <i class="fas fa-music text-purple-500 mr-2"></i>
-                            Música Favorita
-                        </h4>
-                        <p class="text-educa-dark-gray">${
-                          member.favoriteMusic
-                        }</p>
-                    </div>
+          <!-- Favorite Music -->
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h4 class="font-bold text-educa-blue mb-3 flex items-center">
+              <i class="fas fa-music text-purple-500 mr-2"></i>
+              Música Favorita
+            </h4>
+            <p class="text-educa-dark-gray">${member.favoriteMusic}</p>
+          </div>
 
-                    <!-- Favorite Movie -->
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h4 class="font-bold text-educa-blue mb-3 flex items-center">
-                            <i class="fas fa-film text-yellow-500 mr-2"></i>
-                            Filme Favorito
-                        </h4>
-                        <p class="text-educa-dark-gray">${
-                          member.favoriteMovie
-                        }</p>
-                    </div>
+          <!-- Favorite Movie -->
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h4 class="font-bold text-educa-blue mb-3 flex items-center">
+              <i class="fas fa-film text-yellow-500 mr-2"></i>
+              Filme Favorito
+            </h4>
+            <p class="text-educa-dark-gray">${member.favoriteMovie}</p>
+          </div>
 
-                    <!-- Contact -->
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h4 class="font-bold text-educa-blue mb-3 flex items-center">
-                            <i class="fas fa-envelope text-blue-500 mr-2"></i>
-                            Contato
-                        </h4>
-                        <a href="mailto:${
-                          member.email
-                        }" class="text-educa-pink hover:underline break-all">
-                            ${member.email}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
+          <!-- Contact -->
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h4 class="font-bold text-educa-blue mb-3 flex items-center">
+              <i class="fas fa-envelope text-blue-500 mr-2"></i>
+              Contato
+            </h4>
+            <a href="mailto:${
+              member.email
+            }" class="text-educa-pink hover:underline break-all">
+              ${member.email}
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  updateStats() {
-    const totalMembers = this.teamMembers.length;
-    const skills = [...new Set(this.teamMembers.flatMap((m) => m.skills))]
-      .length;
+  // Limpar busca otimizado
+  clearSearch() {
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) return;
 
-    this.animateCounter("totalMembers", totalMembers);
-    this.animateCounter("totalSkills", skills);
+    searchInput.value = "";
+    searchInput.classList.remove("animate-glow-pulse");
+    this.searchTerm = "";
+    this.filterTeam();
+    searchInput.focus();
   }
 
-  animateCounter(elementId, target) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      element.textContent = Math.floor(current);
-    }, 16);
-  }
-
+  // Esconder loading otimizado
   hideLoading() {
     setTimeout(() => {
       const spinner = document.getElementById("loading-spinner");
       if (spinner) {
         spinner.style.opacity = "0";
+        spinner.style.transform = "scale(0.8)";
         setTimeout(() => {
           spinner.style.display = "none";
         }, 300);
       }
     }, 1000);
   }
+
+  // Cleanup para evitar memory leaks
+  destroy() {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+  }
 }
 
 // Função global para limpar pesquisa
 function clearSearch() {
-  document.getElementById("searchInput").value = "";
-
   if (window.teamManager) {
-    window.teamManager.searchTerm = "";
-    window.teamManager.filterTeam();
+    window.teamManager.clearSearch();
   }
 }
 
 // Inicializar quando o DOM estiver pronto
 document.addEventListener("DOMContentLoaded", () => {
   window.teamManager = new TeamManager();
+});
+
+// Cleanup ao sair da página
+window.addEventListener("beforeunload", () => {
+  if (window.teamManager) {
+    window.teamManager.destroy();
+  }
 });

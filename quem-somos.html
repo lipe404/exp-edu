@@ -18,7 +18,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800;900&display=swap"
             rel="stylesheet">
 
-        <!-- Font -->
+        <!-- Font Awesome -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -48,7 +48,13 @@
                             'fade-in': 'fadeIn 0.6s ease-out forwards',
                             'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
                             'scale-in': 'scaleIn 0.5s ease-out forwards',
-                            'pulse-glow': 'pulseGlow 2s ease-in-out infinite'
+                            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                            'float': 'float 6s ease-in-out infinite',
+                            'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                            'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+                            'bounce-soft': 'bounceSoft 2s ease-in-out infinite',
+                            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+                            'shimmer': 'shimmer 2s linear infinite'
                         },
                         keyframes: {
                             fadeIn: {
@@ -66,6 +72,34 @@
                             pulseGlow: {
                                 '0%, 100%': { boxShadow: '0 0 20px rgba(231, 31, 93, 0.3)' },
                                 '50%': { boxShadow: '0 0 40px rgba(231, 31, 93, 0.6)' }
+                            },
+                            float: {
+                                '0%, 100%': { transform: 'translateY(0px)' },
+                                '50%': { transform: 'translateY(-10px)' }
+                            },
+                            slideInLeft: {
+                                '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                                '100%': { opacity: '1', transform: 'translateX(0)' }
+                            },
+                            slideInRight: {
+                                '0%': { opacity: '0', transform: 'translateX(50px)' },
+                                '100%': { opacity: '1', transform: 'translateX(0)' }
+                            },
+                            bounceSoft: {
+                                '0%, 100%': { transform: 'translateY(0)' },
+                                '50%': { transform: 'translateY(-5px)' }
+                            },
+                            glowPulse: {
+                                '0%, 100%': { 
+                                    boxShadow: '0 0 5px rgba(231, 31, 93, 0.3), 0 0 10px rgba(231, 31, 93, 0.2), 0 0 15px rgba(231, 31, 93, 0.1)' 
+                                },
+                                '50%': { 
+                                    boxShadow: '0 0 10px rgba(231, 31, 93, 0.5), 0 0 20px rgba(231, 31, 93, 0.4), 0 0 30px rgba(231, 31, 93, 0.3)' 
+                                }
+                            },
+                            shimmer: {
+                                '0%': { backgroundPosition: '-200% 0' },
+                                '100%': { backgroundPosition: '200% 0' }
                             }
                         }
                     }
@@ -73,6 +107,7 @@
             }
         </script>
 
+        <!-- CSS -->
         <style>
             html {
                 scroll-behavior: smooth;
@@ -87,24 +122,55 @@
             }
 
             ::-webkit-scrollbar-thumb {
-                background: #e71f5d;
+                background: linear-gradient(135deg, #e71f5d, #c2185b);
                 border-radius: 4px;
             }
 
             ::-webkit-scrollbar-thumb:hover {
-                background: #c2185b;
+                background: linear-gradient(135deg, #c2185b, #ad1457);
             }
 
             .hero-gradient {
                 background: linear-gradient(135deg, #e71f5d 0%, #c2185b 50%, #ad1457 100%);
+                position: relative;
+            }
+
+            .hero-gradient::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+                opacity: 0.3;
             }
 
             .team-card {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .team-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+                transition: left 0.6s;
+                z-index: 2;
+            }
+
+            .team-card:hover::before {
+                left: 100%;
             }
 
             .team-card:hover {
-                transform: translateY(-8px) scale(1.02);
+                transform: translateY(-12px) scale(1.03);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(231, 31, 93, 0.1);
             }
 
             .animation-delay-100 { animation-delay: 0.1s; }
@@ -112,41 +178,88 @@
             .animation-delay-300 { animation-delay: 0.3s; }
             .animation-delay-400 { animation-delay: 0.4s; }
             .animation-delay-500 { animation-delay: 0.5s; }
+            .animation-delay-600 { animation-delay: 0.6s; }
+            .animation-delay-700 { animation-delay: 0.7s; }
+            .animation-delay-800 { animation-delay: 0.8s; }
 
             .loading-skeleton {
                 background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
                 background-size: 200% 100%;
-                animation: loading 1.5s infinite;
+                animation: shimmer 1.5s infinite;
+                position: relative;
+                overflow: hidden;
             }
 
-            @keyframes loading {
-                0% { background-position: 200% 0; }
-                100% { background-position: -200% 0; }
+            .loading-skeleton::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+                animation: shimmer 2s infinite;
             }
 
             .modal-backdrop {
-                -webkit-backdrop-filter: blur(8px);
-                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+                background: rgba(0, 0, 0, 0.8);
+                transition: all 0.3s ease;
+            }
+
+            .modal-content {
+                transform: scale(0.9);
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .modal-content.show {
+                transform: scale(1);
             }
 
             .skill-tag {
                 background: linear-gradient(135deg, #e71f5d, #c2185b);
-                transition: all 0.2s ease;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .skill-tag::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            .skill-tag:hover::before {
+                left: 100%;
             }
 
             .skill-tag:hover {
-                transform: scale(1.05);
-                box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
+                transform: scale(1.05) translateY(-2px);
+                box-shadow: 0 8px 25px rgba(231, 31, 93, 0.4);
+            }
+
+            .search-input {
+                transition: all 0.3s ease;
+                position: relative;
             }
 
             .search-input:focus {
-                box-shadow: 0 0 0 3px rgba(231, 31, 93, 0.1);
+                box-shadow: 0 0 0 3px rgba(231, 31, 93, 0.1), 0 10px 25px rgba(0,0,0,0.1);
+                transform: translateY(-2px);
             }
 
+            /* No results animation */
             .no-results {
                 animation: fadeInUp 0.5s ease-out;
             }
 
+            /* Card styles melhorados */
             .team-card-inner {
                 position: relative;
                 width: 100%;
@@ -159,79 +272,182 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                transition: transform 0.3s ease;
+                object-position: center top;
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .team-card:hover .team-card-image {
-                transform: scale(1.05);
+                transform: scale(1.08);
             }
 
             .team-card-overlay {
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, transparent 100%);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
                 padding: 1.5rem;
                 color: white;
                 opacity: 1;
-                transition: opacity 0.3s ease;
+                transition: all 0.3s ease;
             }
 
             .team-card-overlay h3 {
                 font-family: 'Montserrat', sans-serif;
                 font-weight: 700;
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 margin-bottom: 0.25rem;
                 line-height: 1.2;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             }
 
             .team-card-overlay p {
-                font-size: 1rem;
+                font-size: 0.875rem;
                 line-height: 1.5;
                 margin-bottom: 0.5rem;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.5);
             }
 
             .team-card-overlay .email {
-                font-size: 0.875rem;
-                opacity: 0.8;
+                font-size: 0.75rem;
+                opacity: 0.9;
                 margin-bottom: 1rem;
                 word-break: break-all;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            }
+
+            .modal-image {
+                width: 100%;
+                height: 280px;
+                object-fit: cover;
+                object-position: center top;
+            }
+
+            .card-enter {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+
+            .card-enter-active {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .floating-shapes {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .floating-shape {
+                position: absolute;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .floating-shape:nth-child(1) {
+                width: 80px;
+                height: 80px;
+                top: 20%;
+                left: 10%;
+                animation-delay: 0s;
+                animation-duration: 6s;
+            }
+
+            .floating-shape:nth-child(2) {
+                width: 120px;
+                height: 120px;
+                top: 60%;
+                right: 10%;
+                animation-delay: 2s;
+                animation-duration: 8s;
+            }
+
+            .floating-shape:nth-child(3) {
+                width: 60px;
+                height: 60px;
+                top: 40%;
+                left: 60%;
+                animation-delay: 4s;
+                animation-duration: 7s;
+            }
+
+            .micro-bounce {
+                transition: transform 0.1s ease;
+            }
+
+            .micro-bounce:active {
+                transform: scale(0.98);
+            }
+
+            .typing-effect {
+                overflow: hidden;
+                border-right: 3px solid;
+                white-space: nowrap;
+                animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            }
+
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+
+            @keyframes blink-caret {
+                from, to { border-color: transparent }
+                50% { border-color: #e71f5d }
+            }
+
+            .parallax-element {
+                will-change: transform;
+            }
+
+            .team-card,
+            .skill-tag,
+            .search-input {
+                will-change: transform;
+            }
+
+            .team-card:not(:hover),
+            .skill-tag:not(:hover),
+            .search-input:not(:focus) {
+                will-change: auto;
             }
         </style>
     </head>
 
     <body class="font-sans text-educa-blue antialiased bg-educa-light-gray">
-        <!-- Loading Spinner -->
         <div id="loading-spinner"
             class="fixed inset-0 bg-white z-50 flex items-center justify-center">
-            <div
-                class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-educa-pink"></div>
+            <div class="relative">
+                <div
+                    class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-educa-pink"></div>
+                <div
+                    class="absolute inset-0 rounded-full border-2 border-educa-pink/20"></div>
+            </div>
         </div>
 
-        <!-- Header -->
         <header
             class="hero-gradient text-white py-12 md:py-16 relative overflow-hidden">
-            <!-- Background decorativo -->
-            <div class="absolute inset-0 opacity-10">
-                <div
-                    class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full"></div>
-                <div
-                    class="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full"></div>
-                <div
-                    class="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full"></div>
+            <div class="floating-shapes">
+                <div class="floating-shape"></div>
+                <div class="floating-shape"></div>
+                <div class="floating-shape"></div>
             </div>
 
             <div class="container mx-auto px-4 relative z-10">
-                <nav class="flex items-center justify-between mb-12">
+                <nav
+                    class="flex items-center justify-between mb-12 animate-slide-in-left">
                     <a href="index.html"
-                        class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                        <img src="./assets/logos/Ativo 13.png"
-                            alt="Logo Educa+" class="h-12 md:h-16">
+                        class="flex items-center space-x-3 hover:opacity-80 transition-opacity micro-bounce">
+                        <img src="./assets/logos/Ativo 13.png" alt="Logo Educa+"
+                            class="h-12 md:h-16">
                     </a>
                     <a href="index.html"
-                        class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300">
+                        class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300 micro-bounce animate-slide-in-right">
                         <i class="fas fa-arrow-left mr-2"></i>
                         Voltar ao Site
                     </a>
@@ -241,7 +457,7 @@
                     <h1
                         class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
                         Conheça Nossa <span
-                            class="text-educa-blue">Equipe</span>
+                            class="text-educa-blue animate-glow-pulse">Equipe</span>
                     </h1>
                     <p
                         class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-200 leading-relaxed">
@@ -250,16 +466,17 @@
 
                     <div
                         class="max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
-                        <div class="relative">
+                        <div class="relative group">
                             <div
                                 class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i
-                                    class="fas fa-search text-gray-400 text-lg"></i>
+                                    class="fas fa-search text-gray-400 text-lg transition-colors group-focus-within:text-educa-pink"></i>
                             </div>
-                            <input type="text"
-                                id="searchInput"
+                            <input type="text" id="searchInput"
                                 placeholder="Pesquisar por nome, cargo, skill, hobby..."
                                 class="search-input w-full pl-12 pr-4 py-4 text-lg rounded-2xl border-0 focus:ring-2 focus:ring-white/50 text-gray-800 placeholder-gray-500 shadow-lg">
+                            <div
+                                class="absolute inset-0 rounded-2xl bg-gradient-to-r from-educa-pink/20 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
                         </div>
                     </div>
                 </div>
@@ -276,15 +493,17 @@
                 <div id="noResultsMessage"
                     class="no-results text-center py-16 hidden">
                     <div class="max-w-md mx-auto">
-                        <i
-                            class="fas fa-search text-6xl text-gray-300 mb-6"></i>
+                        <div class="animate-bounce-soft">
+                            <i
+                                class="fas fa-search text-6xl text-gray-300 mb-6"></i>
+                        </div>
                         <h3
                             class="text-2xl font-bold text-educa-dark-gray mb-4">Nenhum
                             resultado encontrado</h3>
                         <p class="text-educa-dark-gray mb-6">Tente pesquisar por
                             outro termo ou limpe a pesquisa.</p>
                         <button onclick="clearSearch()"
-                            class="bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors">
+                            class="bg-educa-pink text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-all duration-300 micro-bounce animate-glow-pulse">
                             <i class="fas fa-times mr-2"></i>Limpar Pesquisa
                         </button>
                     </div>
@@ -293,20 +512,22 @@
                 <div id="loadingSkeleton"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
                     <div class="loading-skeleton rounded-2xl h-96"></div>
-                    <div class="loading-skeleton rounded-2xl h-96"></div>
-                    <div class="loading-skeleton rounded-2xl h-96"></div>
-                    <div class="loading-skeleton rounded-2xl h-96"></div>
+                    <div
+                        class="loading-skeleton rounded-2xl h-96 animation-delay-100"></div>
+                    <div
+                        class="loading-skeleton rounded-2xl h-96 animation-delay-200"></div>
+                    <div
+                        class="loading-skeleton rounded-2xl h-96 animation-delay-300"></div>
                 </div>
             </div>
         </main>
 
-        <!-- Modal de Detalhes -->
         <div id="memberModal"
             class="fixed inset-0 bg-black/80 modal-backdrop flex items-center justify-center z-50 hidden p-4">
             <div
-                class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-scale-in">
+                class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative modal-content">
                 <button id="closeModal" title="Fechar"
-                    class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors z-10">
+                    class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-all duration-300 z-10 micro-bounce hover:scale-110">
                     <i class="fas fa-times text-gray-600"></i>
                 </button>
 
@@ -316,32 +537,35 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <footer class="bg-educa-blue text-white py-12">
             <div class="container mx-auto px-4 text-center">
                 <img src="./assets/logos/Ativo 10.png" alt="Logo Educa+"
-                    class="h-16 mx-auto mb-6">
+                    class="h-16 mx-auto mb-6 animate-float">
                 <div class="flex justify-center space-x-6">
-                    <a href="https://www.facebook.com/sejaeducamais" title="Facebook"
-                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                    <a href="https://www.facebook.com/sejaeducamais"
+                        title="Facebook"
+                        class="text-gray-300 hover:text-educa-pink transition-all duration-300 micro-bounce hover:scale-110">
                         <i class="fab fa-facebook-f text-xl"></i>
                     </a>
-                    <a href="https://www.instagram.com/sejaeducamais/" title="Instagram"
-                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                    <a href="https://www.instagram.com/sejaeducamais/"
+                        title="Instagram"
+                        class="text-gray-300 hover:text-educa-pink transition-all duration-300 micro-bounce hover:scale-110">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="https://www.linkedin.com/company/educa-mais-minas/" title="LinkedIn"
-                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                    <a href="https://www.linkedin.com/company/educa-mais-minas/"
+                        title="LinkedIn"
+                        class="text-gray-300 hover:text-educa-pink transition-all duration-300 micro-bounce hover:scale-110">
                         <i class="fab fa-linkedin-in text-xl"></i>
                     </a>
-                    <a href="https://www.youtube.com/@educamaisminas.oficial" title="YouTube"
-                        class="text-gray-300 hover:text-educa-pink transition-colors">
+                    <a href="https://www.youtube.com/@educamaisminas.oficial"
+                        title="YouTube"
+                        class="text-gray-300 hover:text-educa-pink transition-all duration-300 micro-bounce hover:scale-110">
                         <i class="fab fa-youtube text-xl"></i>
                     </a>
                 </div>
                 <div class="border-t border-gray-600 mt-8 pt-8">
-                    <p class="text-gray-400 text-sm">&copy; 2025 Educa+.
-                        Todos os direitos reservados.</p>
+                    <p class="text-gray-400 text-sm">&copy; 2025 Educa+. Todos
+                        os direitos reservados.</p>
                 </div>
             </div>
         </footer>
