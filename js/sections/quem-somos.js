@@ -14,7 +14,6 @@ class TeamManager {
     this.hideLoading();
   }
 
-  // Dados da equipe
   loadTeamData() {
     this.teamMembers = [
       {
@@ -32,7 +31,7 @@ class TeamManager {
         favoriteMusic: "Construção - Chico Buarque",
         favoriteMovie: "Na Natureza Selvagem",
         quote:
-          "Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda. - PAulo Freire",
+          "Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda. - Paulo Freire",
         email: "felipe@educamais.com.br",
         experience: "5+ anos",
       },
@@ -110,7 +109,6 @@ class TeamManager {
     this.renderTeam();
   }
 
-  // Setup de event listeners
   setupEventListeners() {
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", (e) => {
@@ -119,7 +117,6 @@ class TeamManager {
     });
   }
 
-  // Setup do modal
   setupModal() {
     const modal = document.getElementById("memberModal");
     const closeBtn = document.getElementById("closeModal");
@@ -139,7 +136,6 @@ class TeamManager {
     });
   }
 
-  // Filtrar equipe
   filterTeam() {
     this.filteredMembers = this.teamMembers.filter((member) => {
       const matchesSearch =
@@ -168,7 +164,6 @@ class TeamManager {
     return searchFields.includes(this.searchTerm);
   }
 
-  // Renderizar equipe
   renderTeam() {
     const grid = document.getElementById("teamGrid");
     const noResults = document.getElementById("noResultsMessage");
@@ -189,7 +184,6 @@ class TeamManager {
     this.setupCardListeners();
   }
 
-  // Criar card do membro
   createMemberCard(member, index) {
     const delay = Math.min(index * 100, 500);
 
@@ -207,7 +201,6 @@ class TeamManager {
                         <p class="text-base">${member.role}</p>
                         <span class="email text-sm opacity-80 mb-4">${member.email}</span>
 
-                        <!-- View Details Button -->
                         <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
                             <i class="fas fa-eye mr-2"></i>Ver Detalhes
                         </button>
@@ -239,7 +232,6 @@ class TeamManager {
     document.body.style.overflow = "hidden";
   }
 
-  // Fechar modal
   closeModal() {
     const modal = document.getElementById("memberModal");
     modal.classList.add("hidden");
@@ -342,7 +334,6 @@ class TeamManager {
         `;
   }
 
-  // Atualizar estatísticas
   updateStats() {
     const totalMembers = this.teamMembers.length;
     const skills = [...new Set(this.teamMembers.flatMap((m) => m.skills))]
@@ -352,7 +343,6 @@ class TeamManager {
     this.animateCounter("totalSkills", skills);
   }
 
-  // Animar contador
   animateCounter(elementId, target) {
     const element = document.getElementById(elementId);
     if (!element) return;
