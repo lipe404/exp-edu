@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quem Somos - Nossa Equipe | Educa+ Minas</title>
+        <title>Quem Somos - Nossa Equipe | Educa+</title>
         <meta name="description"
-            content="Conheça a equipe da Educa+ Minas. Profissionais dedicados e especializados que fazem a diferença na educação brasileira.">
+            content="Conheça a equipe da Educa+. Profissionais dedicados e especializados que fazem a diferença na educação brasileira.">
 
         <!-- Favicon -->
         <link rel="icon" href="assets/icons/icon-pink-to-blue.ico"
@@ -27,190 +27,191 @@
 
         <!-- Configuração Personalizada do Tailwind -->
         <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'educa-pink': '#e71f5d',
-                        'educa-blue': '#212148',
-                        'educa-white': '#ffffff',
-                        'educa-light-gray': '#f8f9fa',
-                        'educa-dark-gray': '#6b7280',
-                        'educa-pink-light': '#f8d7da',
-                        'educa-blue-light': '#e3f2fd',
-                        'educa-blue-bg': '#212148'
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
-                        'heading': ['Montserrat', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.6s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-                        'scale-in': 'scaleIn 0.5s ease-out forwards',
-                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'educa-pink': '#e71f5d',
+                            'educa-blue': '#212148',
+                            'educa-white': '#ffffff',
+                            'educa-light-gray': '#f8f9fa',
+                            'educa-dark-gray': '#6b7280',
+                            'educa-pink-light': '#f8d7da',
+                            'educa-blue-light': '#e3f2fd',
+                            'educa-blue-bg': '#212148'
                         },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        fontFamily: {
+                            'sans': ['Inter', 'sans-serif'],
+                            'heading': ['Montserrat', 'sans-serif']
                         },
-                        scaleIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.9)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        animation: {
+                            'fade-in': 'fadeIn 0.6s ease-out forwards',
+                            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                            'scale-in': 'scaleIn 0.5s ease-out forwards',
+                            'pulse-glow': 'pulseGlow 2s ease-in-out infinite'
                         },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(231, 31, 93, 0.3)' },
-                            '50%': { boxShadow: '0 0 40px rgba(231, 31, 93, 0.6)' }
+                        keyframes: {
+                            fadeIn: {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' }
+                            },
+                            fadeInUp: {
+                                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' }
+                            },
+                            scaleIn: {
+                                '0%': { opacity: '0', transform: 'scale(0.9)' },
+                                '100%': { opacity: '1', transform: 'scale(1)' }
+                            },
+                            pulseGlow: {
+                                '0%, 100%': { boxShadow: '0 0 20px rgba(231, 31, 93, 0.3)' },
+                                '50%': { boxShadow: '0 0 40px rgba(231, 31, 93, 0.6)' }
+                            }
                         }
                     }
                 }
             }
-        }
-    </script>
+        </script>
 
         <!-- CSS Personalizado -->
         <style>
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+            /* Smooth scroll */
+            html {
+                scroll-behavior: smooth;
+            }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
 
-        ::-webkit-scrollbar-thumb {
-            background: #e71f5d;
-            border-radius: 4px;
-        }
+            ::-webkit-scrollbar-thumb {
+                background: #e71f5d;
+                border-radius: 4px;
+            }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #c2185b;
-        }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #c2185b;
+            }
 
-        /* Gradiente personalizado para header */
-        .hero-gradient {
-            background: linear-gradient(135deg, #e71f5d 0%, #c2185b 50%, #ad1457 100%);
-        }
+            /* Gradiente personalizado para header */
+            .hero-gradient {
+                background: linear-gradient(135deg, #e71f5d 0%, #c2185b 50%, #ad1457 100%);
+            }
 
-        /* Efeitos hover */
-        .team-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+            /* Efeitos hover */
+            .team-card {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
-        .team-card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
+            .team-card:hover {
+                transform: translateY(-8px) scale(1.02);
+            }
 
-        /* Animações de delay */
-        .animation-delay-100 { animation-delay: 0.1s; }
-        .animation-delay-200 { animation-delay: 0.2s; }
-        .animation-delay-300 { animation-delay: 0.3s; }
-        .animation-delay-400 { animation-delay: 0.4s; }
-        .animation-delay-500 { animation-delay: 0.5s; }
+            /* Animações de delay */
+            .animation-delay-100 { animation-delay: 0.1s; }
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-300 { animation-delay: 0.3s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .animation-delay-500 { animation-delay: 0.5s; }
 
-        /* Loading states */
-        .loading-skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
+            /* Loading states */
+            .loading-skeleton {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: loading 1.5s infinite;
+            }
 
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+            @keyframes loading {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
 
-        /* Modal styles */
-        .modal-backdrop {
-            backdrop-filter: blur(8px);
-        }
+            /* Modal styles */
+            .modal-backdrop {
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+            }
 
-        /* Skills tags */
-        .skill-tag {
-            background: linear-gradient(135deg, #e71f5d, #c2185b);
-            transition: all 0.2s ease;
-        }
+            /* Skills tags */
+            .skill-tag {
+                background: linear-gradient(135deg, #e71f5d, #c2185b);
+                transition: all 0.2s ease;
+            }
 
-        .skill-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
-        }
+            .skill-tag:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
+            }
 
-        /* Search input focus */
-        .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(231, 31, 93, 0.1);
-        }
+            /* Search input focus */
+            .search-input:focus {
+                box-shadow: 0 0 0 3px rgba(231, 31, 93, 0.1);
+            }
 
-        /* No results animation */
-        .no-results {
-            animation: fadeInUp 0.5s ease-out;
-        }
+            /* No results animation */
+            .no-results {
+                animation: fadeInUp 0.5s ease-out;
+            }
 
-        /* New card styles for overlay effect */
-        .team-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: inherit; /* Inherit from parent card */
-        }
+            /* New card styles for overlay effect */
+            .team-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                border-radius: inherit; /* Inherit from parent card */
+            }
 
-        .team-card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures photo covers the area */
-            transition: transform 0.3s ease;
-        }
+            .team-card-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ensures photo covers the area */
+                transition: transform 0.3s ease;
+            }
 
-        .team-card:hover .team-card-image {
-            transform: scale(1.05); /* Slight zoom on hover */
-        }
+            .team-card:hover .team-card-image {
+                transform: scale(1.05); /* Slight zoom on hover */
+            }
 
-        .team-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 1.5rem;
-            color: white;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
+            .team-card-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1.5rem;
+                color: white;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            }
 
-        .team-card-overlay h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem; /* text-2xl */
-            margin-bottom: 0.25rem; /* mb-1 */
-            line-height: 1.2;
-        }
+            .team-card-overlay h3 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 1.5rem; /* text-2xl */
+                margin-bottom: 0.25rem; /* mb-1 */
+                line-height: 1.2;
+            }
 
-        .team-card-overlay p {
-            font-size: 1rem; /* text-base */
-            line-height: 1.5;
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
+            .team-card-overlay p {
+                font-size: 1rem; /* text-base */
+                line-height: 1.5;
+                margin-bottom: 0.5rem; /* mb-2 */
+            }
 
-        .team-card-overlay .email {
-            font-size: 0.875rem; /* text-sm */
-            opacity: 0.8;
-            margin-bottom: 1rem; /* mb-4 */
-            word-break: break-all; /* Ensures long emails don't overflow */
-        }
-    </style>
+            .team-card-overlay .email {
+                font-size: 0.875rem; /* text-sm */
+                opacity: 0.8;
+                margin-bottom: 1rem; /* mb-4 */
+                word-break: break-all; /* Ensures long emails don't overflow */
+            }
+        </style>
     </head>
 
     <body class="font-sans text-educa-blue antialiased bg-educa-light-gray">
@@ -240,7 +241,7 @@
                     <a href="index.html"
                         class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                         <img src="./assets/logos/Ativo 13.png"
-                            alt="Logo Educa+ Minas" class="h-12 md:h-16">
+                            alt="Logo Educa+" class="h-12 md:h-16">
                     </a>
                     <a href="index.html"
                         class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300">
@@ -341,7 +342,7 @@
         <!-- Footer -->
         <footer class="bg-educa-blue text-white py-12">
             <div class="container mx-auto px-4 text-center">
-                <img src="./assets/logos/Ativo 10.png" alt="Logo Educa+ Minas"
+                <img src="./assets/logos/Ativo 10.png" alt="Logo Educa+"
                     class="h-16 mx-auto mb-6">
                 <div class="flex justify-center space-x-6">
                     <a href="https://www.facebook.com/sejaeducamais" title="Facebook"
@@ -362,7 +363,7 @@
                     </a>
                 </div>
                 <div class="border-t border-gray-600 mt-8 pt-8">
-                    <p class="text-gray-400 text-sm">&copy; 2025 Educa+ Minas.
+                    <p class="text-gray-400 text-sm">&copy; 2025 Educa+.
                         Todos os direitos reservados.</p>
                 </div>
             </div>

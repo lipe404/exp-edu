@@ -1,10 +1,7 @@
-// quem-somos.js - Sistema de Gerenciamento da Equipe
-
 class TeamManager {
   constructor() {
     this.teamMembers = [];
     this.filteredMembers = [];
-    // this.currentFilter = "all"; // Removido: Filtros de departamento
     this.searchTerm = "";
 
     this.init();
@@ -17,7 +14,7 @@ class TeamManager {
     this.hideLoading();
   }
 
-  // Dados da equipe (substitua por dados reais)
+  // Dados da equipe
   loadTeamData() {
     this.teamMembers = [
       {
@@ -126,17 +123,6 @@ class TeamManager {
       this.searchTerm = e.target.value.toLowerCase();
       this.filterTeam();
     });
-
-    // Removido: Filtro por botões de departamento
-    // const filterButtons = document.querySelectorAll(".filter-btn");
-    // filterButtons.forEach((btn) => {
-    //   btn.addEventListener("click", (e) => {
-    //     filterButtons.forEach((b) => b.classList.remove("active"));
-    //     e.target.classList.add("active");
-    //     this.currentFilter = e.target.dataset.filter;
-    //     this.filterTeam();
-    //   });
-    // });
   }
 
   // Setup do modal
@@ -162,8 +148,6 @@ class TeamManager {
   // Filtrar equipe
   filterTeam() {
     this.filteredMembers = this.teamMembers.filter((member) => {
-      // Simplificado: Agora só filtra pelo termo de busca
-      // const matchesFilter = this.currentFilter === "all" || member.department === this.currentFilter;
       const matchesSearch =
         this.searchTerm === "" || this.matchesSearchTerm(member);
 
@@ -178,12 +162,11 @@ class TeamManager {
     const searchFields = [
       member.name,
       member.role,
-      // member.department, // Removido
       ...member.skills,
       member.hobbies,
       member.favoriteMusic,
       member.favoriteMovie,
-      member.email, // Adicionado email para busca
+      member.email,
     ]
       .join(" ")
       .toLowerCase();
@@ -209,7 +192,6 @@ class TeamManager {
       .map((member, index) => this.createMemberCard(member, index))
       .join("");
 
-    // Adicionar event listeners aos cards
     this.setupCardListeners();
   }
 
@@ -218,19 +200,19 @@ class TeamManager {
     const delay = Math.min(index * 100, 500);
 
     return `
-            <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer animate-scale-in h-[400px]" 
+            <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer animate-scale-in h-[400px]"
                  style="animation-delay: ${delay}ms"
                  data-member-id="${member.id}">
                 <div class="team-card-inner">
-                    <img src="${member.photo}" 
-                         alt="${member.name}" 
+                    <img src="${member.photo}"
+                         alt="${member.name}"
                          class="team-card-image">
-                    
+
                     <div class="team-card-overlay">
                         <h3 class="text-2xl font-bold mb-1">${member.name}</h3>
                         <p class="text-base">${member.role}</p>
                         <span class="email text-sm opacity-80 mb-4">${member.email}</span>
-                        
+
                         <!-- View Details Button -->
                         <button class="w-full bg-educa-pink text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
                             <i class="fas fa-eye mr-2"></i>Ver Detalhes
@@ -241,7 +223,6 @@ class TeamManager {
         `;
   }
 
-  // Setup de listeners para os cards
   setupCardListeners() {
     const cards = document.querySelectorAll(".team-card");
     cards.forEach((card) => {
@@ -252,7 +233,6 @@ class TeamManager {
     });
   }
 
-  // Abrir modal
   openModal(memberId) {
     const member = this.teamMembers.find((m) => m.id === memberId);
     if (!member) return;
@@ -368,35 +348,20 @@ class TeamManager {
         `;
   }
 
-  // Removido: Obter nome do departamento
-  // getDepartmentName(dept) {
-  //   const departments = {
-  //     gestao: "Gestão",
-  //     educacional: "Educacional",
-  //     tecnologia: "Tecnologia",
-  //     marketing: "Marketing",
-  //     vendas: "Vendas",
-  //     suporte: "Suporte",
-  //   };
-  //   return departments[dept] || dept;
-  // }
-
   // Atualizar estatísticas
   updateStats() {
     const totalMembers = this.teamMembers.length;
-    // const departments = [...new Set(this.teamMembers.map((m) => m.department))].length; // Removido
     const skills = [...new Set(this.teamMembers.flatMap((m) => m.skills))]
       .length;
 
     this.animateCounter("totalMembers", totalMembers);
-    // this.animateCounter("totalDepartments", departments); // Removido
     this.animateCounter("totalSkills", skills);
   }
 
   // Animar contador
   animateCounter(elementId, target) {
     const element = document.getElementById(elementId);
-    if (!element) return; // Adicionado check para evitar erro se elemento não existir
+    if (!element) return;
     const duration = 2000;
     const step = target / (duration / 16);
     let current = 0;
@@ -411,7 +376,6 @@ class TeamManager {
     }, 16);
   }
 
-  // Esconder loading
   hideLoading() {
     setTimeout(() => {
       const spinner = document.getElementById("loading-spinner");
@@ -428,52 +392,12 @@ class TeamManager {
 // Função global para limpar pesquisa
 function clearSearch() {
   document.getElementById("searchInput").value = "";
-  // Removido: Limpeza de botões de filtro
-  // document.querySelectorAll(".filter-btn").forEach((btn) => {
-  //   btn.classList.remove("active");
-  // });
-  // document
-  //   .querySelector('.filter-btn[data-filter="all"]')
-  //   .classList.add("active");
 
   if (window.teamManager) {
     window.teamManager.searchTerm = "";
-    // window.teamManager.currentFilter = "all"; // Removido
     window.teamManager.filterTeam();
   }
 }
-
-// Removido: CSS adicional para os botões de filtro, pois os botões foram removidos
-// const additionalStyles = `
-//     .filter-btn {
-//         background: white;
-//         color: #6b7280;
-//         border: 2px solid #e5e7eb;
-//         padding: 0.75rem 1.5rem;
-//         border-radius: 9999px;
-//         font-weight: 600;
-//         transition: all 0.3s ease;
-//         cursor: pointer;
-//     }
-
-//     .filter-btn:hover {
-//         border-color: #e71f5d;
-//         color: #e71f5d;
-//         transform: translateY(-2px);
-//     }
-
-//     .filter-btn.active {
-//         background: #e71f5d;
-//         color: white;
-//         border-color: #e71f5d;
-//         box-shadow: 0 4px 12px rgba(231, 31, 93, 0.3);
-//     }
-// `;
-
-// Removido: Injeção de estilos adicionais
-// const styleSheet = document.createElement("style");
-// styleSheet.textContent = additionalStyles;
-// document.head.appendChild(styleSheet);
 
 // Inicializar quando o DOM estiver pronto
 document.addEventListener("DOMContentLoaded", () => {
