@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seja parceiro Educa+ | Oportunidade EAD de alta
+            rentabilidade</title>
+        <meta name="description"
+            content="Abra seu polo EAD com a Educa+ e aumente sua renda! Expanda negócios, venda cursos online e transforme a educação no Brasil. Seja parceiro!">
+        <meta name="keywords"
+            content="abrir polo EAD, parceria EAD lucrativa, vender cursos online, negócios em educação, expansão ensino a distância, franquia digital EAD, Educa+ parceria, renda extra com educação, oportunidade no EAD">
+        <meta name="author" content="Educa+">
+        <link rel="canonical" href="https://sejaparceiroeducamais.com.br/">
+
+        <!-- Favicon -->
+        <link rel="icon" href="assets/icons/icon-pink-to-blue.ico"
+            type="image/x-icon">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://sejaparceiroeducamais.com.br/">
+        <meta property="og:title"
+            content="Seja Parceiro Educa+ | Oportunidade EAD de Alta Rentabilidade">
+        <meta property="og:description"
+            content="Expanda seus negócios com a Educa+! Abra um polo EAD ou venda cursos online com alta rentabilidade.">
+        <meta property="og:image"
+            content="https://sejaparceiroeducamais.com.br/assets/logos/Ativo 10.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800;900&display=swap"
+            rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Configuração Personalizada do Tailwind -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'educa-pink': '#e71f5d',
+                            'educa-blue': '#212148',
+                            'educa-white': '#ffffff',
+                            'educa-light-gray': '#f8f9fa',
+                            'educa-dark-gray': '#6b7280',
+                            'educa-pink-light': '#f8d7da',
+                            'educa-blue-light': '#e3f2fd',
+                            'educa-blue-bg': '#212148'
+                        },
+                        fontFamily: {
+                            'sans': ['Inter', 'sans-serif'],
+                            'heading': ['Montserrat', 'sans-serif']
+                        },
+                        animation: {
+                            'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                            'fade-in': 'fadeIn 1s ease-out forwards',
+                            'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                            'blob': 'blob 7s infinite',
+                            'slide-up': 'slideUp 0.8s ease-out forwards',
+                            'step-rise': 'stepRise 0.6s ease-out forwards'
+                        },
+                        keyframes: {
+                            fadeIn: {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' }
+                            },
+                            fadeInUp: {
+                                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' }
+                            },
+                            blob: {
+                                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                                '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                            },
+                            slideUp: {
+                                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' }
+                            },
+                            stepRise: {
+                                '0%': { opacity: '0', transform: 'translateY(50px) scale(0.9)' },
+                                '100%': { opacity: '1', transform: 'translateY(0) scale(1)' }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <!-- CSS Personalizado -->
+        <style>
+            /* ===== ESCADA DE PARCERIA EDUCA+ ===== */
+            :root {
+                --educa-pink: #e71f5d;
+                --educa-blue: #212148;
+                --educa-white: #ffffff;
+                --educa-light-gray: #f8f9fa;
+                --educa-dark-gray: #6b7280;
+                --educa-pink-light: #f8d7da;
+                --educa-blue-light: #e3f2fd;
+            }
+
+            /* Container da escada */
+            #tier-ladder {
+                position: relative;
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 40px 0;
+                min-height: 500px;
+                perspective: 1000px;
+            }
+
+            /* Degraus da escada */
+            .tier-step {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                height: 140px;
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                border: 3px solid #e5e7eb;
+                border-radius: 20px;
+                margin: 0 auto 25px auto;
+                padding: 25px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow: hidden;
+                transform-origin: center bottom;
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+
+            /* Animação de entrada */
+            .tier-step.animate-in {
+                animation: stepRise 0.6s ease-out forwards;
+            }
+
+            /* Posicionamento em escada */
+            .tier-step:nth-child(1) { 
+                margin-left: 0; 
+                animation-delay: 0.2s;
+            }
+            .tier-step:nth-child(2) { 
+                margin-left: 80px; 
+                animation-delay: 0.4s;
+            }
+            .tier-step:nth-child(3) { 
+                margin-left: 160px; 
+                animation-delay: 0.6s;
+            }
+
+            /* Número do degrau */
+            .tier-step-number {
+                position: absolute;
+                left: -20px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, var(--educa-pink) 0%, #c2185b 100%);
+                border: 4px solid white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                font-weight: 900;
+                color: white;
+                box-shadow: 0 6px 20px rgba(231, 31, 93, 0.3);
+                z-index: 10;
+                transition: all 0.3s ease;
+            }
+
+            /* Porcentagem grande */
+            .tier-percentage {
+                position: absolute;
+                right: 25px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 4rem;
+                font-weight: 900;
+                color: var(--educa-blue);
+                opacity: 0.8;
+                font-family: 'Montserrat', sans-serif;
+                line-height: 1;
+            }
+
+            /* Conteúdo do degrau */
+            .tier-content {
+                padding-left: 60px;
+                padding-right: 120px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .tier-title {
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: var(--educa-blue);
+                margin-bottom: 8px;
+                font-family: 'Montserrat', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .tier-description {
+                font-size: 0.9rem;
+                color: var(--educa-dark-gray);
+                line-height: 1.4;
+                margin-bottom: 8px;
+            }
+
+            .tier-range {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--educa-pink);
+                background: var(--educa-pink-light);
+                padding: 4px 10px;
+                border-radius: 8px;
+                display: inline-block;
+            }
+
+            /* Efeito hover */
+            .tier-step:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+                border-color: var(--educa-pink);
+            }
+
+            .tier-step:hover .tier-step-number {
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 0 8px 25px rgba(231, 31, 93, 0.5);
+            }
+
+            /* Estados ativos */
+            .tier-step.active-tier {
+                background: linear-gradient(135deg, var(--educa-blue-light) 0%, #dbeafe 100%);
+                border-color: var(--educa-blue);
+                border-width: 4px;
+                transform: translateY(-12px) scale(1.05);
+                box-shadow: 0 25px 50px rgba(33, 33, 72, 0.2);
+                z-index: 20;
+            }
+
+            .tier-step.active-tier .tier-step-number {
+                background: linear-gradient(135deg, var(--educa-blue) 0%, #1e3a8a 100%);
+                transform: translateY(-50%) scale(1.15);
+                box-shadow: 0 10px 30px rgba(33, 33, 72, 0.4);
+            }
+
+            .tier-step.next-tier {
+                background: linear-gradient(135deg, var(--educa-pink-light) 0%, #fce7f3 100%);
+                border-color: var(--educa-pink);
+                border-width: 4px;
+                border-style: dashed;
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 15px 30px rgba(231, 31, 93, 0.15);
+                z-index: 15;
+            }
+
+            .tier-step.next-tier .tier-step-number {
+                animation: pulse 2s infinite;
+                box-shadow: 0 8px 25px rgba(231, 31, 93, 0.4);
+            }
+
+            /* Labels de status */
+            .tier-label {
+                position: absolute;
+                top: -15px;
+                right: 20px;
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 25;
+            }
+
+            .tier-step.active-tier .tier-label {
+                background: var(--educa-blue);
+                color: white;
+            }
+
+            .tier-step.next-tier .tier-label {
+                background: var(--educa-pink);
+                color: white;
+            }
+
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .tier-step {
+                    max-width: 320px;
+                    height: 120px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                }
+
+                .tier-step:nth-child(1),
+                .tier-step:nth-child(2),
+                .tier-step:nth-child(3) {
+                    margin-left: 0;
+                }
+
+                .tier-step-number {
+                    width: 50px;
+                    height: 50px;
+                    font-size: 1.25rem;
+                    left: -15px;
+                }
+
+                .tier-percentage {
+                    font-size: 3rem;
+                    right: 20px;
+                }
+
+                .tier-content {
+                    padding-left: 50px;
+                    padding-right: 100px;
+                }
+
+                .tier-title {
+                    font-size: 1.1rem;
+                }
+
+                .tier-description {
+                    font-size: 0.8rem;
+                }
+            }
+
+            /* Animação de pulso personalizada */
+            @keyframes pulse {
+                0%, 100% { transform: translateY(-50%) scale(1); }
+                50% { transform: translateY(-50%) scale(1.1); }
+            }
+        </style>
+
+        <!-- Google Analytics -->
+        <script async
+            src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GA_MEASUREMENT_ID');
+        </script>
+
+        <!-- Schema.org JSON-LD -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Educa+",
+                "url": "https://educamais.com.br",
+                "logo": "https://educamais.com.br/assets/logos/Ativo 10.png",
+                "description": "A Educa+ transforma vidas e negócios com educação acessível e inovadora. Seja parceiro, abra seu polo EAD ou venda cursos online em todo o Brasil.",
+                "slogan": "Em Parceria com o Futuro",
+                "founder": {
+                    "@type": "Person",
+                    "name": "Equipe Educa+"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Rua Luíz Rodrigues dos Santos, 44, Bairro Todos os Santos",
+                    "addressLocality": "Coronel Fabriciano",
+                    "addressRegion": "MG",
+                    "postalCode": "35170-061",
+                    "addressCountry": "BR"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+55-31-98888-7308",
+                    "contactType": "customer support"
+                },
+                "sameAs": [
+                    "https://www.facebook.com/sejaeducamais",
+                    "https://www.instagram.com/sejaeducamais/",
+                    "https://www.linkedin.com/company/educa-mais-minas/posts/?feedView=all",
+                    "https://www.youtube.com/@educamaisminas.oficial",
+                    "https://www.tiktok.com/@educamaisminas.oficial"
+                ]
+            }
+        </script>
+    </head>
+    <body class="font-sans text-educa-blue antialiased bg-educa-light-gray">
+        <!-- Loading Spinner -->
+        <div id="loading-spinner"
+            class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+            <div
+                class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-educa-pink"></div>
+        </div>
+
+        <!-- Seção Escada de Parceria -->
+        <section id="escada-parceria"
+            class="relative bg-gradient-to-br from-educa-light-gray via-white to-educa-blue-light py-20 overflow-hidden">
+            <!-- Background decorativo -->
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <div
+                    class="absolute top-10 left-10 w-32 h-32 bg-educa-pink rounded-full animate-pulse"></div>
+                <div
+                    class="absolute bottom-20 right-20 w-24 h-24 bg-educa-blue rounded-full animate-bounce"></div>
+                <div
+                    class="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-400 rounded-full animate-ping"></div>
+            </div>
+
+            <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+                <!-- Header da Seção -->
+                <div class="mx-auto max-w-4xl text-center mb-20">
+                    <h2 id="section-title"
+                        class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-educa-blue">
+                        Escada de Parceria Educa+
+                    </h2>
+                    <p id="section-subtitle"
+                        class="text-xl text-educa-dark-gray max-w-3xl mx-auto leading-relaxed">
+                        Descubra os níveis de comissão e benefícios que te
+                        esperam. Quanto mais você vende, mais você ganha!
+                    </p>
+                    <div
+                        class="w-32 h-1 bg-gradient-to-r from-educa-pink via-purple-500 to-educa-blue mx-auto mt-8 rounded-full shadow-lg"></div>
+                </div>
+
+                <div
+                    class="grid grid-cols-1 gap-16 xl:grid-cols-2 xl:gap-20 items-start">
+                    <!-- Coluna: Escada Visual -->
+                    <div class="order-2 xl:order-1">
+                        <div class="text-center xl:text-left mb-10">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-educa-pink to-red-500 rounded-2xl mb-6 shadow-lg">
+                                <i
+                                    class="fas fa-stairs text-white text-2xl"></i>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-educa-blue mb-4">
+                                Sua Jornada de Crescimento
+                            </h3>
+                            <p
+                                class="text-lg text-educa-dark-gray leading-relaxed">
+                                Visualize sua evolução através dos nossos
+                                modelos de parceria e descubra o potencial de
+                                crescimento
+                            </p>
+                        </div>
+
+                        <div id="tier-ladder">
+                            <!-- Os degraus serão renderizados aqui pelo JS -->
+                            <noscript>
+                                <div
+                                    class="p-8 rounded-2xl border-2 border-dashed border-gray-300 bg-white text-center shadow-sm">
+                                    <i
+                                        class="fas fa-exclamation-triangle text-amber-500 text-4xl mb-4"></i>
+                                    <h4
+                                        class="text-xl font-semibold text-gray-900 mb-3">JavaScript
+                                        Necessário</h4>
+                                    <p class="text-gray-600">Ative o JavaScript
+                                        para visualizar a escada de parceria
+                                        interativa.</p>
+                                </div>
+                            </noscript>
+                        </div>
+                    </div>
+
+                    <!-- Coluna: Calculadora -->
+                    <div class="order-1 xl:order-2">
+                        <div class="text-center xl:text-left mb-10">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-educa-blue to-blue-600 rounded-2xl mb-6 shadow-lg">
+                                <i
+                                    class="fas fa-calculator text-white text-2xl"></i>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-educa-blue mb-4">
+                                Calculadora de Projeção
+                            </h3>
+                            <p
+                                class="text-lg text-educa-dark-gray leading-relaxed">
+                                Calcule seu potencial de lucro e descubra quanto
+                                você pode ganhar com nossa parceria
+                            </p>
+                        </div>
+
+                        <div class="relative">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-educa-pink/5 to-educa-blue/5 rounded-3xl blur-xl"></div>
+
+                            <div
+                                class="relative p-8 md:p-10 rounded-3xl border border-gray-200 shadow-2xl bg-white/80 backdrop-blur-sm">
+                                <!-- Input Faturamento -->
+                                <div class="mb-8">
+                                    <label for="faturamento-input"
+                                        class="block text-base font-bold text-gray-800 mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 bg-educa-pink/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-dollar-sign text-educa-pink text-sm"></i>
+                                            </div>
+                                            <span>Seu investimento mensal
+                                                estimado</span>
+                                        </div>
+                                    </label>
+                                    <div class="relative group">
+                                        <input
+                                            id="faturamento-input"
+                                            type="text"
+                                            inputmode="numeric"
+                                            autocomplete="off"
+                                            placeholder="R$ 0,00"
+                                            class="w-full rounded-2xl border-2 border-gray-300 focus:border-educa-blue focus:ring-4 focus:ring-educa-blue/20 px-6 py-5 text-xl font-bold transition-all duration-300 group-hover:shadow-lg bg-white" />
+                                        <div
+                                            class="absolute inset-y-0 right-0 flex items-center pr-6">
+                                            <i
+                                                class="fas fa-edit text-gray-400 group-focus-within:text-educa-blue transition-colors"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Select Modelo -->
+                                <div class="mb-10">
+                                    <label for="tier-select"
+                                        class="block text-base font-bold text-gray-800 mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 bg-educa-blue/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-layer-group text-educa-blue text-sm"></i>
+                                            </div>
+                                            <span>Modelo de parceria</span>
+                                        </div>
+                                    </label>
+                                    <div class="relative group">
+                                        <select
+                                            id="tier-select"
+                                            class="w-full rounded-2xl border-2 border-gray-300 focus:border-educa-blue focus:ring-4 focus:ring-educa-blue/20 px-6 py-5 text-lg bg-white transition-all duration-300 group-hover:shadow-lg appearance-none cursor-pointer">
+                                            <!-- Opções preenchidas pelo JS -->
+                                        </select>
+                                        <div
+                                            class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
+                                            <i
+                                                class="fas fa-chevron-down text-gray-400 group-focus-within:text-educa-blue transition-colors"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cards de Resultado -->
+                                <div
+                                    class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                                    <div
+                                        class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 border-2 border-blue-200 hover:shadow-lg transition-all duration-300">
+                                        <div
+                                            class="flex items-center justify-between mb-3">
+                                            <p
+                                                class="text-sm font-bold text-blue-700 uppercase tracking-wide">Comissão</p>
+                                            <div
+                                                class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-percentage text-blue-600"></i>
+                                            </div>
+                                        </div>
+                                        <p id="comissao-percent"
+                                            class="text-3xl font-black text-blue-900 mb-2">—</p>
+                                        <p id="comissao-alert"
+                                            class="text-xs text-amber-600 hidden flex items-center gap-1">
+                                            <i
+                                                class="fas fa-exclamation-triangle"></i>
+                                            Comissão não definida para este
+                                            modelo.
+                                        </p>
+                                    </div>
+
+                                    <div
+                                        class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 to-green-100 p-6 border-2 border-green-200 hover:shadow-lg transition-all duration-300">
+                                        <div
+                                            class="flex items-center justify-between mb-3">
+                                            <p
+                                                class="text-sm font-bold text-green-700 uppercase tracking-wide">Ganhos/Mês</p>
+                                            <div
+                                                class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-calendar-alt text-green-600"></i>
+                                            </div>
+                                        </div>
+                                        <p id="ganhos-mensais"
+                                            class="text-3xl font-black text-green-900">—</p>
+                                    </div>
+
+                                    <div
+                                        class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 p-6 border-2 border-purple-200 hover:shadow-lg transition-all duration-300">
+                                        <div
+                                            class="flex items-center justify-between mb-3">
+                                            <p
+                                                class="text-sm font-bold text-purple-700 uppercase tracking-wide">Ganhos/Ano</p>
+                                            <div
+                                                class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-chart-line text-purple-600"></i>
+                                            </div>
+                                        </div>
+                                        <p id="ganhos-anuais"
+                                            class="text-3xl font-black text-purple-900">—</p>
+                                    </div>
+
+                                    <div
+                                        class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 p-6 border-2 border-orange-200 hover:shadow-lg transition-all duration-300">
+                                        <div
+                                            class="flex items-center justify-between mb-3">
+                                            <p
+                                                class="text-sm font-bold text-orange-700 uppercase tracking-wide">Próximo
+                                                Nível</p>
+                                            <div
+                                                class="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-arrow-up text-orange-600"></i>
+                                            </div>
+                                        </div>
+                                        <p id="proximo-passo"
+                                            class="text-sm font-bold text-orange-900 leading-tight">—</p>
+                                    </div>
+                                </div>
+
+                                <!-- Footer da Calculadora -->
+                                <div class="border-t-2 border-gray-100 pt-8">
+                                    <div
+                                        class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                                        <div
+                                            class="flex items-center gap-3 text-sm text-gray-600">
+                                            <div
+                                                class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                                                <i
+                                                    class="fas fa-shield-check text-green-600 text-xs"></i>
+                                            </div>
+                                            <span>Simulação baseada em dados
+                                                reais de parceiros ativos</span>
+                                        </div>
+                                        <a href="#partnership-form-modal"
+                                            id="projecao-cta"
+                                            class="inline-flex items-center bg-gradient-to-r from-educa-pink to-red-500 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 group">
+                                            <i
+                                                class="fas fa-rocket mr-3 group-hover:animate-bounce"></i>
+                                            Começar Agora!
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuração JSON -->
+            <script type="application/json" id="parceria-config">
+                {
+                    "tiers": [
+                        {
+                            "id": "mais-base",
+                            "nome": "MAIS BASE",
+                            "descricao": "Primeiro passo na parceria",
+                            "minRevenue": 0,
+                            "maxRevenue": 15000,
+                            "comissao": 0.30,
+                            "destaque": false
+                        },
+                        {
+                            "id": "mais-crescimento",
+                            "nome": "MAIS CRESCIMENTO",
+                            "descricao": "Expansão e consolidação",
+                            "minRevenue": 15000.01,
+                            "maxRevenue": 50000,
+                            "comissao": 0.40,
+                            "destaque": false
+                        },
+                        {
+                            "id": "mais-lideranca",
+                            "nome": "MAIS LIDERANÇA",
+                            "descricao": "Referência no mercado",
+                            "minRevenue": 50000.01,
+                            "maxRevenue": null,
+                            "comissao": 0.50,
+                            "destaque": true
+                        }
+                    ],
+                    "texto": {
+                        "titulo": "Escada de Parceria Educa+",
+                        "subtitulo": "Descubra os níveis de comissão e benefícios que te esperam. Quanto mais você vende, mais você ganha!"
+                    }
+                }
+            </script>
+        </section>
+
+        <!-- Botões Flutuantes -->
+        <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+            <!-- WhatsApp -->
+            <a title="Fale Conosco pelo WhatsApp - Educa+"
+                href="https://wa.me/5531988887308?text=Olá! Tenho interesse em conhecer as oportunidades de parceria da Educa+. Vim através do site e gostaria de mais informações sobre como me tornar um parceiro."
+                class="bg-green-500 text-white w-14 h-14 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-pulse group flex items-center justify-center relative">
+                <i class="fab fa-whatsapp text-xl"></i>
+                <span
+                    class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    Fale conosco agora!
+                </span>
+            </a>
+
+            <!-- Telefone -->
+            <a title="Ligue para a Educa+"
+                href="tel:+5531988887308"
+                class="bg-educa-pink text-white w-14 h-14 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 hover:scale-110 group flex items-center justify-center relative">
+                <i class="fas fa-phone text-xl"></i>
+                <span
+                    class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    (31) 98888-7308
+                </span>
+            </a>
+        </div>
+
+        <!-- Scripts -->
+        <script src="./js/sections/projecao.js"></script>
+        <!-- Scripts da Landing Page -->
+        <script src="./js/config.js"></script>
+        <script src="./js/utils.js"></script>
+        <script src="./js/sections/loading.js"></script>
+        <script src="./js/sections/scroll.js"></script>
+        <script src="./js/sections/analytics.js"></script>
+        <script src="./js/main.js"></script>
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+                height="0" width="0"
+                style="display:none;visibility:hidden"></iframe>
+        </noscript>
+    </body>
+</html>

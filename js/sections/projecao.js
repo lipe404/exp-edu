@@ -1,48 +1,62 @@
-/* projecao.js */
+/* escada-parceria.js - Versão Corrigida */
 
 (function () {
   "use strict";
 
-  // Utilidades de moeda BRL
-  const nfBRL = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  // --- Constantes DOM ---
+  const DOM = {
+    FATURAMENTO_INPUT: "faturamento-input",
+    TIER_SELECT: "tier-select",
+    COMISSAO_PERCENT: "comissao-percent",
+    COMISSAO_ALERT: "comissao-alert",
+    GANHOS_MENSAIS: "ganhos-mensais",
+    GANHOS_ANUAIS: "ganhos-anuais",
+    PROXIMO_PASSO: "proximo-passo",
+    TIER_LADDER: "tier-ladder",
+    PARCERIA_CONFIG: "parceria-config",
+    SECTION_TITLE: "section-title",
+    SECTION_SUBTITLE: "section-subtitle",
+  };
 
-  const formatBRL = (value) => nfBRL.format(isFinite(value) ? value : 0);
+  const STORAGE_KEYS = {
+    FATURAMENTO: "escada.faturamento",
+    TIER_SELECT: "escada.tierSelect",
+  };
 
-  // Transforma "R$ 12.345,67" em 12345.67
+  // --- Utilidades BRL ---
+  const formatBRL = (value) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(isFinite(value) ? value : 0);
+  };
+
   const parseBRLInput = (value) => {
     if (!value) return 0;
     const digits = String(value).replace(/\D+/g, "");
-    if (!digits) return 0;
-    // Últimos 2 dígitos = centavos
-    const num = parseInt(digits, 10);
-    return num / 100;
+    return digits ? parseInt(digits, 10) / 100 : 0;
   };
 
-  // Aplica máscara de moeda enquanto digita
   const applyBRLMask = (inputEl) => {
-    const caretEnd = inputEl.selectionEnd;
-    const raw = inputEl.value;
-    const parsed = parseBRLInput(raw);
+    const parsed = parseBRLInput(inputEl.value);
     inputEl.value = formatBRL(parsed);
-    // Cursor no fim por simplicidade
-    inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+    if (document.activeElement === inputEl) {
+      inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+    }
   };
 
-  // Carrega configuração do JSON embutido
+  // --- Configuração ---
   const loadConfig = () => {
-    const el = document.getElementById("parceria-config");
+    const el = document.getElementById(DOM.PARCERIA_CONFIG);
     if (!el) {
-      console.error("Elemento #parceria-config não encontrado.");
+      console.error(`Elemento #${DOM.PARCERIA_CONFIG} não encontrado.`);
       return null;
     }
+
     try {
       const cfg = JSON.parse(el.textContent);
-      // Sanitiza e ordena tiers por minRevenue asc
       const tiers = (cfg.tiers || [])
         .map((t) => ({
           id: String(t.id || "").trim(),
@@ -58,17 +72,15 @@
               ? null
               : Number(t.comissao),
           destaque: Boolean(t.destaque),
-          corHex: String(t.corHex || "#2563EB"),
         }))
-        .sort((a, b) => a.minRevenue - b.minRevenue); // Garante a ordem para a "escadinha"
+        .sort((a, b) => a.minRevenue - b.minRevenue);
 
       return {
         tiers,
         texto: {
-          titulo: cfg.texto?.titulo || "Modelos de Parceria",
+          titulo: cfg.texto?.titulo || "Escada de Parceria",
           subtitulo:
-            cfg.texto?.subtitulo ||
-            "Escolha o modelo e projete seus ganhos com base no faturamento.",
+            cfg.texto?.subtitulo || "Descubra seu potencial de ganhos.",
         },
       };
     } catch (e) {
@@ -77,9 +89,8 @@
     }
   };
 
-  // Encontra o tier compatível para um faturamento dado
+  // --- Lógica de Negócio ---
   const findTierByRevenue = (tiers, revenue) => {
-    if (!Array.isArray(tiers)) return null;
     return (
       tiers.find((t) => {
         const minOK = revenue >= t.minRevenue;
@@ -89,328 +100,350 @@
     );
   };
 
-  // Próximo passo com base no faturamento atual
-  const nextTierInfo = (tiers, revenue) => {
-    if (!Array.isArray(tiers)) return null;
-    const higher = tiers
-      .filter((t) => t.minRevenue > revenue)
-      .sort((a, b) => a.minRevenue - b.minRevenue)[0];
-    if (!higher) return null;
+  const getNextTierInfo = (tiers, currentRevenue) => {
+    const higherTiers = tiers.filter((t) => t.minRevenue > currentRevenue);
+    if (higherTiers.length === 0) return null;
+
+    const nextTier = higherTiers.sort((a, b) => a.minRevenue - b.minRevenue)[0];
     return {
-      id: higher.id,
-      nome: higher.nome,
-      faltam: Math.max(0, higher.minRevenue - revenue),
+      id: nextTier.id,
+      nome: nextTier.nome,
+      faltam: Math.max(0, nextTier.minRevenue - currentRevenue),
     };
   };
 
-  // Renderiza os cards de tiers como uma "escadinha"
-  const renderTiers = (cfg) => {
-    const tiers = cfg.tiers;
-    const container = document.getElementById("tier-ladder");
-    if (!container) return;
+  // --- Intersection Observer para Animações ---
+  const setupScrollAnimations = () => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
 
-    // Atualiza título e subtítulo da seção
-    document.getElementById("section-title").textContent = cfg.texto.titulo;
-    document.getElementById("section-subtitle").textContent =
-      cfg.texto.subtitulo;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Adiciona animação com delay baseado no índice
+          const steps =
+            entry.target.parentElement.querySelectorAll(".tier-step");
+          steps.forEach((step, index) => {
+            setTimeout(() => {
+              step.classList.add("animate-in");
+            }, index * 200); // 200ms de delay entre cada degrau
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
 
-    container.innerHTML = "";
-    tiers.forEach((t, index) => {
-      const card = document.createElement("div");
-      // Classes iniciais para estilizar o "degrau" da escadinha
-      card.className = "tier-step relative p-5"; // Base class, custom styles handle other properties
-      card.setAttribute("data-tier-id", t.id);
-
-      // Define z-index para sobreposição (quanto mais alto, mais acima na visualização)
-      card.style.zIndex = tiers.length - index;
-      // Adiciona um offset para criar o efeito de escadinha
-      card.style.setProperty("--step-offset", `${index * 40}px`); // Ajuste 40px para a inclinação desejada
-      card.style.marginLeft = `var(--step-offset)`; // Aplica o offset via margin-left
-
-      // Número do degrau (agora um div real, não um pseudo-elemento)
-      const stepNumberEl = document.createElement("div");
-      stepNumberEl.className = "tier-step-number";
-      stepNumberEl.textContent = index + 1;
-
-      // Conteúdo do card
-      const header = document.createElement("div");
-      header.className = "flex items-center justify-between mb-3";
-
-      const title = document.createElement("h4");
-      title.className = "text-lg font-bold text-gray-900"; // Default color, will change with active/next tier
-      title.textContent = t.nome;
-
-      const badge = document.createElement("span");
-      badge.className =
-        "inline-block text-xs font-semibold px-3 py-1 rounded-full";
-      badge.style.backgroundColor = `${t.corHex}20`; // Cor mais clara do tier
-      badge.style.color = t.corHex;
-      badge.textContent = t.destaque ? "🏆 Destaque" : "📈 Modelo";
-
-      const desc = document.createElement("p");
-      desc.className = "text-sm text-gray-700 mb-3 leading-relaxed"; // Default color
-      desc.textContent = t.descricao;
-
-      const faixa = document.createElement("div");
-      faixa.className =
-        "flex items-center justify-between text-xs text-gray-600 bg-gray-100 p-2 rounded-lg mb-2"; // Default color
-      const maxTxt =
-        t.maxRevenue === null ? "sem teto" : `até ${formatBRL(t.maxRevenue)}`;
-      faixa.innerHTML = `
-        <span><strong>Faixa:</strong> ${formatBRL(t.minRevenue)} ${
-        t.maxRevenue === null ? "+" : `- ${formatBRL(t.maxRevenue)}`
-      }</span>
-      `;
-
-      const comissao = document.createElement("div");
-      comissao.className =
-        "flex items-center justify-between text-sm font-medium";
-      const comissaoSpan = document.createElement("span");
-      comissaoSpan.className =
-        t.comissao == null ? "text-amber-700" : "text-gray-900"; // Default color
-      comissaoSpan.textContent =
-        t.comissao == null
-          ? "Comissão: a definir"
-          : `Comissão: ${(t.comissao * 100).toFixed(0)}%`;
-
-      const comissaoIcon = document.createElement("span");
-      comissaoIcon.className = "text-lg";
-      comissaoIcon.textContent = t.comissao == null ? "⏳" : "💰";
-
-      comissao.appendChild(comissaoSpan);
-      comissao.appendChild(comissaoIcon);
-
-      header.appendChild(title);
-      header.appendChild(badge);
-
-      card.appendChild(stepNumberEl); // Add the step number div
-      card.appendChild(header);
-      card.appendChild(desc);
-      card.appendChild(faixa);
-      card.appendChild(comissao);
-
-      container.appendChild(card);
-    });
+    // Observa o container da escada
+    const ladder = document.getElementById(DOM.TIER_LADDER);
+    if (ladder) {
+      observer.observe(ladder);
+    }
   };
 
-  // Preenche o select de tiers
+  // --- Renderização ---
+  const renderTiers = (cfg) => {
+    const container = document.getElementById(DOM.TIER_LADDER);
+    if (!container) {
+      console.error("Container #tier-ladder não encontrado!");
+      return;
+    }
+
+    // Atualiza títulos
+    const titleEl = document.getElementById(DOM.SECTION_TITLE);
+    const subtitleEl = document.getElementById(DOM.SECTION_SUBTITLE);
+
+    if (titleEl) titleEl.textContent = cfg.texto.titulo;
+    if (subtitleEl) subtitleEl.textContent = cfg.texto.subtitulo;
+
+    // Limpa container
+    container.innerHTML = "";
+
+    console.log("Renderizando", cfg.tiers.length, "tiers"); // Debug
+
+    // Renderiza cada tier
+    cfg.tiers.forEach((tier, index) => {
+      const stepEl = document.createElement("div");
+      stepEl.className = "tier-step";
+      stepEl.setAttribute("data-tier-id", tier.id);
+
+      // Mostra imediatamente (remove a dependência da animação)
+      stepEl.style.opacity = "1";
+      stepEl.style.transform = "translateY(0) scale(1)";
+
+      // Número do degrau
+      const numberEl = document.createElement("div");
+      numberEl.className = "tier-step-number";
+      numberEl.textContent = index + 1;
+
+      // Porcentagem grande
+      const percentageEl = document.createElement("div");
+      percentageEl.className = "tier-percentage";
+      percentageEl.textContent = `${(tier.comissao * 100).toFixed(0)}%`;
+
+      // Conteúdo
+      const contentEl = document.createElement("div");
+      contentEl.className = "tier-content";
+
+      // Título
+      const titleEl = document.createElement("h4");
+      titleEl.className = "tier-title";
+      titleEl.textContent = tier.nome;
+
+      // Descrição
+      const descEl = document.createElement("p");
+      descEl.className = "tier-description";
+      descEl.textContent = tier.descricao;
+
+      // Faixa de valores
+      const rangeEl = document.createElement("span");
+      rangeEl.className = "tier-range";
+      const faixaText =
+        tier.maxRevenue === null
+          ? `A partir de ${formatBRL(tier.minRevenue)}`
+          : `${formatBRL(tier.minRevenue)} – ${formatBRL(tier.maxRevenue)}`;
+      rangeEl.textContent = faixaText;
+
+      // Monta o conteúdo
+      contentEl.appendChild(titleEl);
+      contentEl.appendChild(descEl);
+      contentEl.appendChild(rangeEl);
+
+      // Monta o degrau
+      stepEl.appendChild(numberEl);
+      stepEl.appendChild(percentageEl);
+      stepEl.appendChild(contentEl);
+      container.appendChild(stepEl);
+    });
+
+    console.log("Escada renderizada com", container.children.length, "degraus"); // Debug
+
+    // Configura animações após renderizar
+    setTimeout(() => {
+      setupScrollAnimations();
+    }, 100);
+  };
+
   const populateTierSelect = (tiers) => {
-    const select = document.getElementById("tier-select");
-    if (!select) return;
+    const select = document.getElementById(DOM.TIER_SELECT);
+    if (!select) {
+      console.error("Select #tier-select não encontrado!");
+      return;
+    }
 
     select.innerHTML = "";
 
+    // Opção automática
     const optAuto = document.createElement("option");
     optAuto.value = "__auto__";
-    optAuto.textContent = "Selecionar automaticamente pela meta de faturamento";
+    optAuto.textContent =
+      "Selecionar automaticamente pela meta de investimento";
     select.appendChild(optAuto);
 
-    tiers.forEach((t) => {
+    // Opções dos tiers
+    tiers.forEach((tier) => {
       const opt = document.createElement("option");
-      opt.value = t.id;
-      const faixaTexto =
-        t.maxRevenue === null
-          ? `≥ ${formatBRL(t.minRevenue)}`
-          : `${formatBRL(t.minRevenue)} — ${formatBRL(t.maxRevenue)}`;
-      const comTxt =
-        t.comissao == null
-          ? "comissão: definir"
-          : `comissão: ${(t.comissao * 100).toFixed(0)}%`;
-      opt.textContent = `${t.nome} • ${faixaTexto} • ${comTxt}`;
+      opt.value = tier.id;
+      const faixaText =
+        tier.maxRevenue === null
+          ? `≥ ${formatBRL(tier.minRevenue)}`
+          : `${formatBRL(tier.minRevenue)} – ${formatBRL(tier.maxRevenue)}`;
+      const comText = `comissão: ${(tier.comissao * 100).toFixed(0)}%`;
+      opt.textContent = `${tier.nome} • ${faixaText} • ${comText}`;
       select.appendChild(opt);
     });
 
-    // Restaura valor salvo, se existir
-    const savedTier = localStorage.getItem("projecao.tierSelect");
-    if (savedTier) {
-      const has = Array.from(select.options).some((o) => o.value === savedTier);
-      select.value = has ? savedTier : "__auto__";
+    // Restaura seleção salva
+    const savedTier = localStorage.getItem(STORAGE_KEYS.TIER_SELECT);
+    if (
+      savedTier &&
+      Array.from(select.options).some((o) => o.value === savedTier)
+    ) {
+      select.value = savedTier;
     }
+
+    console.log("Select populado com", select.options.length, "opções"); // Debug
   };
 
-  // Atualiza resultados de simulação e destaca tiers na escadinha
+  // --- Atualização de Resultados ---
   const updateResults = (cfg) => {
-    const tiers = cfg.tiers;
+    const faturamentoEl = document.getElementById(DOM.FATURAMENTO_INPUT);
+    const tierSelect = document.getElementById(DOM.TIER_SELECT);
 
-    const faturamentoEl = document.getElementById("faturamento-input");
-    const tierSelect = document.getElementById("tier-select");
-
-    const comissaoEl = document.getElementById("comissao-percent");
-    const comissaoAlertEl = document.getElementById("comissao-alert");
-    const ganhosMensaisEl = document.getElementById("ganhos-mensais");
-    const ganhosAnuaisEl = document.getElementById("ganhos-anuais");
-    const proximoPassoEl = document.getElementById("proximo-passo");
+    if (!faturamentoEl || !tierSelect) {
+      console.error("Elementos de input não encontrados!");
+      return;
+    }
 
     const faturamento = parseBRLInput(faturamentoEl.value);
 
-    // Qual tier aplicar?
+    // Determina tier aplicado
     let tierAplicado = null;
-
     if (tierSelect.value === "__auto__") {
-      tierAplicado = findTierByRevenue(tiers, faturamento);
+      tierAplicado = findTierByRevenue(cfg.tiers, faturamento);
     } else {
-      tierAplicado = tiers.find((t) => t.id === tierSelect.value) || null;
+      tierAplicado = cfg.tiers.find((t) => t.id === tierSelect.value) || null;
     }
 
-    // Limpa destaques anteriores na escadinha
+    // Limpa destaques anteriores
     document.querySelectorAll(".tier-step").forEach((step) => {
       step.classList.remove("active-tier", "next-tier");
-      step.style.zIndex =
-        tiers.length - Array.from(step.parentNode.children).indexOf(step); // Reset z-index
-      step.style.borderColor = ""; // Reset inline styles
-      step.style.backgroundColor = "";
-      step.style.transform = "";
-      step.style.boxShadow = "";
-
-      // Limpa labels anteriores
-      const currentLabel = step.querySelector(".tier-label");
-      if (currentLabel) currentLabel.remove();
-
-      // Reset do círculo do número do degrau
-      const stepNumberEl = step.querySelector(".tier-step-number");
-      if (stepNumberEl) {
-        stepNumberEl.style.backgroundColor = ""; // Reset to default CSS
-        stepNumberEl.style.color = "";
-        stepNumberEl.style.borderColor = "";
-      }
+      const label = step.querySelector(".tier-label");
+      if (label) label.remove();
     });
 
-    // Destaca o tier atual na escadinha
-    if (tierAplicado) {
-      const currentTierStep = document.querySelector(
-        `.tier-step[data-tier-id="${tierAplicado.id}"]`
-      );
-      if (currentTierStep) {
-        currentTierStep.classList.add("active-tier");
-        currentTierStep.style.zIndex = 20; // Ensure active tier is on top
+    // Calcula valores
+    const comissao = tierAplicado?.comissao ?? null;
+    const ganhosMensais =
+      comissao !== null && isFinite(faturamento)
+        ? faturamento * comissao
+        : null;
+    const ganhosAnuais = ganhosMensais ? ganhosMensais * 12 : null;
 
-        // Atualiza o círculo do número do degrau
-        const stepNumberEl = currentTierStep.querySelector(".tier-step-number");
-        if (stepNumberEl) {
-          // Cores definidas no CSS, então não precisamos setar inline aqui
-          // stepNumberEl.style.backgroundColor = tierAplicado.corHex; // Pode ser definido pelo CSS para Educa+ blue
-          // stepNumberEl.style.color = "white";
-          // stepNumberEl.style.borderColor = tierAplicado.corHex;
-        }
+    // Atualiza UI dos resultados
+    const comissaoEl = document.getElementById(DOM.COMISSAO_PERCENT);
+    const comissaoAlertEl = document.getElementById(DOM.COMISSAO_ALERT);
+    const ganhosMensaisEl = document.getElementById(DOM.GANHOS_MENSAIS);
+    const ganhosAnuaisEl = document.getElementById(DOM.GANHOS_ANUAIS);
+    const proximoPassoEl = document.getElementById(DOM.PROXIMO_PASSO);
 
-        // Adiciona um label "Atual"
-        const label = document.createElement("span");
-        label.className = "tier-label"; // Classes definidas no CSS
-        label.textContent = "🎯 Tier Atual";
-        currentTierStep.appendChild(label);
+    if (comissaoEl) {
+      comissaoEl.textContent =
+        comissao === null ? "—" : `${(comissao * 100).toFixed(0)}%`;
+    }
+
+    if (comissaoAlertEl) {
+      comissaoAlertEl.classList.toggle("hidden", comissao !== null);
+    }
+
+    if (ganhosMensaisEl) {
+      ganhosMensaisEl.textContent =
+        ganhosMensais === null ? "—" : formatBRL(ganhosMensais);
+    }
+
+    if (ganhosAnuaisEl) {
+      ganhosAnuaisEl.textContent =
+        ganhosAnuais === null ? "—" : formatBRL(ganhosAnuais);
+    }
+
+    // Próximo passo
+    const nextTier = getNextTierInfo(cfg.tiers, faturamento);
+
+    if (proximoPassoEl) {
+      if (!nextTier) {
+        proximoPassoEl.textContent =
+          "🏆 Você está no topo da escada de parceria!";
+      } else {
+        proximoPassoEl.innerHTML = `🎯 Faltam ${formatBRL(
+          nextTier.faltam
+        )} para atingir "<strong>${nextTier.nome}</strong>"`;
       }
     }
 
-    // Comissão e ganhos
-    let comissao = tierAplicado?.comissao ?? null;
-    let ganhosMensais = null;
-    let ganhosAnuais = null;
-
-    if (comissao != null && isFinite(faturamento)) {
-      ganhosMensais = faturamento * comissao;
-      ganhosAnuais = ganhosMensais * 12;
+    // Destaca tier atual
+    if (tierAplicado) {
+      const currentStep = document.querySelector(
+        `[data-tier-id="${tierAplicado.id}"]`
+      );
+      if (currentStep) {
+        currentStep.classList.add("active-tier");
+        const label = document.createElement("span");
+        label.className = "tier-label";
+        label.textContent = "🎯 Tier Atual";
+        currentStep.appendChild(label);
+      }
     }
 
-    // Atualiza UI
-    if (comissao == null) {
-      comissaoEl.textContent = "—";
-      comissaoAlertEl.classList.remove("hidden");
-    } else {
-      comissaoEl.textContent = `${(comissao * 100).toFixed(0)}%`;
-      comissaoAlertEl.classList.add("hidden");
-    }
-
-    ganhosMensaisEl.textContent =
-      ganhosMensais == null ? "—" : formatBRL(ganhosMensais);
-    ganhosAnuaisEl.textContent =
-      ganhosAnuais == null ? "—" : formatBRL(ganhosAnuais);
-
-    // Próximo passo
-    const next = nextTierInfo(tiers, faturamento);
-    if (!next) {
-      proximoPassoEl.textContent =
-        "🏆 Você está no topo da escada de parceria!";
-    } else {
-      proximoPassoEl.textContent = `🎯 Faltam ${formatBRL(
-        next.faltam
-      )} para atingir "${next.nome}"`;
-
-      // Destaca o próximo tier na escadinha (se não for o tier atual)
-      if (!tierAplicado || next.id !== tierAplicado.id) {
-        const nextTierStep = document.querySelector(
-          `.tier-step[data-tier-id="${next.id}"]`
-        );
-        if (nextTierStep) {
-          nextTierStep.classList.add("next-tier");
-          nextTierStep.style.zIndex = 15; // Ensure next tier is above inactive ones
-
-          // Adiciona um label "Próximo"
-          const label = document.createElement("span");
-          label.className = "tier-label"; // Classes definidas no CSS
-          label.textContent = "🚀 Próximo";
-          nextTierStep.appendChild(label);
-        }
+    // Destaca próximo tier
+    if (nextTier && (!tierAplicado || nextTier.id !== tierAplicado.id)) {
+      const nextStep = document.querySelector(
+        `[data-tier-id="${nextTier.id}"]`
+      );
+      if (nextStep) {
+        nextStep.classList.add("next-tier");
+        const label = document.createElement("span");
+        label.className = "tier-label";
+        label.textContent = "🚀 Próximo";
+        nextStep.appendChild(label);
       }
     }
   };
 
-  // Inicialização
+  // --- Inicialização ---
   const init = () => {
+    console.log("Inicializando escada de parceria..."); // Debug
+
     const cfg = loadConfig();
     if (!cfg) {
-      // Exibe uma mensagem de erro visível na página se a configuração falhar
-      const mainContent = document.getElementById("projecao-ganhos");
-      if (mainContent) {
-        mainContent.innerHTML = `
+      console.error("Configuração não carregada!");
+      const escadaSection = document.getElementById("escada-parceria");
+      if (escadaSection) {
+        escadaSection.innerHTML = `
           <div class="mx-auto max-w-xl text-center py-20">
-            <h2 class="text-3xl font-extrabold text-red-600">⚠️ Erro ao carregar os modelos de parceria</h2>
-            <p class="mt-4 text-lg text-gray-700">Por favor, verifique a configuração JSON. Consulte o console do navegador para mais detalhes.</p>
-            <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-left">
-              <p class="text-sm text-red-800"><strong>Dica:</strong> Verifique se não há caracteres de escape inválidos como <code>\$</code> no JSON.</p>
-            </div>
+            <h2 class="text-3xl font-extrabold text-red-600">⚠️ Erro ao carregar configuração</h2>
+            <p class="mt-4 text-lg text-gray-700">Verifique a configuração JSON.</p>
           </div>
         `;
       }
       return;
     }
 
+    console.log("Configuração carregada:", cfg); // Debug
+
+    // Renderiza a escada
     renderTiers(cfg);
+
+    // Popula o select
     populateTierSelect(cfg.tiers);
 
-    // Máscara e eventos
-    const faturamentoEl = document.getElementById("faturamento-input");
-    const tierSelect = document.getElementById("tier-select");
+    const faturamentoEl = document.getElementById(DOM.FATURAMENTO_INPUT);
+    const tierSelect = document.getElementById(DOM.TIER_SELECT);
 
-    // Restaura faturamento, se houver
-    const savedFat = localStorage.getItem("projecao.faturamento");
-    if (savedFat) {
-      faturamentoEl.value = formatBRL(Number(savedFat));
-    } else {
-      faturamentoEl.value = "";
+    if (!faturamentoEl || !tierSelect) {
+      console.error("Elementos de input não encontrados!");
+      return;
     }
 
-    const onInput = () => {
+    // Restaura faturamento salvo
+    const savedFat = localStorage.getItem(STORAGE_KEYS.FATURAMENTO);
+    faturamentoEl.value = savedFat ? formatBRL(Number(savedFat)) : formatBRL(0);
+
+    // Event listeners
+    const handleUpdate = () => {
       applyBRLMask(faturamentoEl);
       const parsed = parseBRLInput(faturamentoEl.value);
-      localStorage.setItem("projecao.faturamento", String(parsed));
+      localStorage.setItem(STORAGE_KEYS.FATURAMENTO, String(parsed));
       updateResults(cfg);
     };
 
-    faturamentoEl.addEventListener("input", onInput);
-    faturamentoEl.addEventListener("blur", onInput);
+    faturamentoEl.addEventListener("input", handleUpdate);
+    faturamentoEl.addEventListener("blur", handleUpdate);
 
     tierSelect.addEventListener("change", () => {
-      localStorage.setItem("projecao.tierSelect", tierSelect.value);
+      localStorage.setItem(STORAGE_KEYS.TIER_SELECT, tierSelect.value);
       updateResults(cfg);
     });
 
     // Primeira atualização
-    if (!savedFat) {
-      faturamentoEl.value = formatBRL(0);
-    }
     updateResults(cfg);
+
+    // Remove loading spinner
+    const loadingSpinner = document.getElementById("loading-spinner");
+    if (loadingSpinner) {
+      setTimeout(() => {
+        loadingSpinner.style.opacity = "0";
+        setTimeout(() => {
+          loadingSpinner.style.display = "none";
+        }, 300);
+      }, 1000);
+    }
+
+    console.log("Inicialização concluída!"); // Debug
   };
 
+  // Inicializa quando DOM estiver pronto
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
